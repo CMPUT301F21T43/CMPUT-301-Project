@@ -1,0 +1,33 @@
+Meeting Minutes for Oct. 22
+
+Attendance: Marty, Marcus, Kyle, Ragur, Simon
+
+
+GENERAL NOTES
+===================================================
+
+We're aiming to get most of US 01.* & US 02.* done for the coming Tuesday, Oct 26. We won't be worrying about profiles (US 03.01.01) for Project Part 3.
+
+We'll meet at the lab to go over any questions with Sakib.
+
+As you make changes, tag Simon as the reviewer in your pull request. He will focus on integration and code review. 
+
+Everyone should build and evaluate their own tests that cover their additions to the code.
+
+
+
+INDIVIDUAL ROLES
+===================================================
+
+Marcus plans on starting with Firebase integration for our app and will build the list of habits view.
+
+Marty will focus on adding, viewing and deleting habits.
+
+Kyle will work on editing habits.
+
+Ragur will work on the first three habit event user stories (i.e. US 02.01.01, US 02.02.01, US 02.03.01).
+
+We ask that Kourosh do the last three habit event user stories (i.e. US 02.04.01, US 02.05.01, US 02.06.01).
+
+Simon will be the code reviewer and integrate together everyones work and pull requests.
+
