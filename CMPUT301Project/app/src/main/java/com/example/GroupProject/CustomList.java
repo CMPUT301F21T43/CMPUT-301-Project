@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.GroupProject;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class CustomList extends ArrayAdapter<Habit> {
 
 
-    private ArrayList<Habit> habits;
-    private Context context;
+    private final ArrayList<Habit> habits;
+    private final Context context;
 
     public CustomList(Context context, ArrayList<Habit> habits){
         super(context, 0, habits);
