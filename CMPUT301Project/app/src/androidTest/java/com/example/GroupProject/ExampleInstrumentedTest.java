@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.GroupProject;
 
 import android.content.Context;
 

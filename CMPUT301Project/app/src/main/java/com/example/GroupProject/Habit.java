@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.GroupProject;
 
 import java.util.Date;
 
@@ -13,6 +13,12 @@ public class Habit {
     private String name;
     private String reason;
     private Date date;
+
+    Habit(String name, String reason, Date date){
+        this.name = name;
+        this.reason = reason;
+        this.date = date;
+    }
 
     /**
      * Function to return habit name
