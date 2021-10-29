@@ -66,4 +66,9 @@ public class MainActivity extends AppCompatActivity {
     public static FirebaseFirestore getFirestoreInstance(){
         return FirebaseFirestore.getInstance();
     }
+
+    public void viewProfile(View view) {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
 }
