@@ -70,7 +70,7 @@ public class AddHabitActivity extends AppCompatActivity {
             habit.put("dateToStart", new Timestamp(dateToStart));
             habit.put("activeDays", checkedDaysChips());
 
-            db.collection("User").document("John Doe").collection("Habits").document(habitTitle)
+            db.collection("Users").document("John Doe").collection("Habits").document(habitTitle)
                     .set(habit, SetOptions.merge());
         });
 
