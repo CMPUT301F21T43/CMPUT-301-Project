@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //setContentView((R.layout.eventlist));
+        //setContentView(R.layout.activity_main);
+        setContentView((R.layout.eventlist));
 
         FirebaseFirestore db;
         habitList = findViewById(R.id.habit_list);
@@ -44,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
         habitDataList = new ArrayList<>();
         eventDataList = new ArrayList<>();
         for(int i=0;i<names.length;i++){
-            habitDataList.add((new Habit(names[i], reasons[i], dates[i])));
-            //eventDataList.add((new HabitEvents(names[i], true)));
+            //habitDataList.add((new Habit(names[i], reasons[i], dates[i])));
+            eventDataList.add((new HabitEvents(names[i], true)));
         }
 
-        habitAdapter = new CustomList(this, habitDataList);
-        habitList.setAdapter(habitAdapter);
+        //habitAdapter = new CustomList(this, habitDataList);
+        //habitList.setAdapter(habitAdapter);
 
-        //eventAdapter = new EventsCustom(this,eventDataList);
-        //eventList.setAdapter(eventAdapter);
+        eventAdapter = new EventsCustom(this,eventDataList);
+        eventList.setAdapter(eventAdapter);
 
 
         // Access a Cloud Firestore instance from your Activity
