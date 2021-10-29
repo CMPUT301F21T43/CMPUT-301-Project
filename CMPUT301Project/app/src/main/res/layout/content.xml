@@ -24,7 +24,7 @@
         android:text="Reason">
     </TextView>
     <TextView
-        android:id="@+id/habit_date"
+        android:id="@+id/habit_dateToStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"

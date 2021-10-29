@@ -1,6 +1,7 @@
 package com.example.GroupProject;
 
 import java.util.Date;
+import java.util.Dictionary;
 
 /**
  * Habit class
@@ -12,12 +13,14 @@ public class Habit {
 
     private String name;
     private String reason;
-    private Date date;
+    private Date dateToStart;
+    private String[] activeDays;
 
-    Habit(String name, String reason, Date date){
+    Habit(String name, String reason, Date dateToStart, String[] activeDays){
         this.name = name;
         this.reason = reason;
-        this.date = date;
+        this.dateToStart = dateToStart;
+        this.activeDays = activeDays;
     }
 
     /**
@@ -57,20 +60,20 @@ public class Habit {
     }
 
     /**
-     * Function to return habit date
-     * @return date
-     *      Returns date as a Date object
+     * Function to return habit dateToStart
+     * @return dateToStart
+     *      Returns dateToStart as a Date object
      */
-    public Date getDate() {
-        return date;
+    public Date getDateToStart() {
+        return dateToStart;
     }
 
     /**
      * Function to set habit date
-     * @param date
-     *      date started as a Date object
+     * @param dateToStart
+     *      dateToStart started as a Date object
      */
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateToStart(Date dateToStart) {
+        this.dateToStart = dateToStart;
     }
 }

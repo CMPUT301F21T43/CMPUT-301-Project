@@ -42,11 +42,11 @@ public class CustomList extends ArrayAdapter<Habit> {
 
         TextView habitName = view.findViewById(R.id.habit_name);
         TextView habitReason = view.findViewById(R.id.habit_reason);
-        TextView habitDate = view.findViewById(R.id.habit_date);
+        TextView habitDateToStart = view.findViewById(R.id.habit_dateToStart);
 
         habitName.setText(habit.getName());
         habitReason.setText(habit.getReason());
-        habitDate.setText((CharSequence) habit.getDate());
+        habitDateToStart.setText((CharSequence) habit.getDateToStart());
 
         return view;
 
