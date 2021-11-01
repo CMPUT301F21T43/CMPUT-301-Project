@@ -10,7 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroupProject">
         <activity
-            android:name="com.example.GroupProject.MainActivity"
+            android:name=".ViewHabitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditHabitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddHabitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

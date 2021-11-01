@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GroupProject</string>
+    <string name="etHabitTitle">Title</string>
+    <string name="etHabitReason">Reason</string>
+    <string name="etHabitDateToStart">Date To Start</string>
+
 </resources>

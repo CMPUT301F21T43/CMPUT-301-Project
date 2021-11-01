@@ -40,13 +40,13 @@ public class CustomList extends ArrayAdapter<Habit> {
 
         Habit habit = habits.get(position);
 
-        TextView habitName = view.findViewById(R.id.habit_name);
-        TextView habitReason = view.findViewById(R.id.habit_reason);
-        TextView habitDate = view.findViewById(R.id.habit_date);
+        TextView tvHabitName = view.findViewById(R.id.habit_name);
+        TextView tvHabitReason = view.findViewById(R.id.habit_reason);
+        TextView tvHabitDateToStart = view.findViewById(R.id.habit_dateToStart);
 
-        habitName.setText(habit.getName());
-        habitReason.setText(habit.getReason());
-        habitDate.setText((CharSequence) habit.getDate());
+        tvHabitName.setText(habit.getTitle());
+        tvHabitReason.setText(habit.getReason());
+        tvHabitDateToStart.setText(habit.getDateToStartAsString());
 
         return view;
 
