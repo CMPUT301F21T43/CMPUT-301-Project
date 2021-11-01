@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroupProject">
         <activity
+            android:name=".ViewHabitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditHabitActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddHabitActivity"
             android:exported="false" />
         <activity
