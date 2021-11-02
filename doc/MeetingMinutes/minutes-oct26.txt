@@ -1,0 +1,18 @@
+Meeting Minutes for Oct. 26
+
+Attendance: Marty, Marcus, Ragur, Kourosh
+
+Next Meeting: Oct. 29, 2021 @ 2:00pm
+
+GENERAL NOTES
+===================================================
+
+Profiles (US 03.01.01) for Project Part 3 has been added as a deliverable. Looking for someone to take this on.
+
+Everyone should have received emails to their ualberta accounts about Firebase. There you can see a database structure that we came up with at the lab and some sample data for testing your code (no longer need to wait on others to do a part as the data is already available).
+
+Some user stories have been updated and others added to the project specification, check them out.
+
+We're aiming to have the Project Part 3 essentially complete for the Tuesday, November 2 lab next week so that we can ask any last minute questions to Sakib.
+
+We're aiming to have the Project Part 3 deliverable and ready to be submitted by end of day Wednesday, November 3.

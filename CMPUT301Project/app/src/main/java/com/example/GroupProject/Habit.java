@@ -1,44 +1,47 @@
 package com.example.GroupProject;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.Dictionary;
+import java.util.Map;
 
 /**
  * Habit class
- * Class of habit objects with a name, date, and reason
- * @Author Marcus Bengert
+ * Class of habit objects with a title, date, and reason
+ * @Author Marcus Bengert, Martin Rudolf
  */
 
-public class Habit {
+public class Habit implements Serializable {
 
-    private String name;
+    private String title;
     private String reason;
     private Date dateToStart;
-    private String[] activeDays;
+    private Map<String, Boolean> activeDays;
+    private Boolean isPublic;
 
-    Habit(String name, String reason, Date dateToStart, String[] activeDays){
-        this.name = name;
+    Habit(String title, String reason, Date dateToStart, Map<String, Boolean> activeDays, Boolean isPublic){
+        this.title = title;
         this.reason = reason;
         this.dateToStart = dateToStart;
         this.activeDays = activeDays;
+        this.isPublic = isPublic;
     }
 
     /**
-     * Function to return habit name
-     * @return name
-     *      Returns name as a String
+     * Function to return habit title
+     * @return title
+     *      Returns title as a String
      */
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * Function to set habit name
-     * @param name
-     *      name of habit as a string
+     * Function to set habit title
+     * @param title
+     *      title of habit as a string
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
@@ -69,11 +72,60 @@ public class Habit {
     }
 
     /**
+     * Returns dateToStart formatted as "YYYY-MM-DD" string
+     * @return "YYYY-MM-DD"
+     *      Returns the dateToStart formatted as "YYYY-MM-DD"
+     */
+    public String getDateToStartAsString() {
+        Date date = dateToStart;
+        String year = String.valueOf(date.getYear());
+        String month = String.valueOf(date.getMonth());
+        String day = String.valueOf(date.getDate());
+        return year + "-" + month + "-" + day;
+    }
+
+    /**
      * Function to set habit date
      * @param dateToStart
      *      dateToStart started as a Date object
      */
     public void setDateToStart(Date dateToStart) {
         this.dateToStart = dateToStart;
+    }
+
+    /**
+     * Get active days of week.
+     * @return activeDays
+     *      activeDays as a Map with K: day of week (String) and V: active (Boolean)
+     */
+    public Map<String, Boolean> getActiveDays() {
+        return activeDays;
+    }
+
+    /**
+     * Set active days of week.
+     * @param activeDays
+     *      activeDays is a Map with K: day of week (String) and V: active (Boolean)
+     */
+    public void setActiveDays(Map<String, Boolean> activeDays) {
+        this.activeDays = activeDays;
+    }
+
+    /**
+     * Get whether Habit is public or not.
+     * @return isPublic
+     *      isPublic as Boolean
+     */
+    public Boolean getPublic() {
+        return isPublic;
+    }
+
+    /**
+     * Set Habit as public or not.
+     * @param isPublic
+     *      isPublic is Boolean
+     */
+    public void setPublic(Boolean isPublic) {
+        isPublic = isPublic;
     }
 }
