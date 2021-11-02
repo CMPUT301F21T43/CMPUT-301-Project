@@ -59,6 +59,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="parent"
+                android:maxLength="20"
                 ></EditText>
 
             <EditText
@@ -70,7 +71,8 @@
                 android:id="@+id/etHabitReason"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="parent"
-                android:hint="@string/etHabitReason"></EditText>
+                android:hint="@string/etHabitReason"
+                android:maxLength="30"></EditText>
 
             <DatePicker
                 android:layout_width="match_parent"
