@@ -144,6 +144,15 @@
                     android:id="@+id/cSunday"/>
 
             </com.google.android.material.chip.ChipGroup>
+            <ToggleButton
+                android:id="@+id/toggleIsPublic"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textOn="Public"
+                android:textOff="Private"
+                android:checked="true"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

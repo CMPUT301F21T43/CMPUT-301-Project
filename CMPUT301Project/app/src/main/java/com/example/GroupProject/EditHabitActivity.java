@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ToggleButton;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -25,6 +27,8 @@ public class EditHabitActivity extends AppCompatActivity {
     EditText etHabitTitle;
     EditText etHabitReason;
     DatePicker dpDateToStart;
+    ToggleButton toggleIsPublic;
+    Boolean isPublic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +42,18 @@ public class EditHabitActivity extends AppCompatActivity {
         cgDaysOfWeek = findViewById(R.id.cgDaysOfWeek);
         ImageButton btnBack = findViewById(R.id.btnBack);
         ImageButton btnConfirmEditHabit = findViewById(R.id.btnConfirmEditHabit);
+        ToggleButton toggleIsPublic = findViewById(R.id.toggleIsPublic);
 
         FirebaseFirestore db = MainActivity.getFirestoreInstance();
         Intent intent = getIntent();
         Habit habit = (Habit) intent.getSerializableExtra("HABIT");
         etHabitTitle.setText(habit.getTitle());
         etHabitReason.setText(habit.getReason());
+        isPublic = habit.getPublic();
+        toggleIsPublic.setChecked(isPublic);
+
+        // TODO: Set the activeDays to correspond to Habit
+        // TODO: Set the calendar to correspond to Habit
 
         btnBack.setOnClickListener(view -> {
             Intent intentBack = new Intent(EditHabitActivity.this, ViewHabitActivity.class);
@@ -58,7 +68,6 @@ public class EditHabitActivity extends AppCompatActivity {
             String habitTitle = etHabitTitle.getText().toString();
             String habitReason = etHabitReason.getText().toString();
 
-            Boolean isPublic = false;
 
             int day = dpDateToStart.getDayOfMonth();
             int month = dpDateToStart.getMonth();
@@ -83,6 +92,8 @@ public class EditHabitActivity extends AppCompatActivity {
             intentEdit.putExtra("HABIT", (Serializable) newHabit);
             startActivity(intentEdit);
         });
+
+        toggleIsPublic.setOnCheckedChangeListener((compoundButton, b) -> isPublic = b);
     }
 
     public Map<String, Boolean> checkedDaysChips(){
