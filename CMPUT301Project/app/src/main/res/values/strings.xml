@@ -3,5 +3,7 @@
     <string name="etHabitTitle">Title</string>
     <string name="etHabitReason">Reason</string>
     <string name="etHabitDateToStart">Date To Start</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/habitFragment">
+    <fragment
+        android:id="@+id/habitFragment"
+        android:name="com.example.GroupProject.HabitFragment"
+        android:label="fragment_habit"
+        tools:layout="@layout/fragment_habit" >
+        <action
+            android:id="@+id/action_habitFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.GroupProject.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="ShowAppBar"
+            android:defaultValue="true" />
+    </fragment>
+</navigation>
