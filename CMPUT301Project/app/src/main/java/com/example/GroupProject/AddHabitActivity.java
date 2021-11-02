@@ -63,6 +63,9 @@ public class AddHabitActivity extends AppCompatActivity {
 
             db.collection("Users").document("John Doe").collection("Habits").document(habitTitle)
                     .set(habit, SetOptions.merge());
+
+            Intent intent = new Intent(AddHabitActivity.this, MainActivity.class);
+            startActivity(intent);
         });
 
         btnBack.setOnClickListener(view -> {
