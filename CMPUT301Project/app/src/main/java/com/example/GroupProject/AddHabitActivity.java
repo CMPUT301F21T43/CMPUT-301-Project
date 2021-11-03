@@ -8,6 +8,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
+
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.Timestamp;
@@ -23,6 +27,8 @@ public class AddHabitActivity extends AppCompatActivity {
     EditText etHabitTitle;
     EditText etHabitReason;
     DatePicker dpDateToStart;
+    ToggleButton toggleIsPublic;
+    Boolean isPublic = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,7 @@ public class AddHabitActivity extends AppCompatActivity {
         cgDaysOfWeek = findViewById(R.id.cgDaysOfWeek);
         ImageButton btnBack = findViewById(R.id.btnBack);
         ImageButton btnConfirmAddHabit = findViewById(R.id.btnConfirmAddHabit);
+        ToggleButton toggleIsPublic = findViewById(R.id.toggleIsPublic);
 
         FirebaseFirestore db = MainActivity.getFirestoreInstance();
 
@@ -44,8 +51,6 @@ public class AddHabitActivity extends AppCompatActivity {
             // Add all these to Firestore
             String habitTitle = etHabitTitle.getText().toString();
             String habitReason = etHabitReason.getText().toString();
-
-            Boolean isPublic = false;
 
             int day = dpDateToStart.getDayOfMonth();
             int month = dpDateToStart.getMonth();
@@ -73,6 +78,7 @@ public class AddHabitActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        toggleIsPublic.setOnCheckedChangeListener((compoundButton, b) -> isPublic = b);
     }
 
 
