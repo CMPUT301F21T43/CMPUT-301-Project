@@ -1,0 +1,19 @@
+Meeting Minutes for November 2
+
+
+Attendence: 
+
+Observations from A2
+=========================
+ - Whatever we design in CRC cards or UML diagram should align with our implementation. Activities and Fragments are not required.
+ - Problem was with Object Oriented analysis where many requirements were missed. Otherwise most else was good.
+ 
+General Notes
+=========================
+ - Robotium doesn't integrate with Firestore for intent testing, but Espresso does so try that.
+ - Need to do demonstration week after reading week
+ 
+ Work to do
+ ========================
+ 
+ 
