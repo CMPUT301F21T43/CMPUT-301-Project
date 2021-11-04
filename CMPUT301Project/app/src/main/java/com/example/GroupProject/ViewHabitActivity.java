@@ -1,3 +1,14 @@
+/**
+ * Classname
+ *
+ * Version Information
+ *
+ * Date
+ *
+ * Copyright Notices
+ */
+
+
 package com.example.GroupProject;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +23,10 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.Map;
 
+/**
+ * Implements the functionality behind viewing the details of a Habit.
+ * Get here by clicking on a Habit in the MainActivity list of habits.
+ */
 public class ViewHabitActivity extends AppCompatActivity {
     ImageButton btnBack;
     ImageButton btnEditHabit;

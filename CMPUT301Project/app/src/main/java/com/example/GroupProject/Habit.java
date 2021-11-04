@@ -1,7 +1,9 @@
 package com.example.GroupProject;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -79,7 +81,8 @@ public class Habit implements Serializable {
     public String getDateToStartAsString() {
         Date date = dateToStart;
         String year = String.valueOf(date.getYear());
-        String month = String.valueOf(date.getMonth());
+        // getMonth indexes from 0 so need to add 1 to correct for this
+        String month = String.valueOf(date.getMonth() + 1);
         String day = String.valueOf(date.getDate());
         return year + "-" + month + "-" + day;
     }
@@ -98,6 +101,7 @@ public class Habit implements Serializable {
      * @return activeDays
      *      activeDays as a Map with K: day of week (String) and V: active (Boolean)
      */
+    // TODO: This function name is a misnomer as it gets "Inactive" days too
     public Map<String, Boolean> getActiveDays() {
         return activeDays;
     }
@@ -109,6 +113,43 @@ public class Habit implements Serializable {
      */
     public void setActiveDays(Map<String, Boolean> activeDays) {
         this.activeDays = activeDays;
+    }
+
+    /**
+     * Returns the value for the given day key.
+     * @param day_of_week
+     *      int day_of_week is the result of calling .get(Calendar.day_of_week) on
+     *          a calendar instance.
+     * @return value
+     *      value is a boolean mapped to the day param that
+     *          returns true if the day is active, false otherwise
+     */
+    public boolean isDayActive(int day_of_week){
+        String todayDayOfWeek = "";
+        switch (day_of_week) {
+            case Calendar.SUNDAY:
+                todayDayOfWeek = "Sunday";
+                break;
+            case Calendar.MONDAY:
+                todayDayOfWeek = "Monday";
+                break;
+            case Calendar.TUESDAY:
+                todayDayOfWeek = "Tuesday";
+                break;
+            case Calendar.WEDNESDAY:
+                todayDayOfWeek = "Wednesday";
+                break;
+            case Calendar.THURSDAY:
+                todayDayOfWeek = "Thursday";
+                break;
+            case Calendar.FRIDAY:
+                todayDayOfWeek = "Friday";
+                break;
+            case Calendar.SATURDAY:
+                todayDayOfWeek = "Saturday";
+                break;
+        }
+        return activeDays.get(todayDayOfWeek);
     }
 
     /**
