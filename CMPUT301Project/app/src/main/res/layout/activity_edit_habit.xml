@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
+  ~ All rights reserved.
+  -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:contentDescription="Back Button"
+        android:contentDescription="@string/back_button"
         android:src="@drawable/ic_baseline_arrow_back_ios_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:background="@color/white"
-        android:contentDescription="Confirm Edit Habit"
+        android:contentDescription="@string/confirm_edit_habit"
         android:scaleX="2"
         android:scaleY="2"
         android:src="@drawable/ic_baseline_done_24"
@@ -48,19 +53,19 @@
             android:layout_height="wrap_content"
             android:id="@+id/llAddHabit"
             android:orientation="vertical">
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
                 android:id="@+id/etHabitTitle"
-                android:hint="@string/etHabitTitle"
+                android:hint="@string/etHabitTitleHint"
                 app:layout_constraintBottom_toTopOf="@+id/etHabitReason"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="parent"
-                android:maxLength="20"
-                ></EditText>
+                android:maxLength="20" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -71,8 +76,8 @@
                 android:id="@+id/etHabitReason"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="parent"
-                android:hint="@string/etHabitReason"
-                android:maxLength="30"></EditText>
+                android:hint="@string/etHabitReasonHint"
+                android:maxLength="30" />
 
             <DatePicker
                 android:layout_width="match_parent"
@@ -99,49 +104,49 @@
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Monday"
+                    android:text="@string/chipMonday"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:id="@+id/cMonday"/>
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tuesday"
+                    android:text="@string/chipTuesday"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:id="@+id/cTuesday"/>
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Wednesday"
+                    android:text="@string/chipWednesday"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:id="@+id/cWednesday"/>
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Thursday"
+                    android:text="@string/chipThursday"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:id="@+id/cThursday"/>
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Friday"
+                    android:text="@string/chipFriday"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:id="@+id/cTFriday"/>
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Saturday"
+                    android:text="@string/chipSaturday"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:id="@+id/cSaturday"/>
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sunday"
+                    android:text="@string/chipSunday"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:id="@+id/cSunday"/>
 
@@ -152,8 +157,8 @@
                 android:layout_marginBottom="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textOn="Public"
-                android:textOff="Private"
+                android:textOn="@string/isPublicOn"
+                android:textOff="@string/isPublicOff"
                 android:checked="true"/>
         </LinearLayout>
     </ScrollView>

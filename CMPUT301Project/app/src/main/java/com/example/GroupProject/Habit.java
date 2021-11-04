@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
+ * All rights reserved.
+ */
+
 package com.example.GroupProject;
 
 import java.io.Serializable;
@@ -11,7 +16,6 @@ import java.util.Map;
  * Class of habit objects with a title, date, and reason
  * @Author Marcus Bengert, Martin Rudolf
  */
-
 public class Habit implements Serializable {
 
     private String title;
@@ -20,6 +24,14 @@ public class Habit implements Serializable {
     private Map<String, Boolean> activeDays;
     private Boolean isPublic;
 
+    /**
+     * Generic constructor for Habit.
+     * @param title name of the habit, needs to be unique for a particular user.
+     * @param reason reason for the habit
+     * @param dateToStart date that the habit should start
+     * @param activeDays days of the week that the habit should be active
+     * @param isPublic whether the habit is publicly visible or not
+     */
     Habit(String title, String reason, Date dateToStart, Map<String, Boolean> activeDays, Boolean isPublic){
         this.title = title;
         this.reason = reason;
@@ -83,7 +95,8 @@ public class Habit implements Serializable {
         String year = String.valueOf(date.getYear());
         // getMonth indexes from 0 so need to add 1 to correct for this
         String month = String.valueOf(date.getMonth() + 1);
-        String day = String.valueOf(date.getDate());
+        // getDate indexes from 0 so need to add 1 to correct for this
+        String day = String.valueOf(date.getDate() + 1);
         return year + "-" + month + "-" + day;
     }
 
@@ -167,6 +180,6 @@ public class Habit implements Serializable {
      *      isPublic is Boolean
      */
     public void setPublic(Boolean isPublic) {
-        isPublic = isPublic;
+        this.isPublic = isPublic;
     }
 }
