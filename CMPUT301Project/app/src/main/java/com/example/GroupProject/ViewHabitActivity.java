@@ -10,12 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -72,7 +69,5 @@ public class ViewHabitActivity extends AppCompatActivity {
         }
         tvHabitActiveDays.setText(sbActiveDays);
         tvHabitIsPublic.setText(habit.getPublic() ? "Public" : "Private");
-
-
     }
 }
