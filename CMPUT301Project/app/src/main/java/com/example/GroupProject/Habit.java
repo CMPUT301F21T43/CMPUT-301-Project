@@ -1,7 +1,14 @@
+/*
+ * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
+ * All rights reserved.
+ */
+
 package com.example.GroupProject;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,7 +16,6 @@ import java.util.Map;
  * Class of habit objects with a title, date, and reason
  * @Author Marcus Bengert, Martin Rudolf
  */
-
 public class Habit implements Serializable {
 
     private String title;
@@ -18,6 +24,14 @@ public class Habit implements Serializable {
     private Map<String, Boolean> activeDays;
     private Boolean isPublic;
 
+    /**
+     * Generic constructor for Habit.
+     * @param title name of the habit, needs to be unique for a particular user.
+     * @param reason reason for the habit
+     * @param dateToStart date that the habit should start
+     * @param activeDays days of the week that the habit should be active
+     * @param isPublic whether the habit is publicly visible or not
+     */
     Habit(String title, String reason, Date dateToStart, Map<String, Boolean> activeDays, Boolean isPublic){
         this.title = title;
         this.reason = reason;
@@ -79,8 +93,10 @@ public class Habit implements Serializable {
     public String getDateToStartAsString() {
         Date date = dateToStart;
         String year = String.valueOf(date.getYear());
-        String month = String.valueOf(date.getMonth());
-        String day = String.valueOf(date.getDate());
+        // getMonth indexes from 0 so need to add 1 to correct for this
+        String month = String.valueOf(date.getMonth() + 1);
+        // getDate indexes from 0 so need to add 1 to correct for this
+        String day = String.valueOf(date.getDate() + 1);
         return year + "-" + month + "-" + day;
     }
 
@@ -98,6 +114,7 @@ public class Habit implements Serializable {
      * @return activeDays
      *      activeDays as a Map with K: day of week (String) and V: active (Boolean)
      */
+    // TODO: This function name is a misnomer as it gets "Inactive" days too
     public Map<String, Boolean> getActiveDays() {
         return activeDays;
     }
@@ -109,6 +126,43 @@ public class Habit implements Serializable {
      */
     public void setActiveDays(Map<String, Boolean> activeDays) {
         this.activeDays = activeDays;
+    }
+
+    /**
+     * Returns the value for the given day key.
+     * @param day_of_week
+     *      int day_of_week is the result of calling .get(Calendar.day_of_week) on
+     *          a calendar instance.
+     * @return value
+     *      value is a boolean mapped to the day param that
+     *          returns true if the day is active, false otherwise
+     */
+    public boolean isDayActive(int day_of_week){
+        String todayDayOfWeek = "";
+        switch (day_of_week) {
+            case Calendar.SUNDAY:
+                todayDayOfWeek = "Sunday";
+                break;
+            case Calendar.MONDAY:
+                todayDayOfWeek = "Monday";
+                break;
+            case Calendar.TUESDAY:
+                todayDayOfWeek = "Tuesday";
+                break;
+            case Calendar.WEDNESDAY:
+                todayDayOfWeek = "Wednesday";
+                break;
+            case Calendar.THURSDAY:
+                todayDayOfWeek = "Thursday";
+                break;
+            case Calendar.FRIDAY:
+                todayDayOfWeek = "Friday";
+                break;
+            case Calendar.SATURDAY:
+                todayDayOfWeek = "Saturday";
+                break;
+        }
+        return activeDays.get(todayDayOfWeek);
     }
 
     /**
@@ -126,6 +180,6 @@ public class Habit implements Serializable {
      *      isPublic is Boolean
      */
     public void setPublic(Boolean isPublic) {
-        isPublic = isPublic;
+        this.isPublic = isPublic;
     }
 }

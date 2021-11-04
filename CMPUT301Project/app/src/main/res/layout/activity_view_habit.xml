@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
+  ~ All rights reserved.
+  -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:contentDescription="Back Button"
+        android:contentDescription="@string/btnBackContentDescription"
         android:src="@drawable/ic_baseline_arrow_back_ios_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:background="@color/white"
-        android:contentDescription="Edit Habit"
+        android:contentDescription="@string/btnEditHabitContentDescription"
         android:scaleX="1.5"
         android:scaleY="1.5"
         android:src="@drawable/ic_baseline_edit_24"
@@ -57,9 +62,9 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
                 android:id="@+id/_tvHabitTitle"
-                android:text="Habit Title"
+                android:text="@string/tvHabitTitleText"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 />
 
             <TextView
@@ -67,8 +72,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="5dp"
-                android:hint="Title"
-                android:textSize="20dp"
+                android:hint="@string/tvHabitTitleText"
+                android:textSize="20sp"
                 android:id="@+id/tvHabitTitle"/>
 
 
@@ -78,9 +83,9 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
                 android:id="@+id/_tvHabitReason"
-                android:text="Habit Reason"
+                android:text="@string/tvHabitReasonText"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 />
 
             <TextView
@@ -88,8 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="5dp"
-                android:hint="Reason"
-                android:textSize="20dp"
+                android:hint="@string/tvHabitReasonText"
+                android:textSize="20sp"
                 android:id="@+id/tvHabitReason"/>
 
             <TextView
@@ -98,9 +103,9 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
                 android:id="@+id/_tvHabitDateToStart"
-                android:text="Date To Start"
+                android:text="@string/tvDateToStartText"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 />
 
             <TextView
@@ -108,8 +113,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="5dp"
-                android:hint="Date"
-                android:textSize="20dp"
+                android:hint="@string/tvDateToStartText"
+                android:textSize="20sp"
                 android:id="@+id/tvHabitDateToStart"/>
 
             <TextView
@@ -118,9 +123,9 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
                 android:id="@+id/_tvHabitActiveDays"
-                android:text="Active Days of Week"
+                android:text="@string/tvHabitActiveDaysText"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 />
 
             <TextView
@@ -128,8 +133,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="5dp"
-                android:hint="Days"
-                android:textSize="20dp"
+                android:hint="@string/days"
+                android:textSize="20sp"
                 android:id="@+id/tvHabitActiveDays"/>
 
             <TextView
@@ -138,9 +143,9 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
                 android:id="@+id/_tvHabitIsPublic"
-                android:text="Visibility"
+                android:text="@string/_tvHabitIsPublicText"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 />
 
             <TextView
@@ -148,8 +153,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="5dp"
-                android:hint="Public"
-                android:textSize="20dp"
+                android:hint="@string/tvHabitIsPublic"
+                android:textSize="20sp"
                 android:id="@+id/tvHabitIsPublic"/>
 
         </LinearLayout>

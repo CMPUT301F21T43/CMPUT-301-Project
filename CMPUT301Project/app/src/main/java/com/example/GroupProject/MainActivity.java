@@ -1,26 +1,21 @@
+/*
+ * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
+ * All rights reserved.
+ */
+
 package com.example.GroupProject;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 public class MainActivity extends AppCompatActivity {
-
-    int selected;
+    private int selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,22 +27,19 @@ public class MainActivity extends AppCompatActivity {
         ProfileFragment profileFragment = new ProfileFragment();
         HabitFragment habitFragment = new HabitFragment();
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationBar);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.habit:
-                        selected = R.id.habit;
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_fragment, habitFragment).commit();
-                        break;
-                    case R.id.profile:
-                        selected = R.id.profile;
-                        getSupportFragmentManager().beginTransaction().replace(R.id.nav_fragment, profileFragment).commit();
-                        break;
-                }
-                return true;
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationBar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.habit:
+                    selected = R.id.habit;
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_fragment, habitFragment).commit();
+                    break;
+                case R.id.profile:
+                    selected = R.id.profile;
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_fragment, profileFragment).commit();
+                    break;
             }
+            return true;
         });
         if (selected == 0) {
             bottomNavigationView.setSelectedItemId(R.id.habit);

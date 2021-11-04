@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
+ * All rights reserved.
+ */
+
 package com.example.GroupProject;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,12 +28,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditHabitActivity extends AppCompatActivity {
-    ChipGroup cgDaysOfWeek;
-    EditText etHabitTitle;
-    EditText etHabitReason;
-    DatePicker dpDateToStart;
-    ToggleButton toggleIsPublic;
-    Boolean isPublic;
+    private ChipGroup cgDaysOfWeek;
+    private EditText etHabitTitle;
+    private EditText etHabitReason;
+    private DatePicker dpDateToStart;
+    private ToggleButton toggleIsPublic;
+    private Boolean isPublic;
+    private ImageButton btnBack;
+    private ImageButton btnConfirmEditHabit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +47,9 @@ public class EditHabitActivity extends AppCompatActivity {
         etHabitReason = findViewById(R.id.etHabitReason);
         dpDateToStart = findViewById(R.id.dpDateToStart);
         cgDaysOfWeek = findViewById(R.id.cgDaysOfWeek);
-        ImageButton btnBack = findViewById(R.id.btnBack);
-        ImageButton btnConfirmEditHabit = findViewById(R.id.btnConfirmEditHabit);
-        ToggleButton toggleIsPublic = findViewById(R.id.toggleIsPublic);
+        btnBack = findViewById(R.id.btnBack);
+        btnConfirmEditHabit = findViewById(R.id.btnConfirmEditHabit);
+        toggleIsPublic = findViewById(R.id.toggleIsPublic);
 
         FirebaseFirestore db = MainActivity.getFirestoreInstance();
         Intent intent = getIntent();
@@ -53,11 +60,14 @@ public class EditHabitActivity extends AppCompatActivity {
         toggleIsPublic.setChecked(isPublic);
 
         // TODO: Set the activeDays to correspond to Habit
+
         // TODO: Set the calendar to correspond to Habit
+        Date oldDateToStart = habit.getDateToStart();
+        dpDateToStart.init(oldDateToStart.getYear(), oldDateToStart.getMonth(), oldDateToStart.getDay(), null);
 
         btnBack.setOnClickListener(view -> {
             Intent intentBack = new Intent(EditHabitActivity.this, ViewHabitActivity.class);
-            intentBack.putExtra("HABIT", (Serializable) habit);
+            intentBack.putExtra("HABIT", habit);
             startActivity(intentBack);
         });
 
@@ -89,7 +99,7 @@ public class EditHabitActivity extends AppCompatActivity {
                     .set(editHabit, SetOptions.merge());
 
             Intent intentEdit = new Intent(EditHabitActivity.this, MainActivity.class);
-            intentEdit.putExtra("HABIT", (Serializable) newHabit);
+            intentEdit.putExtra("HABIT", newHabit);
             startActivity(intentEdit);
         });
 

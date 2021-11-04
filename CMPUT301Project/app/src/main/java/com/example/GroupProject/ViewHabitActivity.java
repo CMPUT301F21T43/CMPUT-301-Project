@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
+ * All rights reserved.
+ */
+
+
 package com.example.GroupProject;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +18,10 @@ import android.widget.TextView;
 import java.io.Serializable;
 import java.util.Map;
 
+/**
+ * Implements the functionality behind viewing the details of a Habit.
+ * Get here by clicking on a Habit in the MainActivity list of habits.
+ */
 public class ViewHabitActivity extends AppCompatActivity {
     ImageButton btnBack;
     ImageButton btnEditHabit;
@@ -44,7 +54,7 @@ public class ViewHabitActivity extends AppCompatActivity {
 
         btnEditHabit.setOnClickListener(view -> {
             Intent intent12 = new Intent(ViewHabitActivity.this, EditHabitActivity.class);
-            intent12.putExtra("HABIT", (Serializable) habit);
+            intent12.putExtra("HABIT", habit);
             startActivity(intent12);
         });
 
@@ -52,10 +62,10 @@ public class ViewHabitActivity extends AppCompatActivity {
         tvHabitReason.setText(habit.getReason());
         tvHabitDateToStart.setText(habit.getDateToStartAsString());
 
-        StringBuilder sbActiveDays = new StringBuilder("");
+        StringBuilder sbActiveDays = new StringBuilder();
         for (Map.Entry<String, Boolean> entry : habit.getActiveDays().entrySet()){
             // Each day should be accessible from habits to see if it's true or not
-            if (entry.getValue() == true){
+            if (entry.getValue()){
                 sbActiveDays.append(" ");
                 sbActiveDays.append(entry.getKey());
             }
