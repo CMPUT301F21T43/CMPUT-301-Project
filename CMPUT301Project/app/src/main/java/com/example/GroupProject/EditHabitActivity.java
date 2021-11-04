@@ -59,7 +59,12 @@ public class EditHabitActivity extends AppCompatActivity {
         isPublic = habit.getPublic();
         toggleIsPublic.setChecked(isPublic);
 
-        // TODO: Set the activeDays to correspond to Habit
+        cgDaysOfWeek.clearCheck();
+        for (int i = 0; i < cgDaysOfWeek.getChildCount(); i++) {
+            Chip chip = (Chip) cgDaysOfWeek.getChildAt(i);
+            String chipText = (String) chip.getText();
+            if (habit.getActiveDays().get(chipText)) { cgDaysOfWeek.check(chip.getId()); }
+        }
 
         // TODO: Set the calendar to correspond to Habit
         Date oldDateToStart = habit.getDateToStart();
@@ -106,7 +111,7 @@ public class EditHabitActivity extends AppCompatActivity {
         toggleIsPublic.setOnCheckedChangeListener((compoundButton, b) -> isPublic = b);
     }
 
-    public Map<String, Boolean> checkedDaysChips(){
+    public Map<String, Boolean> checkedDaysChips() {
         Map<String, Boolean> checkedDays = new HashMap<>();
         for (int i = 0; i < cgDaysOfWeek.getChildCount(); i++){
             Chip chip  = (Chip) cgDaysOfWeek.getChildAt(i);
