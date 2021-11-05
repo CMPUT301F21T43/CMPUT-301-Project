@@ -12,7 +12,7 @@ public class GroupProject extends Application {
     private String username;
 
     public GroupProject() {
-        this.username = "John Doe";
+        this.username = "John Doe"; // default username
     }
 
     public void setUsername(String username) {

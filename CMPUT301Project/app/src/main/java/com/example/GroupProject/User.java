@@ -19,8 +19,10 @@ public class User {
     private String firstName;
     private String lastName;
 
-    User(String username) {
+    User (String username, String firstName, String lastName) {
         this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     /**

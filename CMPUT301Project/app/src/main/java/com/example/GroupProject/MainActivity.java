@@ -15,8 +15,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
+    
     private int selected;
-    User thisUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

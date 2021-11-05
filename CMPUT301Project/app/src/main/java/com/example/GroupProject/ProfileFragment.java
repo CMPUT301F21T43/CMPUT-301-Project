@@ -110,9 +110,7 @@ public class ProfileFragment extends Fragment {
 
         //username = getArguments().getString("username");
         username = ((GroupProject) getActivity().getApplication()).getUsername();
-        thisUser = new User(username);
-        thisUser.setFirstName("");
-        thisUser.setLastName("");
+        thisUser = new User(username, "", "");
 
         FirebaseFirestore db;
         db = getFirestoreInstance();
