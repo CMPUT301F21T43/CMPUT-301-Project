@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class HabitEventsMain extends AppCompatActivity{
@@ -73,14 +74,20 @@ public class HabitEventsMain extends AppCompatActivity{
         });
 
         addEvent.setOnClickListener(view -> {
-            Intent intent1 = new Intent(HabitEventsMain.this, AddHabitEvent.class);
-            intent1.putExtra("HABIT", habit);
-            startActivity(intent1);
+            Intent intent12 = new Intent(HabitEventsMain.this, AddHabitEvent.class);
+            intent12.putExtra("HABIT", habit);
+            startActivity(intent12);
+        });
+
+
+        eventList.setOnItemClickListener((adapterView, view12, i, l) -> {
+            Intent intentEvent = new Intent(HabitEventsMain.this, ViewHabitEvent.class);
+            intentEvent.putExtra("EVENT", (Serializable) adapterView.getItemAtPosition(i));
+            startActivity(intentEvent);
         });
 
         eventList.setOnItemLongClickListener((adapterView, view1, i, l) -> {
             HabitEvents event = (HabitEvents) adapterView.getItemAtPosition(i);
-            String eventTitle = event.getTitle();
             db.collection("Users")
                     .document("John Doe")
                     .collection("Habits")

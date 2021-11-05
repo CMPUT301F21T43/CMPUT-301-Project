@@ -1,10 +1,12 @@
 package com.example.GroupProject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,10 +43,10 @@ public class CustomEvent extends ArrayAdapter<HabitEvents> {
         }
 
         HabitEvents event = events.get(position);
-
         TextView eventName= view.findViewById(R.id.event_name);
+        //Button editEvent = view.findViewById(R.id.edit_event);
+        eventName.setText(event.getEventTitle());
 
-        eventName.setText(event.getTitle());
 
         return view;
 

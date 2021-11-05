@@ -40,6 +40,10 @@ public class Habit implements Serializable {
         this.isPublic = isPublic;
     }
 
+    public Habit() {
+
+    }
+
     /**
      * Function to return habit title
      * @return title

@@ -20,12 +20,12 @@ public class HabitEventsUnitTest {
 
     @Test
     public void testGetTitle() {
-        assertEquals(testEvents.getTitle(), "Hello");
+        assertEquals(testEvents.getEventTitle(), "Hello");
     }
 
     @Test
     public void testSetTitle() throws NoSuchFieldException, IllegalAccessException {
-        testEvents.setTitle("Bye");
+        testEvents.setEventTitle("Bye");
         final Field field = testEvents.getClass().getDeclaredField("title");
         field.setAccessible(true);
         assertEquals(field.get(testEvents), "Bye");

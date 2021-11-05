@@ -7,20 +7,21 @@ package com.example.GroupProject;
 
 import java.io.Serializable;
 
-public class HabitEvents implements Serializable {
+public class HabitEvents extends Habit {
     private String title;
     private String comment;
 
     public HabitEvents(String title, String comment) {
+        super();
         this.title = title;
         this.comment = comment;
     }
 
-    public String getTitle() {
+    public String getEventTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setEventTitle(String title) {
         this.title = title;
     }
 

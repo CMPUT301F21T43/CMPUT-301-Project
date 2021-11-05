@@ -12,6 +12,18 @@
     tools:context=".ViewHabitActivity">
 
 
+    <Button
+        android:id="@+id/go_events1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to EventS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96" />
+
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
@@ -40,122 +52,120 @@
 
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
         android:id="@+id/svAddHabit"
-        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        android:layout_width="297dp"
+        android:layout_height="525dp"
+        android:layout_marginTop="65dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="65dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
+            android:id="@+id/llAddHabit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/llAddHabit"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/_tvHabitTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
-                android:id="@+id/_tvHabitTitle"
                 android:text="@string/tvHabitTitleText"
-                android:textStyle="bold"
                 android:textSize="20sp"
-                />
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvHabitTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="5dp"
                 android:hint="@string/tvHabitTitleText"
-                android:textSize="20sp"
-                android:id="@+id/tvHabitTitle"/>
+                android:textSize="20sp" />
 
 
             <TextView
+                android:id="@+id/_tvHabitReason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
-                android:id="@+id/_tvHabitReason"
                 android:text="@string/tvHabitReasonText"
-                android:textStyle="bold"
                 android:textSize="20sp"
-                />
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvHabitReason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="5dp"
                 android:hint="@string/tvHabitReasonText"
-                android:textSize="20sp"
-                android:id="@+id/tvHabitReason"/>
+                android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/_tvHabitDateToStart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
-                android:id="@+id/_tvHabitDateToStart"
                 android:text="@string/tvDateToStartText"
-                android:textStyle="bold"
                 android:textSize="20sp"
-                />
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvHabitDateToStart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="5dp"
                 android:hint="@string/tvDateToStartText"
-                android:textSize="20sp"
-                android:id="@+id/tvHabitDateToStart"/>
+                android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/_tvHabitActiveDays"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
-                android:id="@+id/_tvHabitActiveDays"
                 android:text="@string/tvHabitActiveDaysText"
-                android:textStyle="bold"
                 android:textSize="20sp"
-                />
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvHabitActiveDays"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="5dp"
                 android:hint="@string/days"
-                android:textSize="20sp"
-                android:id="@+id/tvHabitActiveDays"/>
+                android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/_tvHabitIsPublic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
-                android:id="@+id/_tvHabitIsPublic"
                 android:text="@string/_tvHabitIsPublicText"
-                android:textStyle="bold"
                 android:textSize="20sp"
-                />
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvHabitIsPublic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginVertical="5dp"
                 android:hint="@string/tvHabitIsPublic"
-                android:textSize="20sp"
-                android:id="@+id/tvHabitIsPublic"/>
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>

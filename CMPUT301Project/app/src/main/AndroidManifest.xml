@@ -14,7 +14,13 @@
             android:name=".SignInActivity"
             android:exported="true" />
         <activity
+            android:name=".EditHabitEvent"
+            android:exported="false" />
+        <activity
             android:name=".AddHabitEvent"
+            android:exported="false" />
+        <activity
+            android:name=".ViewHabitEvent"
             android:exported="false" />
         <activity
             android:name=".HabitEventsMain"

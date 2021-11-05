@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -22,11 +24,13 @@ import java.util.Map;
 public class ViewHabitActivity extends AppCompatActivity {
     ImageButton btnBack;
     ImageButton btnEditHabit;
+    Button goEvents;
     TextView tvHabitTitle;
     TextView tvHabitReason;
     TextView tvHabitDateToStart;
     TextView tvHabitActiveDays;
     TextView tvHabitIsPublic;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,7 @@ public class ViewHabitActivity extends AppCompatActivity {
 
         btnBack  = findViewById(R.id.btnBack);
         btnEditHabit = findViewById(R.id.btnEditHabit);
+        goEvents =findViewById(R.id.go_events1);
         tvHabitTitle = findViewById(R.id.tvHabitTitle);
         tvHabitReason = findViewById(R.id.tvHabitReason);
         tvHabitDateToStart = findViewById(R.id.tvHabitDateToStart);
@@ -54,6 +59,13 @@ public class ViewHabitActivity extends AppCompatActivity {
             intent12.putExtra("HABIT", habit);
             startActivity(intent12);
         });
+
+        goEvents.setOnClickListener(view -> {
+            Intent intent123 = new Intent(ViewHabitActivity.this, HabitEventsMain.class);
+            intent123.putExtra("HABIT", habit);
+            startActivity(intent123);
+        });
+
 
         tvHabitTitle.setText(habit.getTitle());
         tvHabitReason.setText(habit.getReason());

@@ -55,24 +55,13 @@ public class CustomList extends ArrayAdapter<Habit> {
         TextView tvHabitReason = view.findViewById(R.id.habit_reason);
         TextView tvHabitDateToStart = view.findViewById(R.id.habit_dateToStart);
         TextView tvDoToday = view.findViewById(R.id.tvDoToday);
-        Button goEvents = view.findViewById(R.id.go_events);
+
 
         tvHabitName.setText(habit.getTitle());
         tvHabitReason.setText(habit.getReason());
         tvHabitDateToStart.setText(habit.getDateToStartAsString());
         tvDoToday.setVisibility(habit.isDayActive(today.get(Calendar.DAY_OF_WEEK)) ? View.VISIBLE : View.INVISIBLE);
 
-        goEvents.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(view.getContext(), HabitEventsMain.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //add this line
-                intent.putExtra("HABIT", habit);
-                view.getContext().startActivity(intent);
-            }
-        });
 
         return view;
 
