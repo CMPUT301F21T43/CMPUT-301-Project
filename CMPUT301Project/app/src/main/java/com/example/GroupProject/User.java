@@ -5,6 +5,8 @@
 
 package com.example.GroupProject;
 
+import android.app.Application;
+
 /**
  * User class
  * Class of a user, containing username, first name and last name
@@ -12,11 +14,12 @@ package com.example.GroupProject;
  *
  */
 public class User {
-    String username;
-    String firstName;
-    String lastName;
 
-    User(String username, String firstName, String lastName) {
+    private String username;
+    private String firstName;
+    private String lastName;
+
+    User (String username, String firstName, String lastName) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

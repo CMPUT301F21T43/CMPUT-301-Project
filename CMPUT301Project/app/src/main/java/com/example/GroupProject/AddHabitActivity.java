@@ -40,6 +40,8 @@ public class AddHabitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
 
+        String username = ((GroupProject) this.getApplication()).getUsername();
+
         etHabitTitle = findViewById(R.id.etHabitTitle);
         etHabitReason = findViewById(R.id.etHabitReason);
         dpDateToStart = findViewById(R.id.dpDateToStart);
@@ -71,7 +73,7 @@ public class AddHabitActivity extends AppCompatActivity {
             habit.put("dateToStart", new Timestamp(dateToStart));
             habit.put("activeDays", checkedDaysChips());
 
-            db.collection("Users").document("John Doe").collection("Habits").document(habitTitle)
+            db.collection("Users").document(username).collection("Habits").document(habitTitle)
                     .set(habit, SetOptions.merge());
 
             Intent intent = new Intent(AddHabitActivity.this, MainActivity.class);
