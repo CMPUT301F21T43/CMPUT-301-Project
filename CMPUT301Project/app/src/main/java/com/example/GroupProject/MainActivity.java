@@ -25,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseFirestore db;
 
+        if (!((GroupProject) this.getApplication()).isSignedIn()) {
+            Intent intent = new Intent(this, SignInActivity.class);
+            startActivity(intent);
+        }
+
         ProfileFragment profileFragment = new ProfileFragment();
         HabitFragment habitFragment = new HabitFragment();
 

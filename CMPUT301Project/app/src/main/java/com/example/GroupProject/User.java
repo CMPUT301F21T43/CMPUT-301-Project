@@ -52,14 +52,29 @@ public class User {
         return lastName;
     }
 
+    /**
+     * Set username
+     * @param username
+     *      Username as a string
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Set first name
+     * @param firstName
+     *      First name as a string
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Set last name
+     * @param lastName
+     *      Last name as a string
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }

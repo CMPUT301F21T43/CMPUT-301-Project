@@ -11,8 +11,6 @@
     <string name="btnBackContentDescription">Back Button</string>
     <string name="btnConfirmAddHabitContentDescription">Confirm Add Habit</string>
     <string name="btnEditHabitContentDescription">Edit Habit</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tvHabitTitleText">Habit Title</string>
     <string name="tvHabitReasonText">Habit Reason</string>
     <string name="tvDateToStartText">Date To Start</string>
@@ -35,5 +33,6 @@
     <string name="reason">Reason</string>
     <string name="name">Name</string>
     <string name="days">Days</string>
+    <string name="sign_in_create_account">Sign In / Create Account</string>
 
 </resources>
