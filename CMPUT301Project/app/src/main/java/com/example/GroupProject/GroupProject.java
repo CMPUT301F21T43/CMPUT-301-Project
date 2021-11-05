@@ -10,8 +10,10 @@ import android.app.Application;
 public class GroupProject extends Application {
 
     private String username;
+    private boolean signedIn;
 
     public GroupProject() {
+        this.signedIn = false;
         this.username = "John Doe"; // default username
     }
 
@@ -19,7 +21,15 @@ public class GroupProject extends Application {
         this.username = username;
     }
 
+    public void setSignedIn(boolean signedIn) {
+        this.signedIn = signedIn;
+    }
+
     public String getUsername() {
         return username;
+    }
+
+    public boolean isSignedIn() {
+        return signedIn;
     }
 }

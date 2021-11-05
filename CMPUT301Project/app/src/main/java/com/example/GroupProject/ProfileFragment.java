@@ -6,16 +6,19 @@
 package com.example.GroupProject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -44,7 +47,8 @@ public class ProfileFragment extends Fragment {
     EditText usernameEdit;
     EditText fnameEdit;
     EditText lnameEdit;
-    ImageButton confirmUserbtn;
+    Button confirmUserbtn;
+    Button signOutbtn;
 
     User thisUser;
     String username;
@@ -83,15 +87,15 @@ public class ProfileFragment extends Fragment {
 
         confirmUserbtn.setOnClickListener(view1 -> {
             Map<String, Object> user = new HashMap<>();
-            if (usernameEdit.getText() != null) {
+            if (!TextUtils.isEmpty(usernameEdit.getText().toString())) {
                 String newUsername = usernameEdit.getText().toString();
                 thisUser.setUsername(newUsername);
             }
-            if (fnameEdit.getText() != null) {
+            if (!TextUtils.isEmpty(fnameEdit.getText().toString())) {
                 String newFname = fnameEdit.getText().toString();
                 thisUser.setFirstName(newFname);
             }
-            if (lnameEdit.getText() != null) {
+            if (!TextUtils.isEmpty(lnameEdit.getText().toString())) {
                 String newLname = lnameEdit.getText().toString();
                 thisUser.setLastName(newLname);
             }
@@ -101,6 +105,11 @@ public class ProfileFragment extends Fragment {
 
             db.collection("Users").document(thisUser.getUsername())
                     .set(user, SetOptions.merge());
+        });
+
+        signOutbtn.setOnClickListener(view1 -> {
+            Intent intent = new Intent(thisContext, SignInActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -143,6 +152,7 @@ public class ProfileFragment extends Fragment {
         fnameEdit = view.findViewById(R.id.editTextFirstName);
         lnameEdit = view.findViewById(R.id.editTextLastName);
         confirmUserbtn = view.findViewById(R.id.btnConfirmUser);
+        signOutbtn = view.findViewById(R.id.btnSignOut);
 
         return view;
     }
