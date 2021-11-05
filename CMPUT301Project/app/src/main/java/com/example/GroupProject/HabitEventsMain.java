@@ -40,6 +40,7 @@ public class HabitEventsMain extends AppCompatActivity{
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
 
+
         db.collection("Users")
                 .document("John Doe")
                 .collection("Habits")
@@ -75,6 +76,23 @@ public class HabitEventsMain extends AppCompatActivity{
             Intent intent1 = new Intent(HabitEventsMain.this, AddHabitEvent.class);
             intent1.putExtra("HABIT", habit);
             startActivity(intent1);
+        });
+
+        eventList.setOnItemLongClickListener((adapterView, view1, i, l) -> {
+            HabitEvents event = (HabitEvents) adapterView.getItemAtPosition(i);
+            String eventTitle = event.getTitle();
+            db.collection("Users")
+                    .document("John Doe")
+                    .collection("Habits")
+                    .document(habit.getTitle())
+                    .collection("Events")
+                    .document(event.getTitle())
+                    .delete()
+                    .addOnSuccessListener(aVoid -> Log.d("Event", "Event successfully deleted!"))
+                    .addOnFailureListener(e -> Log.w("Event", "Error deleting document", e));
+            eventAdapter.remove((HabitEvents) adapterView.getItemAtPosition(i));
+            eventAdapter.notifyDataSetChanged();
+            return true;
         });
 
     }
