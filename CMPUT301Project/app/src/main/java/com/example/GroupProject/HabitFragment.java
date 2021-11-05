@@ -38,9 +38,8 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link HabitFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Habit fragment class
+ * @Author Martin Rudolf, Kyle Bricker
  */
 public class HabitFragment extends Fragment {
 

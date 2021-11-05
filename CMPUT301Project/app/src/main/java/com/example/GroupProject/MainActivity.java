@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (!((GroupProject) this.getApplication()).isSignedIn()) {
             Intent intent = new Intent(this, SignInActivity.class);
-            ((GroupProject) this.getApplication()).setSignedIn(true);
             startActivity(intent);
         }
 

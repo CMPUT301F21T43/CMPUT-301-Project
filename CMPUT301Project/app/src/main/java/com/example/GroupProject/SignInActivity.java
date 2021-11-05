@@ -15,6 +15,10 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * SignIn activity
+ * @Author Kyle Bricker
+ */
 public class SignInActivity extends AppCompatActivity {
 
     EditText usernameEdit;
@@ -48,7 +52,7 @@ public class SignInActivity extends AppCompatActivity {
                 db.collection("Users").document(username)
                         .set(user, SetOptions.merge());
             }
-
+            ((GroupProject) this.getApplication()).setSignedIn(true);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {

@@ -34,9 +34,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Profile fragment class
+ * @Author Kyle Bricker
  */
 public class ProfileFragment extends Fragment {
 
@@ -109,6 +108,7 @@ public class ProfileFragment extends Fragment {
 
         signOutbtn.setOnClickListener(view1 -> {
             Intent intent = new Intent(thisContext, SignInActivity.class);
+            ((GroupProject) getActivity().getApplication()).setSignedIn(false);
             startActivity(intent);
         });
     }
