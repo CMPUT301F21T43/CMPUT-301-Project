@@ -42,6 +42,7 @@ public class EditHabitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_habit);
 
+        String username = ((GroupProject) this.getApplication()).getUsername();
 
         etHabitTitle = findViewById(R.id.etHabitTitle);
         etHabitReason = findViewById(R.id.etHabitReason);
@@ -100,7 +101,7 @@ public class EditHabitActivity extends AppCompatActivity {
 
             Habit newHabit = new Habit(habitTitle, habitReason, new Timestamp(dateToStart).toDate(), checkedDaysChips(), isPublic);
 
-            db.collection("Users").document("John Doe").collection("Habits").document(habitTitle)
+            db.collection("Users").document(username).collection("Habits").document(habitTitle)
                     .set(editHabit, SetOptions.merge());
 
             Intent intentEdit = new Intent(EditHabitActivity.this, MainActivity.class);
