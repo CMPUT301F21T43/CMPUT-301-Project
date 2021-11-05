@@ -53,6 +53,15 @@
             android:visibility="visible"
             android:textColor="@color/teal_200"
             />
+
+        <Button
+            android:id="@+id/go_events"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_weight="1"
+            android:text="Events" />
+
     </LinearLayout>
 
 </LinearLayout>
