@@ -81,8 +81,9 @@ public class HabitEventsMain extends AppCompatActivity{
 
 
         eventList.setOnItemClickListener((adapterView, view12, i, l) -> {
+            HabitEvents event = (HabitEvents) adapterView.getItemAtPosition(i);
             Intent intentEvent = new Intent(HabitEventsMain.this, ViewHabitEvent.class);
-            intentEvent.putExtra("EVENT", (Serializable) adapterView.getItemAtPosition(i));
+            intentEvent.putExtra("EVENT", event);
             startActivity(intentEvent);
         });
 

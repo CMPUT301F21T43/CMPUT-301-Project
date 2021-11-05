@@ -19,10 +19,10 @@ public class ViewHabitEvent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_event);
 
-        ImageButton backEvent1  = findViewById(R.id.btnBack);
-        ImageButton editEvent1 = findViewById(R.id.btnEditHabit);
-        TextView viewTitle = findViewById(R.id.tvHabitTitle);
-        TextView viewComment = findViewById(R.id.tvHabitReason);
+        ImageButton backEvent1  = findViewById(R.id.back_event);
+        ImageButton editEvent1 = findViewById(R.id.edit_event);
+        TextView viewTitle = findViewById(R.id.view_event_title);
+        TextView viewComment = findViewById(R.id.view_event_comment);
 
         Intent intent = getIntent();
         HabitEvents event = (HabitEvents) intent.getSerializableExtra("EVENT");
@@ -40,7 +40,7 @@ public class ViewHabitEvent extends AppCompatActivity {
 
 
         viewTitle.setText(event.getEventTitle());
-        viewComment.setText(event.getReason());
+        viewComment.setText(event.getComment());
 
     }
 }
