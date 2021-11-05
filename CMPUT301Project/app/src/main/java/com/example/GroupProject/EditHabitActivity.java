@@ -80,7 +80,8 @@ public class EditHabitActivity extends AppCompatActivity {
             Map<String, Object> editHabit = new HashMap<>();
 
             // Add all these to Firestore
-            String habitTitle = etHabitTitle.getText().toString();
+//            String habitTitle = etHabitTitle.getText().toString();
+            String habitTitle = habit.getTitle();
             String habitReason = etHabitReason.getText().toString();
 
 
@@ -92,7 +93,8 @@ public class EditHabitActivity extends AppCompatActivity {
             Date dateToStart = new Date(year, month, day);
             Timestamp timestampDateToStart = new Timestamp(dateToStart);
 
-            editHabit.put("title", habitTitle);
+            // TODO: Look into whether habitTitle should be updateable or not
+//            editHabit.put("title", habitTitle);
             editHabit.put("reason", habitReason);
             editHabit.put("isPublic", isPublic);
             editHabit.put("dateToStart", new Timestamp(dateToStart));

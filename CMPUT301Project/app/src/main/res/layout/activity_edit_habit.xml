@@ -65,7 +65,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="parent"
-                android:maxLength="20" />
+                android:maxLength="20"
+                android:inputType="none"
+                />
 
             <EditText
                 android:layout_width="match_parent"
