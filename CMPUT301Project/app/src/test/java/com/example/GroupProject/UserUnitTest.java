@@ -12,6 +12,11 @@ import org.junit.Test;
 
 import java.lang.reflect.Field;
 
+/**
+ * Unit tests for the User class.
+ *
+ * @author martyrudolf
+ */
 public class UserUnitTest {
     public User testUser;
 

@@ -1,4 +1,11 @@
 /*
+ *
+ * EditHabitActivity
+ *
+ * Version 1.3
+ *
+ * November 4, 2021
+ *
  * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
  * All rights reserved.
  */
@@ -27,6 +34,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Activity for editing a Habit.
+ *
+ * @author martyrudolf
+ */
 public class EditHabitActivity extends AppCompatActivity {
     private ChipGroup cgDaysOfWeek;
     private EditText etHabitTitle;
@@ -37,11 +49,14 @@ public class EditHabitActivity extends AppCompatActivity {
     private ImageButton btnBack;
     private ImageButton btnConfirmEditHabit;
 
+    /**
+     * When the EditHabitActivity is launched, run this method.
+     * @param savedInstanceState of type Bundle that is the saved state of this instance.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_habit);
-
 
         etHabitTitle = findViewById(R.id.etHabitTitle);
         etHabitReason = findViewById(R.id.etHabitReason);
@@ -79,7 +94,6 @@ public class EditHabitActivity extends AppCompatActivity {
         btnConfirmEditHabit.setOnClickListener(view -> {
             Map<String, Object> editHabit = new HashMap<>();
 
-            // Add all these to Firestore
 //            String habitTitle = etHabitTitle.getText().toString();
             String habitTitle = habit.getTitle();
             String habitReason = etHabitReason.getText().toString();

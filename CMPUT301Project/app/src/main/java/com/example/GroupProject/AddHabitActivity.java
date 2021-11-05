@@ -1,4 +1,10 @@
 /*
+ * AddHabitActivity
+ *
+ * Version 1.0
+ *
+ * November 4, 2021
+ *
  * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
  * All rights reserved.
  */
@@ -27,14 +33,23 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Activity for adding a new Habit.
+ *
+ * @author martyrudolf
+ */
 public class AddHabitActivity extends AppCompatActivity {
-    ChipGroup cgDaysOfWeek;
-    EditText etHabitTitle;
-    EditText etHabitReason;
-    DatePicker dpDateToStart;
-    ToggleButton toggleIsPublic;
-    Boolean isPublic = true;
+    private ChipGroup cgDaysOfWeek;
+    private EditText etHabitTitle;
+    private EditText etHabitReason;
+    private DatePicker dpDateToStart;
+    private ToggleButton toggleIsPublic;
+    private Boolean isPublic = true;
 
+    /**
+     * Called when the AddHabitActivity is started.
+     * @param savedInstanceState is a Bundle that saves the state of the instance.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +61,7 @@ public class AddHabitActivity extends AppCompatActivity {
         cgDaysOfWeek = findViewById(R.id.cgDaysOfWeek);
         ImageButton btnBack = findViewById(R.id.btnBack);
         ImageButton btnConfirmAddHabit = findViewById(R.id.btnConfirmAddHabit);
-        ToggleButton toggleIsPublic = findViewById(R.id.toggleIsPublic);
+        toggleIsPublic = findViewById(R.id.toggleIsPublic);
 
         FirebaseFirestore db = MainActivity.getFirestoreInstance();
 
@@ -71,7 +86,10 @@ public class AddHabitActivity extends AppCompatActivity {
             habit.put("dateToStart", new Timestamp(dateToStart));
             habit.put("activeDays", checkedDaysChips());
 
-            db.collection("Users").document("John Doe").collection("Habits").document(habitTitle)
+            db.collection("Users")
+                    .document("John Doe")
+                    .collection("Habits")
+                    .document(habitTitle)
                     .set(habit, SetOptions.merge());
 
             Intent intent = new Intent(AddHabitActivity.this, MainActivity.class);
@@ -86,7 +104,11 @@ public class AddHabitActivity extends AppCompatActivity {
         toggleIsPublic.setOnCheckedChangeListener((compoundButton, b) -> isPublic = b);
     }
 
-
+    /**
+     * Checks which day chips were checked by user.
+     * @return checkedDays as `Map< String, Boolean >` where keys are names of days
+     *      and values are whether the day if checked or not
+     */
     public Map<String, Boolean> checkedDaysChips(){
         Map<String, Boolean> checkedDays = new HashMap<>();
         for (int i = 0; i < cgDaysOfWeek.getChildCount(); i++){

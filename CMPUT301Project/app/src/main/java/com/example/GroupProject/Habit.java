@@ -1,4 +1,10 @@
 /*
+ * Habit
+ *
+ * Version 1.0
+ *
+ * November 3, 2021
+ *
  * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
  * All rights reserved.
  */

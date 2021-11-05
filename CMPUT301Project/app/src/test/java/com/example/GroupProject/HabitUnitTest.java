@@ -9,6 +9,7 @@
  * All rights reserved.
  */
 
+
 package com.example.GroupProject;
 
 import org.junit.Before;
@@ -22,6 +23,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Unit testing for Habit class.
+ *
+ * @author martyrudolf
+ */
 public class HabitUnitTest {
     public Habit testHabit;
 

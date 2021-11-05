@@ -1,4 +1,10 @@
 /*
+ * EditHabitActivity
+ *
+ * Version 1.0
+ *
+ * November 4, 2021
+ *
  * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
  * All rights reserved.
  */
@@ -18,16 +24,21 @@ import java.util.Map;
 /**
  * Implements the functionality behind viewing the details of a Habit.
  * Get here by clicking on a Habit in the MainActivity list of habits.
+ * @author martyrudolf
  */
 public class ViewHabitActivity extends AppCompatActivity {
-    ImageButton btnBack;
-    ImageButton btnEditHabit;
-    TextView tvHabitTitle;
-    TextView tvHabitReason;
-    TextView tvHabitDateToStart;
-    TextView tvHabitActiveDays;
-    TextView tvHabitIsPublic;
+    private ImageButton btnBack;
+    private ImageButton btnEditHabit;
+    private TextView tvHabitTitle;
+    private TextView tvHabitReason;
+    private TextView tvHabitDateToStart;
+    private TextView tvHabitActiveDays;
+    private TextView tvHabitIsPublic;
 
+    /**
+     * This method is run to build the Habit detail View when ViewHabitActivity starts.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

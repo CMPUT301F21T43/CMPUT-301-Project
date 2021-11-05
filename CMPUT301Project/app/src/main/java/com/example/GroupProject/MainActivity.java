@@ -1,4 +1,10 @@
 /*
+ * MainActivity
+ *
+ * Version 1.0
+ *
+ * November 4, 2021
+ *
  * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
  * All rights reserved.
  */
@@ -14,6 +20,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/**
+ * MainActivity class that launches the HabitFragment and shows the list of Habits.
+ * Also builds the bottomNavigationView.
+ *
+ * @author Kyle Bricker
+ */
 public class MainActivity extends AppCompatActivity {
     private int selected;
 
