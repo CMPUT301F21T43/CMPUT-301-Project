@@ -10,9 +10,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GroupProject">
+
+        <activity
+            android:name=".EditEventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddEventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HabitEventsMainActivity"
+            android:exported="false" />
         <activity
             android:name=".SignInActivity"
             android:exported="true" />
+        <activity
+            android:name=".ViewEventActivity"
+            android:exported="false" />
         <activity
             android:name=".ViewHabitActivity"
             android:exported="false" />
