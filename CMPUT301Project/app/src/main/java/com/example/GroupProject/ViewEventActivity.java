@@ -16,8 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class ViewEventActivity extends AppCompatActivity {
@@ -42,7 +40,7 @@ public class ViewEventActivity extends AppCompatActivity {
         btnEditEvent = findViewById(R.id.btnEditEvent);
         tvEventTitle = findViewById(R.id.tvEventTitle);
         tvEventComment = findViewById(R.id.tvEventComment);
-        ivEventPhoto = findViewById(R.id.ivEventPhoto);
+        ivEventPhoto = findViewById(R.id.ivViewEventPhoto);
 
         Intent intent = getIntent();
         HabitEvent event = (HabitEvent) intent.getSerializableExtra("EVENT");
