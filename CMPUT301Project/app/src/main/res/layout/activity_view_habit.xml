@@ -157,6 +157,14 @@
                 android:textSize="20sp"
                 android:id="@+id/tvHabitIsPublic"/>
 
+            <Button
+                android:id="@+id/btnGoToEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text = "Go To Events"
+                android:textStyle="bold"
+                android:textSize="20sp" />
+
         </LinearLayout>
     </ScrollView>
 

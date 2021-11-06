@@ -102,7 +102,5 @@ public class HabitEventsMainActivity extends AppCompatActivity{
             eventAdapter.notifyDataSetChanged();
             return true;
         });
-
     }
-
 }

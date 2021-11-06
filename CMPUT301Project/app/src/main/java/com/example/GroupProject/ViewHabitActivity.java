@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import java.util.Map;
 public class ViewHabitActivity extends AppCompatActivity {
     ImageButton btnBack;
     ImageButton btnEditHabit;
+    Button btnGoToEvents;
     TextView tvHabitTitle;
     TextView tvHabitReason;
     TextView tvHabitDateToStart;
@@ -35,6 +37,7 @@ public class ViewHabitActivity extends AppCompatActivity {
 
         btnBack  = findViewById(R.id.btnViewEventBack);
         btnEditHabit = findViewById(R.id.btnEditHabit);
+        btnGoToEvents = findViewById(R.id.btnGoToEvents);
         tvHabitTitle = findViewById(R.id.tvHabitTitle);
         tvHabitReason = findViewById(R.id.tvHabitReason);
         tvHabitDateToStart = findViewById(R.id.tvHabitDateToStart);
@@ -53,6 +56,12 @@ public class ViewHabitActivity extends AppCompatActivity {
             Intent intent12 = new Intent(ViewHabitActivity.this, EditHabitActivity.class);
             intent12.putExtra("HABIT", habit);
             startActivity(intent12);
+        });
+
+        btnGoToEvents.setOnClickListener(view -> {
+            Intent intent13 = new Intent(ViewHabitActivity.this, HabitEventsMainActivity.class);
+            intent13.putExtra("HABIT", habit);
+            startActivity(intent13);
         });
 
         tvHabitTitle.setText(habit.getTitle());
