@@ -9,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -22,7 +20,6 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +45,7 @@ public class EditHabitActivity extends AppCompatActivity {
         etHabitReason = findViewById(R.id.etHabitReason);
         dpDateToStart = findViewById(R.id.dpDateToStart);
         cgDaysOfWeek = findViewById(R.id.cgDaysOfWeek);
-        btnBack = findViewById(R.id.btnBack);
+        btnBack = findViewById(R.id.btnViewEventBack);
         btnConfirmEditHabit = findViewById(R.id.btnConfirmEditHabit);
         toggleIsPublic = findViewById(R.id.toggleIsPublic);
 

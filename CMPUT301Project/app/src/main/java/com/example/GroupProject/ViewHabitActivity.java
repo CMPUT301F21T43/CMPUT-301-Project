@@ -33,7 +33,7 @@ public class ViewHabitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_habit);
 
-        btnBack  = findViewById(R.id.btnBack);
+        btnBack  = findViewById(R.id.btnViewEventBack);
         btnEditHabit = findViewById(R.id.btnEditHabit);
         tvHabitTitle = findViewById(R.id.tvHabitTitle);
         tvHabitReason = findViewById(R.id.tvHabitReason);

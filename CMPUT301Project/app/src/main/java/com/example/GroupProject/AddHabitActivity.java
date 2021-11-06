@@ -13,7 +13,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
@@ -46,7 +45,7 @@ public class AddHabitActivity extends AppCompatActivity {
         etHabitReason = findViewById(R.id.etHabitReason);
         dpDateToStart = findViewById(R.id.dpDateToStart);
         cgDaysOfWeek = findViewById(R.id.cgDaysOfWeek);
-        ImageButton btnBack = findViewById(R.id.btnBack);
+        ImageButton btnBack = findViewById(R.id.btnViewEventBack);
         ImageButton btnConfirmAddHabit = findViewById(R.id.btnConfirmAddHabit);
         ToggleButton toggleIsPublic = findViewById(R.id.toggleIsPublic);
 
