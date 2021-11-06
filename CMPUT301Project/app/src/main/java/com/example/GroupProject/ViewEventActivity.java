@@ -30,10 +30,6 @@ public class ViewEventActivity extends AppCompatActivity {
     TextView tvEventComment;
     ImageView ivEventPhoto;
 
-    // for retrieving photograph from firebase
-    FirebaseStorage storage;
-    StorageReference storageReference;
-
     DatabaseReference getImage;
 
     @Override
