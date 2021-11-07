@@ -23,26 +23,29 @@ public class HabitEventsMainActivity extends AppCompatActivity{
     ListView eventList;
     ArrayList<HabitEvent> eventDataList;
     ArrayAdapter<HabitEvent> eventAdapter;
-    ImageButton goBack;
-    FloatingActionButton addEvent;
+    ImageButton btnBack;
+    FloatingActionButton btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView((R.layout.eventlist));
+        setContentView((R.layout.activity_main_event));
 
-        goBack = findViewById(R.id.back_button_events);
-        addEvent = findViewById(R.id.add_events);
+        String username = ((GroupProject) this.getApplication()).getUsername();
+
         Intent intent = getIntent();
         Habit habit = (Habit) intent.getSerializableExtra("HABIT");
+
+        btnBack = findViewById(R.id.btnBackMainEvent);
+        btnAdd = findViewById(R.id.btnAddMainEvent);
         eventList = findViewById(R.id.event_list);
         eventDataList = new ArrayList<>();
+
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
 
-
         db.collection("Users")
-                .document("John Doe")
+                .document(username)
                 .collection("Habits")
                 .document(habit.getTitle())
                 .collection("Events")
@@ -67,12 +70,12 @@ public class HabitEventsMainActivity extends AppCompatActivity{
         eventList.setAdapter(eventAdapter);
 
 
-        goBack.setOnClickListener(view -> {
+        btnBack.setOnClickListener(view -> {
             Intent intent1 = new Intent(HabitEventsMainActivity.this, MainActivity.class);
             startActivity(intent1);
         });
 
-        addEvent.setOnClickListener(view -> {
+        btnAdd.setOnClickListener(view -> {
             Intent intent12 = new Intent(HabitEventsMainActivity.this, AddEventActivity.class);
             intent12.putExtra("HABIT", habit);
             startActivity(intent12);
@@ -90,7 +93,7 @@ public class HabitEventsMainActivity extends AppCompatActivity{
         eventList.setOnItemLongClickListener((adapterView, view1, i, l) -> {
             HabitEvent event = (HabitEvent) adapterView.getItemAtPosition(i);
             db.collection("Users")
-                    .document("John Doe")
+                    .document(username)
                     .collection("Habits")
                     .document(habit.getTitle())
                     .collection("Events")

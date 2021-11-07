@@ -65,14 +65,11 @@
                 android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/ivEventPhoto"
+                android:id="@+id/ivViewEventPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         </LinearLayout>
-
     </ScrollView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,29 +6,21 @@
 package com.example.GroupProject;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
-import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,15 +30,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.OnProgressListener;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -66,7 +55,7 @@ public class AddEventActivity extends AppCompatActivity {
     Button btnSelectImage;
     ImageView ivImage;
 
-    private String eventPhotoID;
+    private boolean takenPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +66,10 @@ public class AddEventActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Habit habit = (Habit) intent.getSerializableExtra("HABIT");
-        etTitle = findViewById(R.id.event_title);
-        etComment = findViewById(R.id.event_comment);
-        btnBack = findViewById(R.id.go_back1);
-        btnConfirm = findViewById(R.id.confirm_1);
+        etTitle = findViewById(R.id.etAddEventTitle);
+        etComment = findViewById(R.id.etAddEventComment);
+        btnBack = findViewById(R.id.btnBackAddEvent);
+        btnConfirm = findViewById(R.id.btnConfirmAddEvent);
         btnSelectImage = findViewById(R.id.btnSelectImage);
         ivImage = findViewById(R.id.ivAddEventPhoto);
 
@@ -89,9 +78,9 @@ public class AddEventActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
-        eventPhotoID = "default";
+        takenPhoto = false;
         btnConfirm.setOnClickListener(view -> {
-            uploadFile();
+            String eventPhotoID = takenPhoto ? uploadPhoto(ivImage) : "default";
 
             Map<String, Object> habitEvent = new HashMap<>();
 
@@ -142,10 +131,11 @@ public class AddEventActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ivImage.setImageBitmap(imageBitmap);
+            takenPhoto = true;
         }
     }
 
-    public void uploadFile() {
+    public static String uploadPhoto(ImageView ivImage) {
         ivImage.setDrawingCacheEnabled(true);
         ivImage.buildDrawingCache();
         Bitmap bitmap = ((BitmapDrawable) ivImage.getDrawable()).getBitmap();
@@ -153,7 +143,7 @@ public class AddEventActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        eventPhotoID = UUID.randomUUID().toString();
+        String eventPhotoID = UUID.randomUUID().toString();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageReference imageRef = storageRef.child(eventPhotoID + ".jpg");
@@ -190,5 +180,7 @@ public class AddEventActivity extends AppCompatActivity {
                 });
             }
         });
+
+        return eventPhotoID;
     }
 }

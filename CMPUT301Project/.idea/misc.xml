@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_add_event.xml" value="0.2791666666666667" />
+        <entry key="app/src/main/res/layout/activity_add_event.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_add_habit.xml" value="0.17395833333333333" />
-        <entry key="app/src/main/res/layout/activity_edit_event.xml" value="0.30364583333333334" />
+        <entry key="app/src/main/res/layout/activity_edit_event.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_edit_habit.xml" value="0.17395833333333333" />
         <entry key="app/src/main/res/layout/activity_habit_event_details.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.30364583333333334" />
+        <entry key="app/src/main/res/layout/activity_main_event.xml" value="0.30364583333333334" />
         <entry key="app/src/main/res/layout/activity_view_event.xml" value="0.30364583333333334" />
         <entry key="app/src/main/res/layout/activity_view_habit.xml" value="0.25" />
         <entry key="app/src/main/res/layout/add_habit_event.xml" value="0.23333333333333334" />
@@ -15,6 +17,7 @@
         <entry key="app/src/main/res/layout/edit_habit_event.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/eventcustom.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/eventlist.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/fragment_habit.xml" value="0.30364583333333334" />
       </map>
     </option>
   </component>
