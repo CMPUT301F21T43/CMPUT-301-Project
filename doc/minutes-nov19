@@ -1,0 +1,28 @@
+Meeting Minutes for November 19
+
+
+Attendance: Everyone
+
+ 
+General Notes
+=========================
+- Marcus did intent test for Habit events and is readying a PR for that.
+- Kyle expects to be done login and user page by tomorrow night.
+- Error message about insecure rules wants user to be authenticated before allowing them to edit.
+- Marty can look into Firebase authentication.
+- Simon working on displaying list of users and clicking on them to see their views.
+- Ragur will start working on maps and geolocation.
+- Marty will work on UI design and standardizing templates and formatting.
+- Kourosh was working on user following, will work on it this weekend.
+- Firebase test database expiration might just be down to changing the expiration date.
+- Habits and Habit events are unique and used for referencing their document instances, so they shouldn't be editable in the app and no two should be the same.
+- Marty can write unit testing Habit Events.
+- Simon will work on progress bar after user stuff.
+
+ 
+Bugs
+=========================
+- Habit event optional comment need to be limited to 20 characters.
+- Create two habit events with same name, will overwrite each other. 
+- Can't have two habits with the same name.
+- Issues being upside down, was likely down to emulator.
