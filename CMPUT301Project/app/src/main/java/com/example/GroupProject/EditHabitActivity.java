@@ -1,11 +1,4 @@
 /*
- *
- * EditHabitActivity
- *
- * Version 1.3
- *
- * November 4, 2021
- *
  * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
  * All rights reserved.
  */
@@ -16,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -29,16 +20,10 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Activity for editing a Habit.
- *
- * @author martyrudolf
- */
 public class EditHabitActivity extends AppCompatActivity {
     private ChipGroup cgDaysOfWeek;
     private EditText etHabitTitle;
@@ -49,20 +34,18 @@ public class EditHabitActivity extends AppCompatActivity {
     private ImageButton btnBack;
     private ImageButton btnConfirmEditHabit;
 
-    /**
-     * When the EditHabitActivity is launched, run this method.
-     * @param savedInstanceState of type Bundle that is the saved state of this instance.
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_habit);
 
+        String username = ((GroupProject) this.getApplication()).getUsername();
+
         etHabitTitle = findViewById(R.id.etHabitTitle);
         etHabitReason = findViewById(R.id.etHabitReason);
         dpDateToStart = findViewById(R.id.dpDateToStart);
         cgDaysOfWeek = findViewById(R.id.cgDaysOfWeek);
-        btnBack = findViewById(R.id.btnBack);
+        btnBack = findViewById(R.id.btnViewEventBack);
         btnConfirmEditHabit = findViewById(R.id.btnConfirmEditHabit);
         toggleIsPublic = findViewById(R.id.toggleIsPublic);
 
@@ -94,8 +77,8 @@ public class EditHabitActivity extends AppCompatActivity {
         btnConfirmEditHabit.setOnClickListener(view -> {
             Map<String, Object> editHabit = new HashMap<>();
 
-//            String habitTitle = etHabitTitle.getText().toString();
-            String habitTitle = habit.getTitle();
+            // Add all these to Firestore
+            String habitTitle = etHabitTitle.getText().toString();
             String habitReason = etHabitReason.getText().toString();
 
 
@@ -107,8 +90,7 @@ public class EditHabitActivity extends AppCompatActivity {
             Date dateToStart = new Date(year, month, day);
             Timestamp timestampDateToStart = new Timestamp(dateToStart);
 
-            // TODO: Look into whether habitTitle should be updateable or not
-//            editHabit.put("title", habitTitle);
+            editHabit.put("title", habitTitle);
             editHabit.put("reason", habitReason);
             editHabit.put("isPublic", isPublic);
             editHabit.put("dateToStart", new Timestamp(dateToStart));
@@ -116,7 +98,7 @@ public class EditHabitActivity extends AppCompatActivity {
 
             Habit newHabit = new Habit(habitTitle, habitReason, new Timestamp(dateToStart).toDate(), checkedDaysChips(), isPublic);
 
-            db.collection("Users").document("John Doe").collection("Habits").document(habitTitle)
+            db.collection("Users").document(username).collection("Habits").document(habitTitle)
                     .set(editHabit, SetOptions.merge());
 
             Intent intentEdit = new Intent(EditHabitActivity.this, MainActivity.class);

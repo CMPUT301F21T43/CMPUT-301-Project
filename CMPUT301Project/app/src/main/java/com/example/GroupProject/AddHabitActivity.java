@@ -1,10 +1,4 @@
 /*
- * AddHabitActivity
- *
- * Version 1.0
- *
- * November 4, 2021
- *
  * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
  * All rights reserved.
  */
@@ -19,7 +13,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
@@ -33,35 +26,28 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Activity for adding a new Habit.
- *
- * @author martyrudolf
- */
 public class AddHabitActivity extends AppCompatActivity {
-    private ChipGroup cgDaysOfWeek;
-    private EditText etHabitTitle;
-    private EditText etHabitReason;
-    private DatePicker dpDateToStart;
-    private ToggleButton toggleIsPublic;
-    private Boolean isPublic = true;
+    ChipGroup cgDaysOfWeek;
+    EditText etHabitTitle;
+    EditText etHabitReason;
+    DatePicker dpDateToStart;
+    ToggleButton toggleIsPublic;
+    Boolean isPublic = true;
 
-    /**
-     * Called when the AddHabitActivity is started.
-     * @param savedInstanceState is a Bundle that saves the state of the instance.
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
 
+        String username = ((GroupProject) this.getApplication()).getUsername();
+
         etHabitTitle = findViewById(R.id.etHabitTitle);
         etHabitReason = findViewById(R.id.etHabitReason);
         dpDateToStart = findViewById(R.id.dpDateToStart);
         cgDaysOfWeek = findViewById(R.id.cgDaysOfWeek);
-        ImageButton btnBack = findViewById(R.id.btnBack);
+        ImageButton btnBack = findViewById(R.id.btnViewEventBack);
         ImageButton btnConfirmAddHabit = findViewById(R.id.btnConfirmAddHabit);
-        toggleIsPublic = findViewById(R.id.toggleIsPublic);
+        ToggleButton toggleIsPublic = findViewById(R.id.toggleIsPublic);
 
         FirebaseFirestore db = MainActivity.getFirestoreInstance();
 
@@ -86,10 +72,7 @@ public class AddHabitActivity extends AppCompatActivity {
             habit.put("dateToStart", new Timestamp(dateToStart));
             habit.put("activeDays", checkedDaysChips());
 
-            db.collection("Users")
-                    .document("John Doe")
-                    .collection("Habits")
-                    .document(habitTitle)
+            db.collection("Users").document(username).collection("Habits").document(habitTitle)
                     .set(habit, SetOptions.merge());
 
             Intent intent = new Intent(AddHabitActivity.this, MainActivity.class);
@@ -104,11 +87,7 @@ public class AddHabitActivity extends AppCompatActivity {
         toggleIsPublic.setOnCheckedChangeListener((compoundButton, b) -> isPublic = b);
     }
 
-    /**
-     * Checks which day chips were checked by user.
-     * @return checkedDays as `Map< String, Boolean >` where keys are names of days
-     *      and values are whether the day if checked or not
-     */
+
     public Map<String, Boolean> checkedDaysChips(){
         Map<String, Boolean> checkedDays = new HashMap<>();
         for (int i = 0; i < cgDaysOfWeek.getChildCount(); i++){

@@ -38,9 +38,8 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link HabitFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Habit fragment class
+ * @Author Martin Rudolf, Kyle Bricker
  */
 public class HabitFragment extends Fragment {
 
@@ -62,7 +61,6 @@ public class HabitFragment extends Fragment {
      *
      * @return A new instance of fragment HabitFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static HabitFragment newInstance() {
         HabitFragment fragment = new HabitFragment();
         Bundle args = new Bundle();
@@ -83,6 +81,8 @@ public class HabitFragment extends Fragment {
         FirebaseFirestore db;
         db = getFirestoreInstance();
 
+        String username = ((GroupProject) getActivity().getApplication()).getUsername();
+
         habitList = view.findViewById(R.id.habit_list);
         habitList.setAdapter(habitAdapter);
 
@@ -96,7 +96,7 @@ public class HabitFragment extends Fragment {
             Habit habit = (Habit) adapterView.getItemAtPosition(i);
             String habitTitle = habit.getTitle();
             db.collection("Users")
-                    .document("John Doe")
+                    .document(username)
                     .collection("Habits")
                     .document(habitTitle)
                     .delete()
@@ -111,13 +111,14 @@ public class HabitFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String username = ((GroupProject) getActivity().getApplication()).getUsername();
         FirebaseFirestore db;
 
         // Add habit objects to list in listview
         habitDataList = new ArrayList<>();
         db = getFirestoreInstance();
         db.collection("Users")
-                .document("John Doe")
+                .document(username)
                 .collection("Habits")
                 .get()
                 .addOnCompleteListener(task -> {

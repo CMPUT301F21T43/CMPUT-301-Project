@@ -15,9 +15,7 @@
         android:id="@+id/habit_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true">
-
-    </ListView>
+        android:clickable="true"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddHabit"

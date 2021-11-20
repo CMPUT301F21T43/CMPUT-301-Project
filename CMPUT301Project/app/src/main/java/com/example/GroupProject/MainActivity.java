@@ -13,12 +13,24 @@ package com.example.GroupProject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * MainActivity class that launches the HabitFragment and shows the list of Habits.
@@ -27,6 +39,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
  * @author Kyle Bricker
  */
 public class MainActivity extends AppCompatActivity {
+    
     private int selected;
 
     @Override
@@ -35,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FirebaseFirestore db;
+
+        if (!((GroupProject) this.getApplication()).isSignedIn()) {
+            Intent intent = new Intent(this, SignInActivity.class);
+            startActivity(intent);
+        }
+
 
         ProfileFragment profileFragment = new ProfileFragment();
         HabitFragment habitFragment = new HabitFragment();
