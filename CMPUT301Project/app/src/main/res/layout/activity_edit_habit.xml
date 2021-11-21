@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+  ~ activity_edit_habit
+  ~
+  ~ Version 1.0
+  ~
+  ~ November 3, 2021
   ~ Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
   ~ All rights reserved.
   -->
@@ -65,7 +70,10 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="parent"
-                android:maxLength="20" />
+                android:maxLength="20"
+                android:inputType="none"
+                android:editable="false"
+                />
 
             <EditText
                 android:layout_width="match_parent"

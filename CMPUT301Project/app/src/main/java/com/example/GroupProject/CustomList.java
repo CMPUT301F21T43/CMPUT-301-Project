@@ -1,4 +1,10 @@
 /*
+ * CustomList
+ *
+ * Version 1.0
+ *
+ * November 4, 2021
+ *
  * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
  * All rights reserved.
  */
@@ -23,21 +29,29 @@ import java.util.Date;
  * CustomList class for storing a list of Habit object
  * @Author Marcus Bengert, Martin Rudolf
  */
-//TODO: Add encapsulation on variables
 public class CustomList extends ArrayAdapter<Habit> {
-
-
     private final ArrayList<Habit> habits;
     private final Context context;
     private Calendar today = Calendar.getInstance();
 
-
+    /**
+     * Constructor for CustomList
+     * @param context the context of the fragment when attached
+     * @param habits habits to pass in to the CustomList
+     */
     public CustomList(Context context, ArrayList<Habit> habits){
         super(context, 0, habits);
         this.habits = habits;
         this.context = context;
     }
 
+    /**
+     * Sets the contents for each of the habit instances.
+     * @param position in custom list
+     * @param convertView
+     * @param parent
+     * @return returns the View to plugin
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -59,8 +73,6 @@ public class CustomList extends ArrayAdapter<Habit> {
         tvHabitDateToStart.setText(habit.getDateToStartAsString());
         tvDoToday.setVisibility(habit.isDayActive(today.get(Calendar.DAY_OF_WEEK)) ? View.VISIBLE : View.INVISIBLE);
 
-
         return view;
-
     }
 }

@@ -1,4 +1,10 @@
 /*
+ * MainActivity
+ *
+ * Version 1.0
+ *
+ * November 4, 2021
+ *
  * Copyright (c) 2021-2022. Group 43 CMPUT301 F2021
  * All rights reserved.
  */
@@ -26,6 +32,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+/**
+ * MainActivity class that launches the HabitFragment and shows the list of Habits.
+ * Also builds the bottomNavigationView.
+ *
+ * @author Kyle Bricker
+ */
 public class MainActivity extends AppCompatActivity {
     
     private int selected;
