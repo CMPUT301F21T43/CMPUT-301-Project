@@ -54,6 +54,7 @@ public class SignInActivity extends AppCompatActivity {
             }
             ((GroupProject) this.getApplication()).setSignedIn(true);
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("SELECTED", R.id.profile);
             startActivity(intent);
         } else {
             Toast toast = Toast.makeText(this, "Missing Required Fields", Toast.LENGTH_SHORT);

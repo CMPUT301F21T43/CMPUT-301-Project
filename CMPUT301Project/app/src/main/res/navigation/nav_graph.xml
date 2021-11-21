@@ -27,4 +27,10 @@
             android:name="ShowAppBar"
             android:defaultValue="true" />
     </fragment>
+    <fragment
+        android:id="@+id/friendsFragment"
+        android:name="com.example.GroupProject.FriendsFragment"
+        android:label="fragment_friends"
+        tools:layout="@layout/fragment_friends">
+    </fragment>
 </navigation>
