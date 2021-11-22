@@ -11,10 +11,14 @@
 
 package com.example.GroupProject;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +45,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     
     private int selected;
+    private String username = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseFirestore db;
 
         if (!((GroupProject) this.getApplication()).isSignedIn()) {
-            Intent intent = new Intent(this, SignInActivity.class);
+            Intent intent = new Intent(this, EmailPasswordActivity.class);
             startActivity(intent);
         }
 
@@ -79,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Access a Cloud Firestore instance from your Activity
         db = FirebaseFirestore.getInstance();
+        Intent intent = getIntent();
+        if (intent.getBooleanExtra("CREATED", false)) {
+            promptUsername();
+        }
     }
 
     public static FirebaseFirestore getFirestoreInstance(){
@@ -88,5 +97,34 @@ public class MainActivity extends AppCompatActivity {
     public void addHabit(View view) {
         Intent intent = new Intent(this, AddHabitActivity.class);
         startActivity(intent);
+    }
+
+
+    private void promptUsername() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Username Prompt");
+
+        final EditText input = new EditText(this);
+        builder.setView(input);
+        GroupProject thisGP = (GroupProject) this.getApplicationContext();
+
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                username = input.getText().toString();
+                thisGP.setUsername(username);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                promptUsername();
+                Toast.makeText(MainActivity.this, "Username needs to be entered for account.",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+        builder.show();
     }
 }

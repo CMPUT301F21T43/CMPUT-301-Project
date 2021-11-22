@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -107,7 +108,8 @@ public class ProfileFragment extends Fragment {
         });
 
         signOutbtn.setOnClickListener(view1 -> {
-            Intent intent = new Intent(thisContext, SignInActivity.class);
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(thisContext, EmailPasswordActivity.class);
             ((GroupProject) getActivity().getApplication()).setSignedIn(false);
             startActivity(intent);
         });
