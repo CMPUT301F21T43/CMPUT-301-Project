@@ -7,33 +7,38 @@ package com.example.GroupProject;
 
 import android.app.Application;
 
+import com.google.firebase.auth.FirebaseUser;
+
 /**
  * GroupProject class
  * Class that extends the application and holds the global variables
  * username and signedIn.
- * @Author Kyle Bricker
+ * @Author Kyle Bricker, Marty Rudolf
  */
 public class GroupProject extends Application {
 
-    private String username;
     private boolean signedIn;
+    private FirebaseUser firebaseUser;
+    private String username;
 
     /**
      * Method that occurs upon application start
      */
     public GroupProject() {
         this.signedIn = false;
+        this.firebaseUser = null; // default user
         this.username = "John Doe"; // default username
     }
 
     /**
-     * Set username
-     * @param username
-     *      Username as a string
+     * Method that occurs upon application start
      */
-    public void setUsername(String username) {
+    public GroupProject(FirebaseUser user, String username) {
+        this.signedIn = false;
+        this.firebaseUser = user;
         this.username = username;
     }
+
 
     /**
      * Set signedIn
@@ -44,14 +49,6 @@ public class GroupProject extends Application {
         this.signedIn = signedIn;
     }
 
-    /**
-     * Get username
-     * @return username
-     *      Returns username as a string
-     */
-    public String getUsername() {
-        return username;
-    }
 
     /**
      * Check if signed in
@@ -61,4 +58,30 @@ public class GroupProject extends Application {
     public boolean isSignedIn() {
         return signedIn;
     }
+
+    /**
+     * Get the FirebaseUser attached to this app instance.
+     * @return FirebaseUser
+     */
+    public FirebaseUser getFirebaseUser() {
+        return firebaseUser;
+    }
+
+    /**
+     * Set the FirebaseUser attached to this app instance.
+     * @param user FirebaseUser object
+     */
+    public void setFirebaseUser(FirebaseUser user) {
+        this.firebaseUser = user;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
 }
