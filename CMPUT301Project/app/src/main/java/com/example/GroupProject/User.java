@@ -7,13 +7,15 @@ package com.example.GroupProject;
 
 import android.app.Application;
 
+import java.io.Serializable;
+
 /**
  * User class
  * Class of a user, containing username, first name and last name
  * @Author Kyle Bricker
  *
  */
-public class User {
+public class User implements Serializable {
 
     private String username;
     private String firstName;
