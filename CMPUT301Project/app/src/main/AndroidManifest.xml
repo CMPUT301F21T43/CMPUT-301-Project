@@ -38,6 +38,9 @@
             android:name=".ViewHabitActivity"
             android:exported="false" />
         <activity
+            android:name=".ViewUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditHabitActivity"
             android:exported="false" />
         <activity

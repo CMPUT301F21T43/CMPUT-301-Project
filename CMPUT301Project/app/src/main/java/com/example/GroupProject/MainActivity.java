@@ -15,6 +15,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -59,28 +61,27 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-
-        ProfileFragment profileFragment = new ProfileFragment();
-        HabitFragment habitFragment = new HabitFragment();
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            Fragment newFragment;
             switch (item.getItemId()) {
                 case R.id.habit:
-                    selected = R.id.habit;
-                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_fragment, habitFragment).commit();
+                    newFragment = new HabitFragment();
                     break;
-                case R.id.profile:
-                    selected = R.id.profile;
-                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_fragment, profileFragment).commit();
+                case R.id.friends:
+                    newFragment = new FriendsFragment();
+                    break;
+                default:
+                    newFragment = new ProfileFragment();
                     break;
             }
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_fragment, newFragment).commit();
             return true;
         });
-        if (selected == 0) {
-            bottomNavigationView.setSelectedItemId(R.id.habit);
-            selected = R.id.habit;
-        }
+
+        Intent intent = getIntent();
+        int selected = intent.getIntExtra("SELECTED", 0);
+        bottomNavigationView.setSelectedItemId(selected);
 
         // Access a Cloud Firestore instance from your Activity
         db = FirebaseFirestore.getInstance();

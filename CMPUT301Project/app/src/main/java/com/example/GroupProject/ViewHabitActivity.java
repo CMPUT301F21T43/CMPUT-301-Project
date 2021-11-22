@@ -49,6 +49,7 @@ public class ViewHabitActivity extends AppCompatActivity {
 
         btnBack.setOnClickListener(view -> {
             Intent intent1 = new Intent(ViewHabitActivity.this, MainActivity.class);
+            intent1.putExtra("SELECTED", R.id.habit);
             startActivity(intent1);
         });
 
