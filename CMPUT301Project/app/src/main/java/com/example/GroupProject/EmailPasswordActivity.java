@@ -183,6 +183,7 @@ public class EmailPasswordActivity extends AppCompatActivity {
         ((GroupProject) this.getApplication()).setSignedIn(true);
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("CREATED", accountJustCreated);
+        intent.putExtra("SELECTED", R.id.friends);
         startActivity(intent);
     }
 

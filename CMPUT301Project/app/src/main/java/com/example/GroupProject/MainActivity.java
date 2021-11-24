@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Access a Cloud Firestore instance from your Activity
         db = FirebaseFirestore.getInstance();
-        Intent intent = getIntent();
         if (intent.getBooleanExtra("CREATED", false)) {
             promptUsername();
         }
