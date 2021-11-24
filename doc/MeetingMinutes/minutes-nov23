@@ -1,0 +1,25 @@
+Meeting Minutes for November 23
+
+
+Attendance: Marty, Marcus, Ragur, Simon
+
+Next meeting: Looking to have one Friday.
+
+ 
+General Notes
+=========================
+- Sakib: Not all sections for Part 3 have been marked but should be ready tomorrow.
+- Sakib: Final presentation is expected to be day after deadline, on the 30th. Presentation needs to be ready for then.
+- Aim to have the app fully fleshed out in the next couple days. We still need time to update storyboard, OO analysis, conduct testing, documentation, and build presentation.
+- Simon is essentially done, just has to do the progress bar. 
+- Kourosh has the RecyclerView as well.
+- Ragur is planning on submitting a PR on Wednesday and has mostly completed showing the map and centering it on phone position.
+- Marty added Firebase Authentication, but that change hasn't been propagated through the app so make sure your parts leverage it when needed.
+- Marty will add unique icon for friends in navbar.
+- Marty will look into Firebase rules and seeing if we can authenticate with Authenticated users.
+
+
+ 
+Bugs
+=========================
+- Logging in, shows nothing, then going to profile and back shows a full list of habits.
