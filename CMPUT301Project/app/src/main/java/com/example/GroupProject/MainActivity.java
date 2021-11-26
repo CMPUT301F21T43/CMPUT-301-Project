@@ -89,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
         int selected = intent.getIntExtra("SELECTED", 0);
         bottomNavigationView.setSelectedItemId(selected);
-
-        // Access a Cloud Firestore instance from your Activity
-        db = FirebaseFirestore.getInstance();
     }
 
     public static FirebaseFirestore getFirestoreInstance(){

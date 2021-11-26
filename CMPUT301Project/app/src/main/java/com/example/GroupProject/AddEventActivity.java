@@ -40,6 +40,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Add event activity class for adding habit events.
+ */
 public class AddEventActivity extends AppCompatActivity {
 
     private static final String TAG = "AddEventActivity";
