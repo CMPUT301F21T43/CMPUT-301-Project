@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class EmailPasswordActivity extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
@@ -73,7 +74,7 @@ public class EmailPasswordActivity extends AppCompatActivity {
                 //redirect
                 ((GroupProject) this.getApplication()).setFirebaseUser(user);
                 // Reload UI for this user.
-                startMainActivity(false);
+                //startMainActivity(false);
             } else {
                 // User is signed out
                 Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -177,6 +178,28 @@ public class EmailPasswordActivity extends AppCompatActivity {
 
 
     private void startMainActivity(Boolean accountJustCreated) {
+        // get username
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Users")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        String username;
+                        String userEmail;
+                        String email = ((GroupProject) this.getApplication()).getEmail();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            userEmail = (String) document.get("Email");
+                            if (userEmail.equals(email)) {
+                                username = (String) document.get("Username");
+                                ((GroupProject) this.getApplication()).setUsername(username);
+                            }
+                        }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+
+
         ((GroupProject) this.getApplication()).setSignedIn(true);
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("CREATED", accountJustCreated);

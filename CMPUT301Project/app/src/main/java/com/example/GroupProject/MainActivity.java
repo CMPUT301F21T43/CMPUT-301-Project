@@ -63,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        Intent intent = getIntent();
+
+        if (intent.getBooleanExtra("CREATED", false)) {
+            promptUsername();
+        }
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             Fragment newFragment;
@@ -81,15 +87,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        Intent intent = getIntent();
         int selected = intent.getIntExtra("SELECTED", 0);
         bottomNavigationView.setSelectedItemId(selected);
 
         // Access a Cloud Firestore instance from your Activity
         db = FirebaseFirestore.getInstance();
-        if (intent.getBooleanExtra("CREATED", false)) {
-            promptUsername();
-        }
     }
 
     public static FirebaseFirestore getFirestoreInstance(){
@@ -118,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 docData.put("Joined", Timestamp.now());
                 docData.put("Email", thisGP.getEmail());
                 username = input.getText().toString();
+                docData.put("Username", username);
                 thisGP.setUsername(username);
                 db.collection("Users").document(username).set(docData, SetOptions.merge());
             }
