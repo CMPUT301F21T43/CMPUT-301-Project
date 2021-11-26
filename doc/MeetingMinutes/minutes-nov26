@@ -1,0 +1,30 @@
+Meeting Minutes for November 26
+
+
+Attendance: Everyone
+
+Next meeting: Sunday, Nov 28 @2:00pm
+
+ 
+General Notes
+=========================
+- Marty added unique icon for friends in navbar.
+- Marty changed Firebase rules back to read and write for everyone. 
+- Marty fixed the DateToStart functionality to be EditText based.
+- #53 is being worked on. So far it's been fixed when coming from Add or Edit Habit. Now only appears when first entering app.
+- Ragur finished map and geolocation. Just needs to push it. Having an issue where optional photo inside Events is small. 
+- Ragur is adding checkboxes for habit events list and can't click the checkbox without clicking on the list items.
+- Working on receiving notifications and accepting/denying friend requests. Following is working. Unfollowing has two options: 
+  (1) Follow button changes to unfollow immediately and can unfollow then. 
+  (2) After following, person disappears and have to go to friends list to unfollow them.
+ Going with option 2.
+ - Simon is working on prog bar and been debugging.
+ - Kyle submitted a PR.
+ 
+
+
+
+ 
+Bugs
+=========================
+- Signing in the first time on app startup doesn't load data to Habit List. When clicking around then returning to the screen, it loads.
