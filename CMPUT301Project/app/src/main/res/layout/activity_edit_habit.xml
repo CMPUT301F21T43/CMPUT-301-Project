@@ -96,6 +96,8 @@
                 android:layout_marginVertical="20dp"
                 app:layout_constraintLeft_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="parent"
+                android:datePickerMode="spinner"
+                android:calendarViewShown="false"
                 >
             </DatePicker>
 

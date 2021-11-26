@@ -100,7 +100,7 @@ public class FriendsFragment extends Fragment {
                         String userFirstName;
                         String userLastName;
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            userUsername = (String) document.getId();
+                            userUsername = document.getId();
                             userFirstName = (String) document.get("FirstName");
                             userLastName = (String) document.get("LastName");
                             if (!userUsername.equals(username)) {

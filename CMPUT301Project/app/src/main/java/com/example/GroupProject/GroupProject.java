@@ -20,6 +20,7 @@ public class GroupProject extends Application {
     private boolean signedIn;
     private FirebaseUser firebaseUser;
     private String username;
+    private String email;
 
     /**
      * Method that occurs upon application start
@@ -28,6 +29,7 @@ public class GroupProject extends Application {
         this.signedIn = false;
         this.firebaseUser = null; // default user
         this.username = "John Doe"; // default username
+        this.email = "default@example.com";
     }
 
     /**
@@ -37,6 +39,7 @@ public class GroupProject extends Application {
         this.signedIn = false;
         this.firebaseUser = user;
         this.username = username;
+        this.email = "default@example.com";
     }
 
 
@@ -79,9 +82,17 @@ public class GroupProject extends Application {
         return username;
     }
 
+    // TODO: Check if username already exists.
     public void setUsername(String username) {
         this.username = username;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 }
