@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
@@ -26,6 +27,11 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.SetOptions;
+
+import java.security.acl.Group;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EmailPasswordActivity extends AppCompatActivity {
     private static final String TAG = "EmailPassword";
@@ -39,8 +45,7 @@ public class EmailPasswordActivity extends AppCompatActivity {
 
     private String email;
     private String password;
-
-
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +123,7 @@ public class EmailPasswordActivity extends AppCompatActivity {
                         FirebaseUser user = mAuth.getCurrentUser();
                         ((GroupProject) this.getApplication()).setFirebaseUser(user);
                         ((GroupProject) this.getApplication()).setEmail(email);
-                        startMainActivity(true);
+                        promptUsername();
                         // Go to add username. There, set username. Then bring back here.
                     } else {
                         try {
@@ -153,7 +158,7 @@ public class EmailPasswordActivity extends AppCompatActivity {
                         FirebaseUser user = mAuth.getCurrentUser();
                         ((GroupProject) this.getApplication()).setFirebaseUser(user);
                         ((GroupProject) this.getApplication()).setEmail(email);
-                        startMainActivity(false);
+                        getUsername();
                     } else {
                         try {
                             throw task.getException();
@@ -176,15 +181,12 @@ public class EmailPasswordActivity extends AppCompatActivity {
         // [END sign_in_with_email]
     }
 
-
-    private void startMainActivity(Boolean accountJustCreated) {
-        // get username
+    private void getUsername() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Users")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        String username;
                         String userEmail;
                         String email = ((GroupProject) this.getApplication()).getEmail();
                         for (QueryDocumentSnapshot document : task.getResult()) {
@@ -192,14 +194,51 @@ public class EmailPasswordActivity extends AppCompatActivity {
                             if (userEmail.equals(email)) {
                                 username = (String) document.get("Username");
                                 ((GroupProject) this.getApplication()).setUsername(username);
+                                startMainActivity(false);
                             }
                         }
                     } else {
                         Log.d(TAG, "Error getting documents: ", task.getException());
                     }
                 });
+    }
 
+    private void promptUsername() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Username Prompt");
 
+        final EditText input = new EditText(this);
+        builder.setView(input);
+        GroupProject thisGP = (GroupProject) this.getApplicationContext();
+
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                Map<String, Object> docData = new HashMap<>();
+                docData.put("Joined", Timestamp.now());
+                docData.put("Email", thisGP.getEmail());
+                username = input.getText().toString();
+                docData.put("Username", username);
+                thisGP.setUsername(username);
+                db.collection("Users").document(username).set(docData, SetOptions.merge());
+                startMainActivity(true);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                promptUsername();
+                Toast.makeText(EmailPasswordActivity.this, "Username needs to be entered for account.",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void startMainActivity(Boolean accountJustCreated) {
         ((GroupProject) this.getApplication()).setSignedIn(true);
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("CREATED", accountJustCreated);
