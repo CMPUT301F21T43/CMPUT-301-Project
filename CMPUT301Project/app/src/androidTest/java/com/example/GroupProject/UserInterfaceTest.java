@@ -128,7 +128,7 @@ public class UserInterfaceTest {
                 .perform(click());
         onView(withId(R.id.etAddEventTitle))
                 .perform(typeText("Test Event Name"))
-                .check(matches(withText("Test Event Name")));;
+                .check(matches(withText("Test Event Name")));
         onView(withId(R.id.etAddEventComment))
                 .perform(typeText("Test Comment"))
                 .check(matches(withText("Test Comment")));

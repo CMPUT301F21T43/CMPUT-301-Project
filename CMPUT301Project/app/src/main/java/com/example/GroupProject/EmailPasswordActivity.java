@@ -2,6 +2,7 @@ package com.example.GroupProject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -70,14 +71,12 @@ public class EmailPasswordActivity extends AppCompatActivity {
             if (user != null) {
                 // User is signed in
                 //redirect
-                updateUI(user);
                 ((GroupProject) this.getApplication()).setFirebaseUser(user);
                 // Reload UI for this user.
                 startMainActivity(false);
             } else {
                 // User is signed out
                 Log.d(TAG, "onAuthStateChanged:signed_out");
-                updateUI(null);
             }
 
         };
@@ -117,9 +116,9 @@ public class EmailPasswordActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                         FirebaseUser user = mAuth.getCurrentUser();
                         ((GroupProject) this.getApplication()).setFirebaseUser(user);
+                        ((GroupProject) this.getApplication()).setEmail(email);
                         startMainActivity(true);
                         // Go to add username. There, set username. Then bring back here.
-                        updateUI(user);
                     } else {
                         try {
                             throw task.getException();
@@ -138,7 +137,6 @@ public class EmailPasswordActivity extends AppCompatActivity {
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
                         Toast.makeText(EmailPasswordActivity.this, "Account creation failed.",
                                 Toast.LENGTH_SHORT).show();
-                        updateUI(null);
                     }
                 });
         // [END create_user_with_email]
@@ -153,8 +151,8 @@ public class EmailPasswordActivity extends AppCompatActivity {
                         Log.d(TAG, "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
                         ((GroupProject) this.getApplication()).setFirebaseUser(user);
+                        ((GroupProject) this.getApplication()).setEmail(email);
                         startMainActivity(false);
-                        updateUI(user);
                     } else {
                         try {
                             throw task.getException();
@@ -172,7 +170,6 @@ public class EmailPasswordActivity extends AppCompatActivity {
                         Toast.makeText(EmailPasswordActivity.this,
                                 "Authentication failed. Create an account if you don't have one.",
                                 Toast.LENGTH_SHORT).show();
-                        updateUI(null);
                     }
                 });
         // [END sign_in_with_email]
@@ -187,9 +184,11 @@ public class EmailPasswordActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void updateUI(FirebaseUser user) {
-
+    private void startProfileFragment() {
+        Fragment newFragment = new ProfileFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_fragment, newFragment).commit();
     }
+
 
     @Override
     public void onStop() {

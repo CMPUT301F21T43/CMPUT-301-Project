@@ -1,7 +1,7 @@
 /*
  * MainActivity
  *
- * Version 1.0
+ * Version 1.5
  *
  * November 4, 2021
  *
@@ -32,10 +32,12 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(selected);
 
         // Access a Cloud Firestore instance from your Activity
-        db = FirebaseFirestore.getInstance();
+
         if (intent.getBooleanExtra("CREATED", false)) {
             promptUsername();
         }
@@ -111,8 +113,13 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                Map<String, Object> docData = new HashMap<>();
+                docData.put("Joined", Timestamp.now());
+                docData.put("Email", thisGP.getEmail());
                 username = input.getText().toString();
                 thisGP.setUsername(username);
+                db.collection("Users").document(username).set(docData, SetOptions.merge());
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

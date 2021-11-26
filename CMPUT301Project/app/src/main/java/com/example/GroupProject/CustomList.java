@@ -32,7 +32,7 @@ import java.util.Date;
 public class CustomList extends ArrayAdapter<Habit> {
     private final ArrayList<Habit> habits;
     private final Context context;
-    private Calendar today = Calendar.getInstance();
+    private final Calendar today = Calendar.getInstance();
 
     /**
      * Constructor for CustomList

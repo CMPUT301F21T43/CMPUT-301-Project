@@ -63,8 +63,7 @@ public class AddHabitActivity extends AppCompatActivity {
             int year = dpDateToStart.getYear();
 
             // Year is being given as 3921 for some reason.
-            Date dateToStart = new Date(year, month, day);
-            Timestamp timestampDateToStart = new Timestamp(dateToStart);
+            Date dateToStart = new Date(year, month, day, 4, 30);
 
             habit.put("title", habitTitle);
             habit.put("reason", habitReason);
