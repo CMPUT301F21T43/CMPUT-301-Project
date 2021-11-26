@@ -58,10 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseFirestore db;
 
-        if (!((GroupProject) this.getApplication()).isSignedIn()) {
-            Intent intent = new Intent(this, EmailPasswordActivity.class);
-            startActivity(intent);
-        }
+//        if (!((GroupProject) this.getApplication()).isSignedIn()) {
+//            Intent intent = new Intent(this, EmailPasswordActivity.class);
+//            startActivity(intent);
+//        }
+
+        Intent intent = getIntent();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -81,14 +83,8 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        Intent intent = getIntent();
-        int selected = intent.getIntExtra("SELECTED", 0);
+        int selected = intent.getIntExtra("SELECTED", R.id.habit);
         bottomNavigationView.setSelectedItemId(selected);
-
-        // Access a Cloud Firestore instance from your Activity
-        if (intent.getBooleanExtra("CREATED", false)) {
-            promptUsername();
-        }
     }
 
     public static FirebaseFirestore getFirestoreInstance(){
@@ -98,39 +94,5 @@ public class MainActivity extends AppCompatActivity {
     public void addHabit(View view) {
         Intent intent = new Intent(this, AddHabitActivity.class);
         startActivity(intent);
-    }
-
-
-    private void promptUsername() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Username Prompt");
-
-        final EditText input = new EditText(this);
-        builder.setView(input);
-        GroupProject thisGP = (GroupProject) this.getApplicationContext();
-
-        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                Map<String, Object> docData = new HashMap<>();
-                docData.put("Joined", Timestamp.now());
-                docData.put("Email", thisGP.getEmail());
-                username = input.getText().toString();
-                thisGP.setUsername(username);
-                db.collection("Users").document(username).set(docData, SetOptions.merge());
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                promptUsername();
-                Toast.makeText(MainActivity.this, "Username needs to be entered for account.",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-
-        builder.show();
     }
 }
