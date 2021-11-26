@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.material.chip.Chip;
@@ -81,6 +82,15 @@ public class EditHabitActivity extends AppCompatActivity {
             String habitTitle = etHabitTitle.getText().toString();
             String habitReason = etHabitReason.getText().toString();
 
+            if (habitTitle.matches("")) {
+                Toast.makeText(this, "A habit title is needed.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (habitReason.matches("")) {
+                Toast.makeText(this, "A habit reason is needed.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             int day = dpDateToStart.getDayOfMonth();
             int month = dpDateToStart.getMonth();

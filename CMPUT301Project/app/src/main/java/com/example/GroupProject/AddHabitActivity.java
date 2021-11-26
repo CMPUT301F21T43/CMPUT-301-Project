@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
@@ -27,12 +28,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddHabitActivity extends AppCompatActivity {
-    ChipGroup cgDaysOfWeek;
-    EditText etHabitTitle;
-    EditText etHabitReason;
-    DatePicker dpDateToStart;
-    ToggleButton toggleIsPublic;
-    Boolean isPublic = true;
+    private ChipGroup cgDaysOfWeek;
+    private EditText etHabitTitle;
+    private EditText etHabitReason;
+    private DatePicker dpDateToStart;
+    private ToggleButton toggleIsPublic;
+    private Boolean isPublic = true;
+
+    String habitTitle = null;
+    String habitReason = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +59,18 @@ public class AddHabitActivity extends AppCompatActivity {
             Map<String, Object> habit = new HashMap<>();
 
             // Add all these to Firestore
-            String habitTitle = etHabitTitle.getText().toString();
-            String habitReason = etHabitReason.getText().toString();
+            habitTitle = etHabitTitle.getText().toString();
+            habitReason = etHabitReason.getText().toString();
+
+            if (habitTitle.matches("")) {
+                Toast.makeText(this, "A habit title is needed.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (habitReason.matches("")) {
+                Toast.makeText(this, "A habit reason is needed.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             int day = dpDateToStart.getDayOfMonth();
             int month = dpDateToStart.getMonth();
