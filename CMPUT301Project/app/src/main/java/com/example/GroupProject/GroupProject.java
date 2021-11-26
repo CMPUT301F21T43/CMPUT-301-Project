@@ -28,8 +28,8 @@ public class GroupProject extends Application {
     public GroupProject() {
         this.signedIn = false;
         this.firebaseUser = null; // default user
-        this.username = "John Doe"; // default username
-        this.email = "default@example.com";
+        this.username = "default"; // default username
+        this.email = "default@default.com";
     }
 
     /**
@@ -39,7 +39,7 @@ public class GroupProject extends Application {
         this.signedIn = false;
         this.firebaseUser = user;
         this.username = username;
-        this.email = "default@example.com";
+        this.email = "default@default.com";
     }
 
 

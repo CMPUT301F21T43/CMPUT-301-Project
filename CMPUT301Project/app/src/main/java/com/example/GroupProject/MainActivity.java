@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(selected);
 
         // Access a Cloud Firestore instance from your Activity
-
+        db = FirebaseFirestore.getInstance();
         if (intent.getBooleanExtra("CREATED", false)) {
             promptUsername();
         }

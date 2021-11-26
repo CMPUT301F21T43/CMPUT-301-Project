@@ -75,11 +75,13 @@ public class AddHabitActivity extends AppCompatActivity {
                     .set(habit, SetOptions.merge());
 
             Intent intent = new Intent(AddHabitActivity.this, MainActivity.class);
+            intent.putExtra("SELECTED", R.id.habit);
             startActivity(intent);
         });
 
         btnBack.setOnClickListener(view -> {
             Intent intent = new Intent(AddHabitActivity.this, MainActivity.class);
+            intent.putExtra("SELECTED", R.id.habit);
             startActivity(intent);
         });
 
