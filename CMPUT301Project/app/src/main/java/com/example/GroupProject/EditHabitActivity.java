@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.material.chip.Chip;
@@ -28,6 +29,9 @@ public class EditHabitActivity extends AppCompatActivity {
     private ChipGroup cgDaysOfWeek;
     private EditText etHabitTitle;
     private EditText etHabitReason;
+    private EditText etDateToStartYear;
+    private EditText etDateToStartMonth;
+    private EditText etDateToStartDay;
     private DatePicker dpDateToStart;
     private ToggleButton toggleIsPublic;
     private Boolean isPublic;
@@ -43,7 +47,9 @@ public class EditHabitActivity extends AppCompatActivity {
 
         etHabitTitle = findViewById(R.id.etHabitTitle);
         etHabitReason = findViewById(R.id.etHabitReason);
-        dpDateToStart = findViewById(R.id.dpDateToStart);
+        etDateToStartYear = findViewById(R.id.etDateToStartYear);
+        etDateToStartMonth = findViewById(R.id.etDateToStartMonth);
+        etDateToStartDay = findViewById(R.id.etDateToStartDay);
         cgDaysOfWeek = findViewById(R.id.cgDaysOfWeek);
         btnBack = findViewById(R.id.btnViewEventBack);
         btnConfirmEditHabit = findViewById(R.id.btnConfirmEditHabit);
@@ -64,9 +70,9 @@ public class EditHabitActivity extends AppCompatActivity {
             if (habit.getActiveDays().get(chipText)) { cgDaysOfWeek.check(chip.getId()); }
         }
 
-        // TODO: Set the calendar to correspond to Habit
-        Date oldDateToStart = habit.getDateToStart();
-        dpDateToStart.init(oldDateToStart.getYear(), oldDateToStart.getMonth(), oldDateToStart.getDay(), null);
+        etDateToStartDay.setText(habit.getDateToStartDay());
+        etDateToStartMonth.setText(habit.getDateToStartMonth());
+        etDateToStartYear.setText(habit.getDateToStartYear());
 
         btnBack.setOnClickListener(view -> {
             Intent intentBack = new Intent(EditHabitActivity.this, ViewHabitActivity.class);
@@ -82,13 +88,27 @@ public class EditHabitActivity extends AppCompatActivity {
             String habitTitle = etHabitTitle.getText().toString();
             String habitReason = etHabitReason.getText().toString();
 
+            if (habitTitle.matches("")) {
+                Toast.makeText(this, "A habit title is needed.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            int day = dpDateToStart.getDayOfMonth();
-            int month = dpDateToStart.getMonth();
-            int year = dpDateToStart.getYear();
+            if (habitReason.matches("")) {
+                Toast.makeText(this, "A habit reason is needed.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Integer year = Integer.parseInt(etDateToStartYear.getText().toString());
+            Integer month = Integer.parseInt(etDateToStartMonth.getText().toString());
+            Integer day = Integer.parseInt(etDateToStartDay.getText().toString());
+
+            if (!isDateToStartGood(year, month - 1, day)) {
+                Toast.makeText(this, "Month and date need to be valid.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             // Year is being given as 3921 for some reason.
-            Date dateToStart = new Date(year, month, day);
+            Date dateToStart = new Date(year, month - 1, day);
             Timestamp timestampDateToStart = new Timestamp(dateToStart);
 
             editHabit.put("title", habitTitle);
@@ -123,4 +143,54 @@ public class EditHabitActivity extends AppCompatActivity {
         }
         return checkedDays;
     }
+
+    public Boolean isDateToStartGood(Integer year, Integer month, Integer day) {
+        Boolean dayGood = false;
+        switch (month) {
+            case 0:
+                dayGood = day <= 31;
+                break;
+            case 1:
+                if (year % 4 == 0){
+                    dayGood = day <= 29;
+                } else {
+                    dayGood = day <= 28;
+                }
+                break;
+            case 2:
+                dayGood = day <= 31;
+                break;
+            case 3:
+                dayGood = day <= 30;
+                break;
+            case 4:
+                dayGood = day <= 31;
+                break;
+            case 5:
+                dayGood = day <= 30;
+                break;
+            case 6:
+                dayGood = day <= 31;
+                break;
+            case 7:
+                dayGood = day <= 31;
+                break;
+            case 8:
+                dayGood = day <= 30;
+                break;
+            case 9:
+                dayGood = day <= 31;
+                break;
+            case 10:
+                dayGood = day <= 30;
+                break;
+            case 11:
+                dayGood = day <= 31;
+                break;
+            default:
+                break;
+        }
+        return dayGood;
+    }
+
 }
