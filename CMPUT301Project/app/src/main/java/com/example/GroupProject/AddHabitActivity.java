@@ -31,7 +31,9 @@ public class AddHabitActivity extends AppCompatActivity {
     private ChipGroup cgDaysOfWeek;
     private EditText etHabitTitle;
     private EditText etHabitReason;
-    private DatePicker dpDateToStart;
+    private EditText etDateToStartYear;
+    private EditText etDateToStartMonth;
+    private EditText etDateToStartDay;
     private ToggleButton toggleIsPublic;
     private Boolean isPublic = true;
 
@@ -47,7 +49,9 @@ public class AddHabitActivity extends AppCompatActivity {
 
         etHabitTitle = findViewById(R.id.etHabitTitle);
         etHabitReason = findViewById(R.id.etHabitReason);
-        dpDateToStart = findViewById(R.id.dpDateToStart);
+        etDateToStartYear = findViewById(R.id.etDateToStartYear);
+        etDateToStartMonth = findViewById(R.id.etDateToStartMonth);
+        etDateToStartDay = findViewById(R.id.etDateToStartDay);
         cgDaysOfWeek = findViewById(R.id.cgDaysOfWeek);
         ImageButton btnBack = findViewById(R.id.btnViewEventBack);
         ImageButton btnConfirmAddHabit = findViewById(R.id.btnConfirmAddHabit);
@@ -72,12 +76,17 @@ public class AddHabitActivity extends AppCompatActivity {
                 return;
             }
 
-            int day = dpDateToStart.getDayOfMonth();
-            int month = dpDateToStart.getMonth();
-            int year = dpDateToStart.getYear();
+            Integer year = Integer.parseInt(etDateToStartYear.getText().toString());
+            Integer month = Integer.parseInt(etDateToStartMonth.getText().toString());
+            Integer day = Integer.parseInt(etDateToStartDay.getText().toString());
+
+            if (!isDateToStartGood(year, month, day)) {
+                Toast.makeText(this, "Month and date need to be valid.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             // Year is being given as 3921 for some reason.
-            Date dateToStart = new Date(year, month, day, 4, 30);
+            Date dateToStart = new Date(year, month - 1, day, 4, 30);
 
             habit.put("title", habitTitle);
             habit.put("reason", habitReason);
@@ -112,6 +121,55 @@ public class AddHabitActivity extends AppCompatActivity {
             }
         }
         return checkedDays;
+    }
+
+    public Boolean isDateToStartGood(Integer year, Integer month, Integer day) {
+        Boolean dayGood = false;
+        switch (month) {
+            case 0:
+                dayGood = day <= 31;
+                break;
+            case 1:
+                if (year % 4 == 0){
+                    dayGood = day <= 29;
+                } else {
+                    dayGood = day <= 28;
+                }
+                break;
+            case 2:
+                dayGood = day <= 31;
+                break;
+            case 3:
+                dayGood = day <= 30;
+                break;
+            case 4:
+                dayGood = day <= 31;
+                break;
+            case 5:
+                dayGood = day <= 30;
+                break;
+            case 6:
+                dayGood = day <= 31;
+                break;
+            case 7:
+                dayGood = day <= 31;
+                break;
+            case 8:
+                dayGood = day <= 30;
+                break;
+            case 9:
+                dayGood = day <= 31;
+                break;
+            case 10:
+                dayGood = day <= 30;
+                break;
+            case 11:
+                dayGood = day <= 31;
+                break;
+            default:
+                break;
+        }
+        return dayGood;
     }
 
 }

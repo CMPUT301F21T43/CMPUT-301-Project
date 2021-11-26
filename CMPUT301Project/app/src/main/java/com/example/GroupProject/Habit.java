@@ -92,6 +92,33 @@ public class Habit implements Serializable {
     }
 
     /**
+     * Function to return day of dateToStart
+     * @return day
+     *      Returns day of dateToStart as String
+     */
+    public String getDateToStartDay() {
+        return String.valueOf(dateToStart.getDay() - 1);
+    }
+
+    /**
+     * Function to return habit dateToStart
+     * @return dateToStart
+     *      Returns dateToStart as a Date object
+     */
+    public String getDateToStartMonth() {
+        return String.valueOf(dateToStart.getMonth() + 1);
+    }
+
+    /**
+     * Function to return habit dateToStart
+     * @return dateToStart
+     *      Returns dateToStart as a Date object
+     */
+    public String getDateToStartYear() {
+        return String.valueOf(dateToStart.getYear());
+    }
+
+    /**
      * Returns dateToStart formatted as "YYYY-MM-DD" string
      * @return "YYYY-MM-DD"
      *      Returns the dateToStart formatted as "YYYY-MM-DD"
@@ -102,7 +129,7 @@ public class Habit implements Serializable {
         // getMonth indexes from 0 so need to add 1 to correct for this
         String month = String.valueOf(date.getMonth() + 1);
         // getDate indexes from 0 so need to add 1 to correct for this
-        String day = String.valueOf(date.getDate() + 1);
+        String day = String.valueOf(date.getDate());
         return year + "-" + month + "-" + day;
     }
 
