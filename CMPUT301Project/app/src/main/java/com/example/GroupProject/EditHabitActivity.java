@@ -81,6 +81,7 @@ public class EditHabitActivity extends AppCompatActivity {
         btnBack.setOnClickListener(view -> {
             Intent intentBack = new Intent(EditHabitActivity.this, ViewHabitActivity.class);
             intentBack.putExtra("HABIT", habit);
+            intent.putExtra("SELECTED", R.id.habit);
             startActivity(intentBack);
         });
 
@@ -128,6 +129,7 @@ public class EditHabitActivity extends AppCompatActivity {
 
             Intent intentEdit = new Intent(EditHabitActivity.this, MainActivity.class);
             intentEdit.putExtra("HABIT", newHabit);
+            intentEdit.putExtra("SELECTED", R.id.habit);
             startActivity(intentEdit);
         });
 
