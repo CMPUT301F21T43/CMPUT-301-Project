@@ -15,6 +15,7 @@ public class HabitEvent implements Serializable {
     private String title;
     private String comment;
     private String photoID;
+    private double latitude, longitude;
 
     /**
      * Generic constructor for HabitEvent.
@@ -26,6 +27,21 @@ public class HabitEvent implements Serializable {
         this.title = title;
         this.comment = comment;
         this.photoID = photoID;
+        this.latitude = this.longitude = 1;    // default location
+    }
+
+    /**
+     * Generic constructor for HabitEvent.
+     * @param title name of the habit event, needs to be unique for a particular habit.
+     * @param comment optional comment
+     * @param photoID optional photo (references a link stored in a realtime database)
+     */
+    public HabitEvent(String title, String comment, String photoID, double latitude, double longitude) {
+        this.title = title;
+        this.comment = comment;
+        this.photoID = photoID;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     /**
@@ -80,5 +96,25 @@ public class HabitEvent implements Serializable {
      */
     public void setPhotoID(String photoID) {
         this.photoID = photoID;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLocationString() {
+        return String.format("LatLon: (%.2f, %.2f)", latitude, longitude);
     }
 }

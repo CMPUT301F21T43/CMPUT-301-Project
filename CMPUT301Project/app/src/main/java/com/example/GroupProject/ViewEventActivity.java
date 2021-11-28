@@ -27,11 +27,12 @@ public class ViewEventActivity extends AppCompatActivity {
 
     private static final String TAG = "HabitEventDetails";
 
-    ImageButton btnBack;
-    ImageButton btnEditEvent;
-    TextView tvEventTitle;
-    TextView tvEventComment;
-    ImageView ivEventPhoto;
+    private ImageButton btnBack;
+    private ImageButton btnEditEvent;
+    private TextView tvEventTitle;
+    private TextView tvEventComment;
+    private TextView tvEventLocation;
+    private ImageView ivEventPhoto;
 
     DatabaseReference getImage;
 
@@ -45,6 +46,7 @@ public class ViewEventActivity extends AppCompatActivity {
         btnEditEvent = findViewById(R.id.btnEditEvent);
         tvEventTitle = findViewById(R.id.tvEventTitle);
         tvEventComment = findViewById(R.id.tvEventComment);
+        tvEventLocation = findViewById(R.id.tvEventLocation);
         ivEventPhoto = findViewById(R.id.ivViewEventPhoto);
 
         Intent intent = getIntent();
@@ -58,7 +60,7 @@ public class ViewEventActivity extends AppCompatActivity {
 
         tvEventTitle.setText(event.getTitle());
         tvEventComment.setText(event.getComment());
-
+        tvEventLocation.setText(event.getLocationString());
         getImage = databaseReference.child(event.getPhotoID());
 
         getImage.addListenerForSingleValueEvent(new ValueEventListener() {
