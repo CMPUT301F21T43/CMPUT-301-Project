@@ -38,6 +38,10 @@ public class EditHabitActivity extends AppCompatActivity {
     private ImageButton btnBack;
     private ImageButton btnConfirmEditHabit;
 
+    private Integer year = null;
+    private Integer month = null;
+    private Integer day = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,11 +101,12 @@ public class EditHabitActivity extends AppCompatActivity {
                 return;
             }
 
-            Integer year = Integer.parseInt(etDateToStartYear.getText().toString());
-            Integer month = Integer.parseInt(etDateToStartMonth.getText().toString());
-            Integer day = Integer.parseInt(etDateToStartDay.getText().toString());
+            if (getDateTexts() == -1) {
+                Toast.makeText(this, "Date To Start fields are needed.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            if (!isDateToStartGood(year, month - 1, day)) {
+            if (!HabitActivityHelper.isDateToStartGood(year, month - 1, day)) {
                 Toast.makeText(this, "Month and date need to be valid.", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -114,9 +119,9 @@ public class EditHabitActivity extends AppCompatActivity {
             editHabit.put("reason", habitReason);
             editHabit.put("isPublic", isPublic);
             editHabit.put("dateToStart", new Timestamp(dateToStart));
-            editHabit.put("activeDays", checkedDaysChips());
+            editHabit.put("activeDays", HabitActivityHelper.checkedDaysChips(cgDaysOfWeek));
 
-            Habit newHabit = new Habit(habitTitle, habitReason, new Timestamp(dateToStart).toDate(), checkedDaysChips(), isPublic);
+            Habit newHabit = new Habit(habitTitle, habitReason, new Timestamp(dateToStart).toDate(), HabitActivityHelper.checkedDaysChips(cgDaysOfWeek), isPublic);
 
             db.collection("Users").document(username).collection("Habits").document(habitTitle)
                     .set(editHabit, SetOptions.merge());
@@ -129,66 +134,21 @@ public class EditHabitActivity extends AppCompatActivity {
         toggleIsPublic.setOnCheckedChangeListener((compoundButton, b) -> isPublic = b);
     }
 
-    public Map<String, Boolean> checkedDaysChips() {
-        Map<String, Boolean> checkedDays = new HashMap<>();
-        for (int i = 0; i < cgDaysOfWeek.getChildCount(); i++){
-            Chip chip  = (Chip) cgDaysOfWeek.getChildAt(i);
-            if (chip.isChecked()) {
-                checkedDays.put((String) chip.getText(), true);
-            } else {
-                checkedDays.put((String) chip.getText(), false);
-            }
+    /**
+     * Checks that the Date To Start fields aren't empty and sets them if not.
+     * @return -1 if at least one is empty, 0 otherwise.
+     */
+    private Integer getDateTexts() {
+        String yearStr = etDateToStartYear.getText().toString();
+        String monthStr = etDateToStartMonth.getText().toString();
+        String dayStr = etDateToStartDay.getText().toString();
+        if (yearStr.matches("") || monthStr.matches("") || dayStr.matches("")) {
+            return -1;
         }
-        return checkedDays;
-    }
-
-    public Boolean isDateToStartGood(Integer year, Integer month, Integer day) {
-        Boolean dayGood = false;
-        switch (month) {
-            case 0:
-                dayGood = day <= 31;
-                break;
-            case 1:
-                if (year % 4 == 0){
-                    dayGood = day <= 29;
-                } else {
-                    dayGood = day <= 28;
-                }
-                break;
-            case 2:
-                dayGood = day <= 31;
-                break;
-            case 3:
-                dayGood = day <= 30;
-                break;
-            case 4:
-                dayGood = day <= 31;
-                break;
-            case 5:
-                dayGood = day <= 30;
-                break;
-            case 6:
-                dayGood = day <= 31;
-                break;
-            case 7:
-                dayGood = day <= 31;
-                break;
-            case 8:
-                dayGood = day <= 30;
-                break;
-            case 9:
-                dayGood = day <= 31;
-                break;
-            case 10:
-                dayGood = day <= 30;
-                break;
-            case 11:
-                dayGood = day <= 31;
-                break;
-            default:
-                break;
-        }
-        return dayGood;
+        year = Integer.parseInt(yearStr);
+        month = Integer.parseInt(monthStr);
+        day = Integer.parseInt(dayStr);
+        return 0;
     }
 
 }

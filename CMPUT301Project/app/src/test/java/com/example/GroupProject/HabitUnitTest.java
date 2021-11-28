@@ -71,10 +71,6 @@ public class HabitUnitTest {
         assertEquals(testHabit.getDateToStart(), new Date(2021, 05, 05));
     }
 
-    @Test
-    public void testGetDateToStartAsString() {
-        assertEquals(testHabit.getDateToStartAsString(), "2021-6-6");
-    }
 
     @Test
     public void testSetDateToStart() throws NoSuchFieldException, IllegalAccessException{
