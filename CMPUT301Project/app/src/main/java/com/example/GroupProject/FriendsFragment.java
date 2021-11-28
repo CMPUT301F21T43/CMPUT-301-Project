@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,6 +45,8 @@ public class FriendsFragment extends Fragment {
     ListView userList;
     ArrayAdapter<User> userAdapter;
     ArrayList<User> userDataList;
+    Button exploreUsers;
+    Button followerRequest;
 
     public FriendsFragment() {
         // Required empty public constructor
@@ -80,6 +83,18 @@ public class FriendsFragment extends Fragment {
             intent.putExtra("USER", (Serializable) adapterView.getItemAtPosition(i));
             startActivity(intent);
         });
+
+        exploreUsers = view.findViewById(R.id.explore_users);
+        exploreUsers.setOnClickListener((view12) -> {
+            Intent intent1 = new Intent(thisContext, ExploreUsers.class);
+            startActivity(intent1);
+        });
+
+        followerRequest = view.findViewById(R.id.follower_request);
+        followerRequest.setOnClickListener((view123) -> {
+            Intent intent123 = new Intent(thisContext, Notifications.class);
+            startActivity(intent123);
+        });
     }
 
     @Override
@@ -92,7 +107,8 @@ public class FriendsFragment extends Fragment {
 
         // Add user objects to list in listview
         userDataList = new ArrayList<>();
-        db.collection("Users")
+        db.collection("Users").document(username)
+                .collection("Friends")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -100,7 +116,7 @@ public class FriendsFragment extends Fragment {
                         String userFirstName;
                         String userLastName;
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            userUsername = document.getId();
+                            userUsername = (String) document.get("FriendUsername");
                             userFirstName = (String) document.get("FirstName");
                             userLastName = (String) document.get("LastName");
                             if (!userUsername.equals(username)) {
