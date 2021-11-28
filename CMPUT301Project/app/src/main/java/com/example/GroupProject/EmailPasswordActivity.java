@@ -48,8 +48,9 @@ public class EmailPasswordActivity extends AppCompatActivity {
     private Button btnSignIn;
     private Button btnCreateAccount;
 
-    private String email;
-    private String password;
+
+    private String email = "";
+    private String password = "";
     private String username;
 
     @Override
@@ -66,12 +67,14 @@ public class EmailPasswordActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(view -> {
             setEmail();
             setPassword();
+            if (!isEmail() || !isPassword()) { return; }
             signIn(email, password);
         });
 
         btnCreateAccount.setOnClickListener(view -> {
             setEmail();
             setPassword();
+            if (!isEmail() || !isPassword()) { return; }
             createAccount(email, password);
         });
 
@@ -111,8 +114,24 @@ public class EmailPasswordActivity extends AppCompatActivity {
         email = etEmail.getText().toString();
     }
 
+    public Boolean isEmail() {
+        if (email.matches("")) {
+            Toast.makeText(this, "An email is needed.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
     public void setPassword() {
         password = etPassword.getText().toString();
+    }
+
+    public Boolean isPassword() {
+        if (password.matches("")) {
+            Toast.makeText(this, "A password is needed.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
 
