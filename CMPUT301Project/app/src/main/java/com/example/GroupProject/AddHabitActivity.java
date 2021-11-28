@@ -40,9 +40,9 @@ public class AddHabitActivity extends AppCompatActivity {
     private String habitTitle = null;
     private String habitReason = null;
 
-    private Integer year = null;
-    private Integer month = null;
-    private Integer day = null;
+    private Long year = null;
+    private Long month = null;
+    private Long day = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,13 +90,12 @@ public class AddHabitActivity extends AppCompatActivity {
                 return;
             }
 
-            // Year is being given as 3921 for some reason.
-            Date dateToStart = new Date(year, month - 1, day, 4, 30);
-
             habit.put("title", habitTitle);
             habit.put("reason", habitReason);
             habit.put("isPublic", isPublic);
-            habit.put("dateToStart", new Timestamp(dateToStart));
+            habit.put("yearToStart", year);
+            habit.put("monthToStart", month);
+            habit.put("dayToStart", day);
             habit.put("activeDays", HabitActivityHelper.checkedDaysChips(cgDaysOfWeek));
 
             db.collection("Users").document(username).collection("Habits").document(habitTitle)
@@ -127,9 +126,9 @@ public class AddHabitActivity extends AppCompatActivity {
         if (yearStr.matches("") || monthStr.matches("") || dayStr.matches("")) {
             return -1;
         }
-        year = Integer.parseInt(yearStr);
-        month = Integer.parseInt(monthStr);
-        day = Integer.parseInt(dayStr);
+        year = Long.parseLong(yearStr);
+        month = Long.parseLong(monthStr);
+        day = Long.parseLong(dayStr);
         return 0;
     }
 

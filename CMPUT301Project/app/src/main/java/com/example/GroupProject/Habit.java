@@ -26,7 +26,9 @@ public class Habit implements Serializable {
 
     private String title;
     private String reason;
-    private Date dateToStart;
+    private Long yearToStart;
+    private Long monthToStart;
+    private Long dayToStart;
     private Map<String, Boolean> activeDays;
     private Boolean isPublic;
 
@@ -34,14 +36,18 @@ public class Habit implements Serializable {
      * Generic constructor for Habit.
      * @param title name of the habit, needs to be unique for a particular user.
      * @param reason reason for the habit
-     * @param dateToStart date that the habit should start
+     * @param yearToStart Long year to start
+     * @param monthToStart Long month to start
+     * @param dayToStart Long day to start
      * @param activeDays days of the week that the habit should be active
      * @param isPublic whether the habit is publicly visible or not
      */
-    Habit(String title, String reason, Date dateToStart, Map<String, Boolean> activeDays, Boolean isPublic){
+    Habit(String title, String reason, Long yearToStart, Long monthToStart, Long dayToStart, Map<String, Boolean> activeDays, Boolean isPublic){
         this.title = title;
         this.reason = reason;
-        this.dateToStart = dateToStart;
+        this.yearToStart = yearToStart;
+        this.monthToStart = monthToStart;
+        this.dayToStart = dayToStart;
         this.activeDays = activeDays;
         this.isPublic = isPublic;
     }
@@ -83,63 +89,75 @@ public class Habit implements Serializable {
     }
 
     /**
-     * Function to return habit dateToStart
-     * @return dateToStart
-     *      Returns dateToStart as a Date object
+     * Get the year for habit to start.
+     * @return Long year
      */
-    public Date getDateToStart() {
-        return dateToStart;
+    public Long getYearToStart() {
+        return yearToStart;
     }
 
     /**
-     * Function to return day of dateToStart
-     * @return day
-     *      Returns day of dateToStart as String
+     * Set the year for habit to start.
+     * @param yearToStart
      */
-    public String getDateToStartDay() {
-        return String.valueOf(dateToStart.getDay() - 1);
+    public void setYearToStart(Long yearToStart) {
+        this.yearToStart = yearToStart;
     }
 
     /**
-     * Function to return habit dateToStart
-     * @return dateToStart
-     *      Returns dateToStart as a Date object
+     * Get the month for habit to start.
+     * @return Long month
      */
-    public String getDateToStartMonth() {
-        return String.valueOf(dateToStart.getMonth() + 1);
+    public Long getMonthToStart() {
+        return monthToStart;
     }
 
     /**
-     * Function to return habit dateToStart
-     * @return dateToStart
-     *      Returns dateToStart as a Date object
+     * Set the month for habit to start.
+     * @param monthToStart
      */
-    public String getDateToStartYear() {
-        return String.valueOf(dateToStart.getYear());
+    public void setMonthToStart(Long monthToStart) {
+        this.monthToStart = monthToStart;
     }
 
     /**
-     * Returns dateToStart formatted as "YYYY-MM-DD" string
+     * Get the day for habit to start.
+     * @return Long day
+     */
+    public Long getDayToStart() {
+        return dayToStart;
+    }
+
+    /**
+     * Set the day for habit to start.
+     * @param dayToStart
+     */
+    public void setDayToStart(Long dayToStart) {
+        this.dayToStart = dayToStart;
+    }
+
+    /**
+     * Returns date to start formatted as "YYYY-MM-DD" string
      * @return "YYYY-MM-DD"
-     *      Returns the dateToStart formatted as "YYYY-MM-DD"
+     *      Returns the date to start formatted as "YYYY-MM-DD"
      */
     public String getDateToStartAsString() {
-        Date date = dateToStart;
-        String year = String.valueOf(date.getYear());
-        // getMonth indexes from 0 so need to add 1 to correct for this
-        String month = String.valueOf(date.getMonth() + 1);
-        // getDate indexes from 0 so need to add 1 to correct for this
-        String day = String.valueOf(date.getDate());
-        return year + "-" + month + "-" + day;
+        String yyyy = yearToStart.toString();
+        String mm = monthToStart.toString();
+        String dd = dayToStart.toString();
+        return yyyy + "-" + mm + "-" + dd;
     }
 
     /**
-     * Function to set habit date
-     * @param dateToStart
-     *      dateToStart started as a Date object
+     * Set the date to start for a habit.
+     * @param year Long year to start
+     * @param month Long month to start
+     * @param day Long day to start
      */
-    public void setDateToStart(Date dateToStart) {
-        this.dateToStart = dateToStart;
+    public void setDateToStart(Long year, Long month, Long day) {
+        setYearToStart(year);
+        setMonthToStart(month);
+        setDayToStart(day);
     }
 
     /**

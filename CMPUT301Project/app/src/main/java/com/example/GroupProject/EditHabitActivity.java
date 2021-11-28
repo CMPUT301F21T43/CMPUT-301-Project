@@ -21,6 +21,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,9 +39,9 @@ public class EditHabitActivity extends AppCompatActivity {
     private ImageButton btnBack;
     private ImageButton btnConfirmEditHabit;
 
-    private Integer year = null;
-    private Integer month = null;
-    private Integer day = null;
+    private Long year = null;
+    private Long month = null;
+    private Long day = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +75,9 @@ public class EditHabitActivity extends AppCompatActivity {
             if (habit.getActiveDays().get(chipText)) { cgDaysOfWeek.check(chip.getId()); }
         }
 
-        etDateToStartDay.setText(habit.getDateToStartDay());
-        etDateToStartMonth.setText(habit.getDateToStartMonth());
-        etDateToStartYear.setText(habit.getDateToStartYear());
+        etDateToStartDay.setText(habit.getDayToStart().toString());
+        etDateToStartMonth.setText(habit.getMonthToStart().toString());
+        etDateToStartYear.setText(habit.getYearToStart().toString());
 
         btnBack.setOnClickListener(view -> {
             Intent intentBack = new Intent(EditHabitActivity.this, ViewHabitActivity.class);
@@ -107,22 +108,21 @@ public class EditHabitActivity extends AppCompatActivity {
                 return;
             }
 
-            if (!HabitActivityHelper.isDateToStartGood(year, month - 1, day)) {
+            if (!HabitActivityHelper.isDateToStartGood(year, month, day)) {
                 Toast.makeText(this, "Month and date need to be valid.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Year is being given as 3921 for some reason.
-            Date dateToStart = new Date(year, month - 1, day);
-            Timestamp timestampDateToStart = new Timestamp(dateToStart);
 
             editHabit.put("title", habitTitle);
             editHabit.put("reason", habitReason);
             editHabit.put("isPublic", isPublic);
-            editHabit.put("dateToStart", new Timestamp(dateToStart));
+            editHabit.put("yearToStart", year);
+            editHabit.put("monthToStart", month);
+            editHabit.put("dayToStart", day);
             editHabit.put("activeDays", HabitActivityHelper.checkedDaysChips(cgDaysOfWeek));
 
-            Habit newHabit = new Habit(habitTitle, habitReason, new Timestamp(dateToStart).toDate(), HabitActivityHelper.checkedDaysChips(cgDaysOfWeek), isPublic);
+            Habit newHabit = new Habit(habitTitle, habitReason, year, month, day, HabitActivityHelper.checkedDaysChips(cgDaysOfWeek), isPublic);
 
             db.collection("Users").document(username).collection("Habits").document(habitTitle)
                     .set(editHabit, SetOptions.merge());
@@ -147,9 +147,9 @@ public class EditHabitActivity extends AppCompatActivity {
         if (yearStr.matches("") || monthStr.matches("") || dayStr.matches("")) {
             return -1;
         }
-        year = Integer.parseInt(yearStr);
-        month = Integer.parseInt(monthStr);
-        day = Integer.parseInt(dayStr);
+        year = Long.parseLong(yearStr);
+        month = Long.parseLong(monthStr);
+        day = Long.parseLong(dayStr);
         return 0;
     }
 
