@@ -96,6 +96,7 @@ public class AddEventActivity extends AppCompatActivity {
             habitEvent.put("photoID", eventPhotoID);
             habitEvent.put("latitude", 1);
             habitEvent.put("longitude", 1);
+            habitEvent.put("isDone", false);
             db.collection("Users")
                     .document(username)
                     .collection("Habits")

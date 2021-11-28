@@ -23,7 +23,6 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * CustomList class for storing a list of Habit object
@@ -58,7 +57,7 @@ public class CustomList extends ArrayAdapter<Habit> {
         View view = convertView;
 
         if(view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.content, parent,false);
+            view = LayoutInflater.from(context).inflate(R.layout.habit_custom, parent,false);
         }
 
         Habit habit = habits.get(position);

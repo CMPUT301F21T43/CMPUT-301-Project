@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -47,6 +48,7 @@ public class EditEventActivity extends AppCompatActivity {
     private Button btnSelectImage;
     private Button btnChangeLocation;
     private ImageView ivEventPhoto;
+    private CheckBox cbEventDone;
 
     private HabitEvent changedLocationEvent;
     private boolean takenPhoto;
@@ -67,6 +69,7 @@ public class EditEventActivity extends AppCompatActivity {
         btnSelectImage = findViewById(R.id.btnSelectEditEvent);
         btnChangeLocation = findViewById(R.id.btnChangeLocation);
         ivEventPhoto = findViewById(R.id.ivEditEventPhoto);
+        cbEventDone = findViewById(R.id.cbEditEventDone);
 
         Intent intent = getIntent();
         HabitEvent event = (HabitEvent) intent.getSerializableExtra("EVENT");
@@ -75,6 +78,7 @@ public class EditEventActivity extends AppCompatActivity {
         editTitle.setText(event.getTitle());
         editComment.setText(event.getComment());
         tvEventLocation.setText(event.getLocationString());
+        cbEventDone.setChecked(event.getDone());
 
         FirebaseFirestore db = MainActivity.getFirestoreInstance();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -119,13 +123,15 @@ public class EditEventActivity extends AppCompatActivity {
             // Add all these to Firestore
             String eventTitle = editTitle.getText().toString();
             String eventComment = editComment.getText().toString();
-            double lat, lon;
+            boolean eventDone = cbEventDone.isChecked();
+            double eventLat, eventLon;
+
             if (changedLocation) {
-                lat = changedLocationEvent.getLatitude();
-                lon = changedLocationEvent.getLongitude();
+                eventLat = changedLocationEvent.getLatitude();
+                eventLon = changedLocationEvent.getLongitude();
             } else {
-                lat = event.getLatitude();
-                lon = event.getLongitude();
+                eventLat = event.getLatitude();
+                eventLon = event.getLongitude();
             }
 
             if (!eventTitle.equals(event.getTitle())) {
@@ -143,9 +149,9 @@ public class EditEventActivity extends AppCompatActivity {
             editEvent.put("title", eventTitle);
             editEvent.put("comment", eventComment);
             editEvent.put("photoID", eventPhotoID);
-            editEvent.put("latitude", lat);
-            editEvent.put("longitude", lon);
-            // HabitEvent newEvent = new HabitEvent(eventTitle, eventComment, eventPhotoID);
+            editEvent.put("latitude", eventLat);
+            editEvent.put("longitude", eventLon);
+            editEvent.put("isDone", eventDone);
 
             db.collection("Users")
                     .document(username)
@@ -156,7 +162,6 @@ public class EditEventActivity extends AppCompatActivity {
                     .set(editEvent, SetOptions.merge());
 
             Intent intentEdit = new Intent(EditEventActivity.this, HabitEventsMainActivity.class);
-            // intentEdit.putExtra("EVENT", newEvent);
             intentEdit.putExtra("HABIT", habit);
             startActivity(intentEdit);
         });

@@ -16,6 +16,7 @@ public class HabitEvent implements Serializable {
     private String comment;
     private String photoID;
     private double latitude, longitude;
+    private boolean isDone;
 
     /**
      * Generic constructor for HabitEvent.
@@ -28,6 +29,7 @@ public class HabitEvent implements Serializable {
         this.comment = comment;
         this.photoID = photoID;
         this.latitude = this.longitude = 1;    // default location
+        this.isDone = false;
     }
 
     /**
@@ -36,12 +38,13 @@ public class HabitEvent implements Serializable {
      * @param comment optional comment
      * @param photoID optional photo (references a link stored in a realtime database)
      */
-    public HabitEvent(String title, String comment, String photoID, double latitude, double longitude) {
+    public HabitEvent(String title, String comment, String photoID, double latitude, double longitude, boolean isDone) {
         this.title = title;
         this.comment = comment;
         this.photoID = photoID;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.isDone = isDone;
     }
 
     /**
@@ -98,23 +101,61 @@ public class HabitEvent implements Serializable {
         this.photoID = photoID;
     }
 
+    /**
+     * Function to return latitude
+     * @return latitude
+     *      Returns latitude as a double
+     */
     public double getLatitude() {
         return latitude;
     }
 
+    /**
+     * Function to set latitude
+     * @param latitude
+     *      latitude as a double
+     */
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
+    /**
+     * Function to return longitude
+     * @return longitude
+     *      Returns longitude as a double
+     */
     public double getLongitude() {
         return longitude;
     }
 
+    /**
+     * Function to set longitude
+     * @param longitude
+     *      longitude as a double
+     */
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
     public String getLocationString() {
         return String.format("LatLon: (%.2f, %.2f)", latitude, longitude);
+    }
+
+    /**
+     * Get whether HabitEvent is done or not.
+     * @return isDone
+     *      isDone as Boolean
+     */
+    public boolean getDone() {
+        return isDone;
+    }
+
+    /**
+     * Set Habit Event as done or not.
+     * @param isDone
+     *      isDone is Boolean
+     */
+    public void setPublic(Boolean isDone) {
+        this.isDone = isDone;
     }
 }
