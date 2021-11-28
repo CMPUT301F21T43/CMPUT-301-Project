@@ -14,7 +14,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="tvHabitEventTitle">Habit Event Title</string>
     <string name="tvHabitEventComment">Optional Comment</string>
-
+    <string name="tvHabitEventLocation">Optional Location</string>
     <string name="tvHabitTitleText">Habit Title</string>
     <string name="tvHabitReasonText">Habit Reason</string>
     <string name="tvDateToStartText">Date To Start</string>

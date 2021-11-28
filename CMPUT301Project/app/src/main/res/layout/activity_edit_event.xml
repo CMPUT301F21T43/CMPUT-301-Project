@@ -34,32 +34,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/svAddEvent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/svAddEvent"
-        app:layout_constraintTop_toBottomOf="@id/btnBackEditEvent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="65dp">
+        android:layout_marginVertical="70dp"
+        tools:layout_editor_absoluteY="65dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginStart="20dp"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/etEditEventTitle"
-                android:layout_width="279dp"
-                android:layout_height="52dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Event Title"
-                android:inputType="textPersonName"
-                app:layout_constraintBottom_toTopOf="@+id/etEditEventComment"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.744" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/etEditEventComment"
@@ -68,48 +61,46 @@
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/tvHabitEventComment"
-                android:inputType="textMultiLine"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.245" />
+                android:inputType="textMultiLine" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/tvEditEventLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:hint="@string/tvHabitEventLocation"
+                android:textSize="20sp" />
+
+            <LinearLayout
                 android:id="@+id/constraintLayout"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etEditEventComment"
-                app:layout_constraintVertical_bias="0.094"
+                android:layout_marginVertical="10dp"
                 tools:layout_editor_absoluteX="0dp">
 
                 <Button
                     android:id="@+id/btnSelectEditEvent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="24dp"
                     android:text="Select New Image"
-                    android:textSize="10sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="10sp" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/btnChangeLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Change Location"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/ivEditEventPhoto"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-                app:layout_constraintVertical_bias="0.003"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         </LinearLayout>
