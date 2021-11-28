@@ -54,13 +54,15 @@ public class HabitEventsMainActivity extends AppCompatActivity{
                     if (task.isSuccessful()) {
                         String title, comment, photoID;
                         double latitude, longitude;
+                        boolean isDone;
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             title = (String) document.get("title");
                             comment = (String) document.get("comment");
                             photoID = (String) document.get("photoID");
                             latitude = Double.parseDouble(document.get("latitude").toString());
                             longitude = Double.parseDouble(document.get("longitude").toString());
-                            eventAdapter.add(new HabitEvent(title, comment, photoID, latitude, longitude));
+                            isDone = (boolean) document.get("isDone");
+                            eventAdapter.add(new HabitEvent(title, comment, photoID, latitude, longitude, isDone));
                             eventAdapter.notifyDataSetChanged();
                         }
                     } else {
