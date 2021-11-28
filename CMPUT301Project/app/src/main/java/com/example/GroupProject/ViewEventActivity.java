@@ -7,6 +7,8 @@ package com.example.GroupProject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +35,7 @@ public class ViewEventActivity extends AppCompatActivity {
     private TextView tvEventComment;
     private TextView tvEventLocation;
     private ImageView ivEventPhoto;
+    private CheckBox cbEventDone;
 
     DatabaseReference getImage;
 
@@ -48,6 +51,7 @@ public class ViewEventActivity extends AppCompatActivity {
         tvEventComment = findViewById(R.id.tvEventComment);
         tvEventLocation = findViewById(R.id.tvEventLocation);
         ivEventPhoto = findViewById(R.id.ivViewEventPhoto);
+        cbEventDone = findViewById(R.id.cbEventDone);
 
         Intent intent = getIntent();
         HabitEvent event = (HabitEvent) intent.getSerializableExtra("EVENT");
@@ -62,6 +66,7 @@ public class ViewEventActivity extends AppCompatActivity {
         tvEventComment.setText(event.getComment());
         tvEventLocation.setText(event.getLocationString());
         getImage = databaseReference.child(event.getPhotoID());
+        cbEventDone.setChecked(event.getDone());
 
         getImage.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
