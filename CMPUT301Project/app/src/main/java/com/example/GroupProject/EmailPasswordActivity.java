@@ -215,7 +215,7 @@ public class EmailPasswordActivity extends AppCompatActivity {
                         String email = ((GroupProject) this.getApplication()).getEmail();
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             userEmail = (String) document.get("Email");
-                            if (userEmail.equals(email)) {
+                            if (userEmail != null && userEmail.equals(email)) {
                                 username = (String) document.get("Username");
                                 ((GroupProject) this.getApplication()).setUsername(username);
                                 startMainActivity(false);

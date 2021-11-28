@@ -36,7 +36,7 @@ public class HabitUnitTest {
         Map<String, Boolean> testActiveDays = new HashMap<>();
         testActiveDays.put("Monday", true);
         testActiveDays.put("Tuesday", false);
-        testHabit = new Habit("Foo", "Bar", new Date(2021, 05, 05), testActiveDays, false);
+        testHabit = new Habit("Foo", "Bar",2021L, 05L, 05L, testActiveDays, false);
     }
 
     @Test
@@ -67,17 +67,42 @@ public class HabitUnitTest {
     }
 
     @Test
-    public void testGetDateToStart() {
-        assertEquals(testHabit.getDateToStart(), new Date(2021, 05, 05));
+    public void testGetYearToStart() {
+        assertEquals(testHabit.getYearToStart(), new Long(2021));
     }
 
+    @Test
+    public void testGetMonthToStart() {
+        assertEquals(testHabit.getMonthToStart(), new Long(5));
+    }
 
     @Test
-    public void testSetDateToStart() throws NoSuchFieldException, IllegalAccessException{
-        testHabit.setDateToStart(new Date(2021, 06, 06));
-        final Field field = testHabit.getClass().getDeclaredField("dateToStart");
+    public void testGetDayToStart() {
+        assertEquals(testHabit.getDayToStart(), new Long(05));
+    }
+
+    @Test
+    public void testSetYearToStart() throws NoSuchFieldException, IllegalAccessException{
+        testHabit.setYearToStart(2021L);
+        final Field field = testHabit.getClass().getDeclaredField("yearToStart");
         field.setAccessible(true);
-        assertEquals(field.get(testHabit), new Date(2021, 06, 06));
+        assertEquals(field.get(testHabit),2021L);
+    }
+
+    @Test
+    public void testSetMonthToStart() throws NoSuchFieldException, IllegalAccessException{
+        testHabit.setMonthToStart(06L);
+        final Field field = testHabit.getClass().getDeclaredField("monthToStart");
+        field.setAccessible(true);
+        assertEquals(field.get(testHabit), 06L);
+    }
+
+    @Test
+    public void testSetDayToStart() throws NoSuchFieldException, IllegalAccessException{
+        testHabit.setDayToStart(06L);
+        final Field field = testHabit.getClass().getDeclaredField("dayToStart");
+        field.setAccessible(true);
+        assertEquals(field.get(testHabit),06L);
     }
 
     @Test

@@ -125,20 +125,21 @@ public class HabitFragment extends Fragment {
                     if (task.isSuccessful()) {
                         String habitTitle;
                         String habitReason;
-                        Timestamp timestamp;
-                        Date dateToStart;
+                        Long yearToStart;
+                        Long monthToStart;
+                        Long dayToStart;
                         Boolean isPublic;
                         Map<String, Boolean> activeDays;
                         SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd");
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             habitTitle = (String) document.get("title");
                             habitReason = (String) document.get("reason");
-                            timestamp = (Timestamp) document.get("dateToStart");
-                            assert timestamp != null;
-                            dateToStart = timestamp.toDate();
+                            yearToStart = (Long) document.get("yearToStart");
+                            monthToStart = (Long) document.get("monthToStart");
+                            dayToStart = (Long) document.get("dayToStart");
                             activeDays = (Map<String, Boolean>) document.get("activeDays");
                             isPublic = (Boolean) document.get("isPublic");
-                            habitAdapter.add((new Habit(habitTitle, habitReason, dateToStart, activeDays, isPublic)));
+                            habitAdapter.add((new Habit(habitTitle, habitReason, yearToStart, monthToStart, dayToStart, activeDays, isPublic)));
                             habitAdapter.notifyDataSetChanged();
                             Log.d(TAG, document.getId() + " => " + document.getData());
                         }

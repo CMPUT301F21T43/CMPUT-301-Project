@@ -71,35 +71,37 @@ public class ViewUserActivity extends AppCompatActivity {
 
         // Add habit objects to list in listview
         userHabitsDataList = new ArrayList<>();
-        db.collection("Users")
-                .document(user.getUsername())
-                .collection("Habits")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        String habitTitle;
-                        String habitReason;
-                        Timestamp timestamp;
-                        Date dateToStart;
-                        Boolean isPublic;
-                        Map<String, Boolean> activeDays;
-                        SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd");
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            habitTitle = (String) document.get("title");
-                            habitReason = (String) document.get("reason");
-                            timestamp = (Timestamp) document.get("dateToStart");
-                            assert timestamp != null;
-                            dateToStart = timestamp.toDate();
-                            activeDays = (Map<String, Boolean>) document.get("activeDays");
-                            isPublic = (Boolean) document.get("isPublic");
-                            userHabitsAdapter.add((new Habit(habitTitle, habitReason, dateToStart, activeDays, isPublic)));
-                            userHabitsAdapter.notifyDataSetChanged();
-                            Log.d(TAG, document.getId() + " => " + document.getData());
+
+            db.collection("Users")
+                    .document(user.getUsername())
+                    .collection("Habits")
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            String habitTitle;
+                            String habitReason;
+                            Long yearToStart;
+                            Long monthToStart;
+                            Long dayToStart;
+                            Boolean isPublic;
+                            Map<String, Boolean> activeDays;
+                            SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd");
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                habitTitle = (String) document.get("title");
+                                habitReason = (String) document.get("reason");
+                                yearToStart = (Long) document.get("yearToStart");
+                                monthToStart = (Long) document.get("monthToStart");
+                                dayToStart = (Long) document.get("dayToStart");
+                                activeDays = (Map<String, Boolean>) document.get("activeDays");
+                                isPublic = (Boolean) document.get("isPublic");
+                                userHabitsAdapter.add((new Habit(habitTitle, habitReason, yearToStart, monthToStart, dayToStart, activeDays, isPublic)));
+                                userHabitsAdapter.notifyDataSetChanged();
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
                         }
-                    } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
-                    }
-                });
+                    });
 
         userHabitsAdapter = new CustomList(this, userHabitsDataList);
         userHabitsList = findViewById(R.id.user_habits_list);
