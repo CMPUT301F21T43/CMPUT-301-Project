@@ -1,0 +1,28 @@
+Meeting Minutes for November 28
+
+
+Attendance: Everyone
+
+Next meeting: November 30, @4:00pm to run through presentation.
+
+ 
+General Notes
+=========================
+ - New name is Happy Habits.
+ - Kyle making app icon.
+
+
+Things Left TODO
+=========================
+ - Make Habit Event can't choose location, but can when editing.
+ - Sunday chip doesn't show on add habit. Fix with width=wrap_content or reducing marginHorizontal.
+ - Change text from Request. And change Follow to Friend.
+ - Search bar for Friends page.
+ - Complete UI color standardizing.
+ - Button on Follower Request so that new fragment is created going back to Friends list.
+ - Simon doing progress bar.
+ - Presentation. 
+ - Marcus to propagate color changes through rest of app.
+ - Figma, backlog and CRC cards.
+ - Kourosh will update Figma. 
+ - Ragur planning on submitting a PR for checkboxes.

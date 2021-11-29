@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
@@ -128,6 +129,12 @@ public class AddEventActivity extends AppCompatActivity {
                     .collection("Events")
                     .document(eventTitle)
                     .set(habitEvent, SetOptions.merge());
+
+            db.collection("Users")
+                    .document(username)
+                    .collection("Habits")
+                    .document(habit.getTitle())
+                    .update("numEvents", FieldValue.increment(1));
 
             Intent intent1 = new Intent(AddEventActivity.this, HabitEventsMainActivity.class);
             intent1.putExtra("HABIT", habit);

@@ -21,6 +21,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.material.progressindicator.CircularProgressIndicator;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -66,11 +69,13 @@ public class CustomList extends ArrayAdapter<Habit> {
         TextView tvHabitReason = view.findViewById(R.id.habit_reason);
         TextView tvHabitDateToStart = view.findViewById(R.id.habit_dateToStart);
         TextView tvDoToday = view.findViewById(R.id.tvDoToday);
+        CircularProgressIndicator cpiHabitProgressIndicator = view.findViewById(R.id.habit_progress_indicator);
 
         tvHabitName.setText(habit.getTitle());
         tvHabitReason.setText(habit.getReason());
         tvHabitDateToStart.setText(habit.getDateToStartAsString());
         tvDoToday.setVisibility(habit.isDayActive(today.get(Calendar.DAY_OF_WEEK)) ? View.VISIBLE : View.INVISIBLE);
+        cpiHabitProgressIndicator.setProgress(habit.getProgress());
 
         return view;
     }

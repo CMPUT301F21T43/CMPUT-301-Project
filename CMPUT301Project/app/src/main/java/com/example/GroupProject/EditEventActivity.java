@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.squareup.picasso.Picasso;
@@ -142,6 +143,13 @@ public class EditEventActivity extends AppCompatActivity {
                         .delete()
                         .addOnSuccessListener(aVoid -> Log.d("Event", "Event successfully deleted!"))
                         .addOnFailureListener(e -> Log.w("Event", "Error deleting document", e));
+
+                db.collection("Users")
+                        .document(username)
+                        .collection("Habits")
+                        .document(habit.getTitle())
+                        .update("numEvents", FieldValue.increment(-1),
+                                "numEventsDone", FieldValue.increment(-1));
             }
 
             editEvent.put("title", eventTitle);
@@ -158,6 +166,14 @@ public class EditEventActivity extends AppCompatActivity {
                     .collection("Events")
                     .document(eventTitle)
                     .set(editEvent, SetOptions.merge());
+
+            if (eventDone) {
+                db.collection("Users")
+                        .document(username)
+                        .collection("Habits")
+                        .document(habit.getTitle())
+                        .update("numEventsDone", FieldValue.increment(1));
+            }
 
             Intent intentEdit = new Intent(EditEventActivity.this, HabitEventsMainActivity.class);
             intentEdit.putExtra("HABIT", habit);

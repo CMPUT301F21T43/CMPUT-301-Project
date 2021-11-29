@@ -54,6 +54,7 @@
                 android:hint="Event Title"
                 android:inputType="textPersonName" />
 
+
             <EditText
                 android:id="@+id/etEditEventComment"
                 android:layout_width="wrap_content"
@@ -91,7 +92,7 @@
                     android:id="@+id/btnSelectEditEvent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Select New Image"
+                    android:text="@string/select_new_image"
                     android:layout_marginHorizontal="5dp"
                     android:textSize="10sp" />
 
@@ -99,10 +100,9 @@
                     android:id="@+id/btnChangeLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Change Location"
+                    android:text="@string/change_location"
                     android:layout_marginHorizontal="5dp"
                     android:textSize="10sp" />
-
             </LinearLayout>
 
             <ImageView

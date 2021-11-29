@@ -20,7 +20,7 @@
         android:layout_marginEnd="24dp"
         android:textSize="25sp"
         android:editable="false"
-        android:hint="#username"
+        android:hint="@string/username"
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
         android:layout_marginEnd="24dp"
         android:textSize="25sp"
         android:ems="10"
-        android:hint="First Name"
+        android:hint="@string/first_name_space"
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,7 @@
         android:layout_marginEnd="24dp"
         android:textSize="25sp"
         android:ems="10"
-        android:hint="Last Name"
+        android:hint="@string/last_name_space"
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +93,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="64dp"
-        android:text="Sign Out"
+        android:backgroundTint="@color/teal_200"
+        android:text="@string/sign_out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -103,7 +104,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="64dp"
-        android:text="Confirm"
+        android:backgroundTint="@color/teal_200"
+        android:text="@string/confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

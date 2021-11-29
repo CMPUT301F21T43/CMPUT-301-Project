@@ -40,5 +40,26 @@
     <string name="username">Username</string>
     <string name="first_name">FirstName</string>
     <string name="last_name">LastName</string>
+    <string name="event_title">Event Title</string>
+    <string name="day">Day</string>
+    <string name="dash">-</string>
+    <string name="month">Month</string>
+    <string name="date_to_start">Date To Start</string>
+    <string name="year">Year</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_in">Sign In</string>
+    <string name="password">password</string>
+    <string name="passwordUpper">Password</string>
+    <string name="jane_doe_example_com">jane.doe@example.com</string>
+    <string name="email">Email</string>
+    <string name="add_event">Add Event</string>
+    <string name="first_name_space">First Name</string>
+    <string name="last_name_space">Last Name</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="confirm">Confirm</string>
+    <string name="change_location">Change Location</string>
+    <string name="select_new_image">Select New Image</string>
+    <string name="select_image">Select Image</string>
+    <string name="set_location">Set Location</string>
 
 </resources>

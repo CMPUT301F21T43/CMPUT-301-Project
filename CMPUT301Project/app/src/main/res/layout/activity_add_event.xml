@@ -53,8 +53,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Event Title"
-                android:inputType="textPersonName" />
+                android:hint="@string/event_title"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/etAddEventComment"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.744" />
 
             <EditText
                 android:id="@+id/etAddEventComment"
@@ -93,7 +98,7 @@
                     android:id="@+id/btnSelectImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Select Image"
+                    android:text="@string/select_image"
                     android:layout_marginHorizontal="5dp"
                     android:textSize="10sp" />
 
@@ -101,7 +106,7 @@
                     android:id="@+id/btnAddEventLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Change Location"
+                    android:text="@string/set_location"
                     android:layout_marginHorizontal="5dp"
                     android:textSize="10sp" />
             </LinearLayout>
