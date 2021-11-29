@@ -38,6 +38,7 @@ public class Notifications extends AppCompatActivity {
 
         back.setOnClickListener(view -> {
             Intent intent = new Intent(Notifications.this, MainActivity.class);
+            intent.putExtra("SELECTED", R.id.friends);
             startActivity(intent);
         });
 
