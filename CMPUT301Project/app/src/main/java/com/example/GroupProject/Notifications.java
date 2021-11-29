@@ -1,8 +1,11 @@
 package com.example.GroupProject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +19,7 @@ public class Notifications extends AppCompatActivity {
     ListView notificationList;
     ArrayList<String> friendRequestList;
     ArrayAdapter<String> requestAdapter;
+    ImageButton back;
 
 
 
@@ -28,9 +32,14 @@ public class Notifications extends AppCompatActivity {
 
         notificationList = findViewById(R.id.notification_list);
         friendRequestList = new ArrayList<>();
-
+        back = findViewById(R.id.back_notifications);
 
         FirebaseFirestore db = MainActivity.getFirestoreInstance();
+
+        back.setOnClickListener(view -> {
+            Intent intent = new Intent(Notifications.this, MainActivity.class);
+            startActivity(intent);
+        });
 
         db.collection("Users").document(username).collection("FriendRequest")
                 .get()

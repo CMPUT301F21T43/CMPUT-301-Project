@@ -57,17 +57,17 @@ public class CustomNotifications extends ArrayAdapter<String> {
                 Log.d("OnClick", username);
                 Map<String, Object> followerReq = new HashMap<>();
                 followerReq.put("FriendUsername",username);
-                Map<String, Object> followerReq2 = new HashMap<>();
-                followerReq2.put("FriendUsername",userRequest);
+
                 db.collection("Users").document(userRequest).collection("Friends")
                         .document(username)
                         .set(followerReq, SetOptions.merge());
-                db.collection("Users").document(username).collection("Friends")
-                        .document(userRequest)
-                        .set(followerReq2, SetOptions.merge());
                 db.collection("Users").document(username)
                         .collection("FriendRequest")
                         .document(userRequest)
+                        .delete();
+                db.collection("Users").document(userRequest)
+                        .collection("PendingRequest")
+                        .document(username)
                         .delete();
             }
         });
@@ -81,6 +81,10 @@ public class CustomNotifications extends ArrayAdapter<String> {
                 db.collection("Users").document(username)
                         .collection("FriendRequest")
                         .document(userRequest)
+                        .delete();
+                db.collection("Users").document(userRequest)
+                        .collection("PendingRequest")
+                        .document(username)
                         .delete();
             }
         });

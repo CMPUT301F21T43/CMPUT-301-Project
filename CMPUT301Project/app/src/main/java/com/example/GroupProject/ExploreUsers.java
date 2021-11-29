@@ -1,9 +1,11 @@
 package com.example.GroupProject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,7 @@ public class ExploreUsers extends AppCompatActivity {
     ArrayList<String> userDataList;
     ArrayAdapter<String> userAdapter;
     Button follow;
+    ImageButton back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +32,15 @@ public class ExploreUsers extends AppCompatActivity {
         follow = findViewById(R.id.follow_btn);
         userList = findViewById(R.id.user_list);
         userDataList = new ArrayList<>();
-
+        back = findViewById(R.id.back_explore);
 
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
+
+        back.setOnClickListener(view -> {
+            Intent intent = new Intent(ExploreUsers.this, MainActivity.class);
+            startActivity(intent);
+        });
 
         //get friends
         ArrayList<String> userFriendList;
@@ -49,6 +57,22 @@ public class ExploreUsers extends AppCompatActivity {
                     }
                 });
 
+        ArrayList<String> pendingRequest;
+        pendingRequest = new ArrayList<>();
+        db.collection("Users").document(username).collection("PendingRequest")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        String pendingUser;
+
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            pendingUser = (String) document.get("Pending");
+                            Log.d("Pending", "hello" + pendingUser);
+                            pendingRequest.add(pendingUser);
+                        }
+                    }
+                });
+
         //get users no self or friends
         db.collection("Users")
                 .get()
@@ -57,7 +81,7 @@ public class ExploreUsers extends AppCompatActivity {
                         String user;
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             user = (String) document.get("Username");
-                            if ((!user.equals(username)) & (!userFriendList.contains(user))){
+                            if ((!user.equals(username)) & (!userFriendList.contains(user)) & (!pendingRequest.contains(user))){
                                 Log.d("userPage", "hello"+user);
                                 userAdapter.add(user);
                                 userAdapter.notifyDataSetChanged();

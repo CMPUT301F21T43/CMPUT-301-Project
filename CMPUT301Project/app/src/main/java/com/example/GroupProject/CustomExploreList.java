@@ -52,13 +52,17 @@ public class CustomExploreList extends ArrayAdapter<String> {
         follow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                follow.setText("Followed");
-                follow.setEnabled(false);
+                //follow.setText("Followed");
+                //follow.setEnabled(false);
                 Log.d("OnClick", username);
                 Map<String, Object> followers = new HashMap<>();
                 followers.put("Request",username);
                 db.collection("Users").document(user).collection("FriendRequest").document(username)
                         .set(followers, SetOptions.merge());
+                Map<String, Object> pending = new HashMap<>();
+                pending.put("Pending",user);
+                db.collection("Users").document(username).collection("PendingRequest").document(user)
+                        .set(pending, SetOptions.merge());
             }
         });
 
@@ -66,3 +70,4 @@ public class CustomExploreList extends ArrayAdapter<String> {
     }
 
 }
+
