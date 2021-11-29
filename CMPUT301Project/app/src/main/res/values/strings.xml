@@ -4,7 +4,7 @@
   -->
 
 <resources>
-    <string name="app_name">GroupProject</string>
+    <string name="app_name">Habitude</string>
     <string name="etHabitTitleHint">Title</string>
     <string name="etHabitReasonHint">Reason</string>
     <string name="btnBackContentDescription">Back Button</string>
