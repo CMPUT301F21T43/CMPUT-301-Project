@@ -34,7 +34,6 @@ import org.junit.runners.MethodSorters;
  * edit, and delete habit, and corresponding habit event functions
  * @Author Marcus Bengert
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- * TODO: Implement a custom data set for bete date verification
  */
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -57,8 +56,8 @@ public class UserInterfaceTest {
         onView(withId(R.id.etHabitTitle))
                 .check(matches(withText("Walking")));
         onView(withId(R.id.etHabitReason))
-                .perform(replaceText("Get Excercise"))
-                .check(matches(withText("Get Excercise")));
+                .perform(replaceText("Get Exercise"))
+                .check(matches(withText("Get Exercise")));
 
         onView(withId(R.id.etDateToStartYear))
                 .perform(replaceText("2020"));
@@ -246,8 +245,9 @@ public class UserInterfaceTest {
                 .perform(click());
 
         // Navigate to friend Jane Doe
-        onView(withText("JaneDoe"))
+        onView(withText("JaneDoe1"))
                 .perform(click());
+        SystemClock.sleep(500);
 
         // Confirm her public habit is displayed
         onView(withText("Study math"))
@@ -269,11 +269,11 @@ public class UserInterfaceTest {
     public void signIn(){
         // Enter test user John Doe's email and password and sign in
         onView(withId(R.id.etEmail))
-                .perform(typeText("JohnDoe@gmail.com"))
-                .check(matches(withText("JohnDoe@gmail.com")));
+                .perform(typeText("JohnDoe14@example.com"), closeSoftKeyboard())
+                .check(matches(withText("JohnDoe14@example.com")));
         onView(withId(R.id.etPassword))
-                .perform(typeText("JohnDoe"), pressImeActionButton())
-                .check(matches(withText("JohnDoe")));
+                .perform(typeText("JohnDoe14"), pressImeActionButton())
+                .check(matches(withText("JohnDoe14")));
         onView(withText("SIGN IN"))
                 .perform(click());
         SystemClock.sleep(2500);
