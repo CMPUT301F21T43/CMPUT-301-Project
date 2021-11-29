@@ -134,7 +134,7 @@ public class AddEventActivity extends AppCompatActivity {
                     .document(username)
                     .collection("Habits")
                     .document(habit.getTitle())
-                    .update("numEvents", FieldValue.increment(1));
+                    .update("numEvents", FieldValue.increment(1),"numEventsDone", FieldValue.increment(eventDone ? 1 : 0));
 
             Intent intent1 = new Intent(AddEventActivity.this, HabitEventsMainActivity.class);
             intent1.putExtra("HABIT", habit);

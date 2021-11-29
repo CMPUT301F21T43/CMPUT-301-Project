@@ -149,7 +149,7 @@ public class EditEventActivity extends AppCompatActivity {
                         .collection("Habits")
                         .document(habit.getTitle())
                         .update("numEvents", FieldValue.increment(-1),
-                                "numEventsDone", FieldValue.increment(-1));
+                                "numEventsDone", FieldValue.increment(eventDone ? -1 : 0));
             }
 
             editEvent.put("title", eventTitle);
@@ -167,12 +167,12 @@ public class EditEventActivity extends AppCompatActivity {
                     .document(eventTitle)
                     .set(editEvent, SetOptions.merge());
 
-            if (eventDone) {
+            if (eventDone != event.getDone()) {
                 db.collection("Users")
                         .document(username)
                         .collection("Habits")
                         .document(habit.getTitle())
-                        .update("numEventsDone", FieldValue.increment(1));
+                        .update("numEventsDone", FieldValue.increment(eventDone ? 1 : -1));
             }
 
             Intent intentEdit = new Intent(EditEventActivity.this, HabitEventsMainActivity.class);

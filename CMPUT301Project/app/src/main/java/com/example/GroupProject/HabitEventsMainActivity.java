@@ -113,7 +113,7 @@ public class HabitEventsMainActivity extends AppCompatActivity{
                     .collection("Habits")
                     .document(habit.getTitle())
                     .update("numEvents", FieldValue.increment(-1),
-                            "numEventsDone", FieldValue.increment(-1));
+                            "numEventsDone", FieldValue.increment(event.getDone() ? -1 : 0));
 
             eventAdapter.remove((HabitEvent) adapterView.getItemAtPosition(i));
             eventAdapter.notifyDataSetChanged();
