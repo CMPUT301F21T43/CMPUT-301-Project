@@ -97,6 +97,8 @@ public class AddHabitActivity extends AppCompatActivity {
             habit.put("monthToStart", month);
             habit.put("dayToStart", day);
             habit.put("activeDays", HabitActivityHelper.checkedDaysChips(cgDaysOfWeek));
+            habit.put("numEvents", 0);
+            habit.put("numEventsDone", 0);
 
             db.collection("Users").document(username).collection("Habits").document(habitTitle)
                     .set(habit, SetOptions.merge());
