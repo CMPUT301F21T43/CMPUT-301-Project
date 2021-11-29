@@ -30,6 +30,12 @@
             android:name=".EditEventActivity"
             android:exported="false" />
         <activity
+            android:name=".ExploreUsers"
+            android:exported="false" />
+        <activity
+            android:name=".Notifications"
+            android:exported="false" />
+        <activity
             android:name=".AddEventActivity"
             android:exported="false" />
         <activity
