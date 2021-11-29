@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -106,6 +107,14 @@ public class HabitEventsMainActivity extends AppCompatActivity{
                     .delete()
                     .addOnSuccessListener(aVoid -> Log.d("Event", "Event successfully deleted!"))
                     .addOnFailureListener(e -> Log.w("Event", "Error deleting document", e));
+
+            db.collection("Users")
+                    .document(username)
+                    .collection("Habits")
+                    .document(habit.getTitle())
+                    .update("numEvents", FieldValue.increment(-1),
+                            "numEventsDone", FieldValue.increment(-1));
+
             eventAdapter.remove((HabitEvent) adapterView.getItemAtPosition(i));
             eventAdapter.notifyDataSetChanged();
             return true;

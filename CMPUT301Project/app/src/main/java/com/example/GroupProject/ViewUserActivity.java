@@ -84,6 +84,8 @@ public class ViewUserActivity extends AppCompatActivity {
                             Long monthToStart;
                             Long dayToStart;
                             Boolean isPublic;
+                            Long numEvents;
+                            Long numEventsDone;
                             Map<String, Boolean> activeDays;
                             SimpleDateFormat sfd = new SimpleDateFormat("yyyy-MM-dd");
                             for (QueryDocumentSnapshot document : task.getResult()) {
@@ -94,7 +96,15 @@ public class ViewUserActivity extends AppCompatActivity {
                                 dayToStart = (Long) document.get("dayToStart");
                                 activeDays = (Map<String, Boolean>) document.get("activeDays");
                                 isPublic = (Boolean) document.get("isPublic");
-                                userHabitsAdapter.add((new Habit(habitTitle, habitReason, yearToStart, monthToStart, dayToStart, activeDays, isPublic)));
+                                Habit newHabit = new Habit(habitTitle, habitReason, yearToStart, monthToStart, dayToStart, activeDays, isPublic);
+
+                                numEvents = (Long) document.get("numEvents");
+                                numEventsDone = (Long) document.get("numEventsDone");
+                                if (numEvents != 0 && numEventsDone != 0) {
+                                    newHabit.setProgress(Math.round(100 * numEventsDone / numEvents));
+                                }
+
+                                userHabitsAdapter.add((newHabit));
                                 userHabitsAdapter.notifyDataSetChanged();
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                             }
