@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -21,6 +22,8 @@ public class ExploreUsers extends AppCompatActivity {
     ArrayAdapter<String> userAdapter;
     Button follow;
     ImageButton back;
+    Button search;
+    EditText searchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +36,15 @@ public class ExploreUsers extends AppCompatActivity {
         userList = findViewById(R.id.user_list);
         userDataList = new ArrayList<>();
         back = findViewById(R.id.back_explore);
+        search = findViewById(R.id.searchButton);
+        searchText = findViewById(R.id.editTextSearch);
 
         FirebaseFirestore db;
         db = FirebaseFirestore.getInstance();
 
         back.setOnClickListener(view -> {
             Intent intent = new Intent(ExploreUsers.this, MainActivity.class);
+            intent.putExtra("SELECTED", R.id.friends);
             startActivity(intent);
         });
 
@@ -90,6 +96,31 @@ public class ExploreUsers extends AppCompatActivity {
                         Log.d("userPage", "Error getting documents: ", task.getException());
                     }
                 });
+
+        search.setOnClickListener(view -> {
+            String filter = searchText.getText().toString();
+            userAdapter.clear();
+            userAdapter.notifyDataSetChanged();
+            db.collection("Users")
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            String user;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                user = (String) document.get("Username");
+                                if ((!user.equals(username)) & (!userFriendList.contains(user))){
+                                    if (user.contains(filter)) {
+                                        Log.d("userPage", "hello"+user);
+                                        userAdapter.add(user);
+                                        userAdapter.notifyDataSetChanged();
+                                    }
+                                }
+                            }
+                        } else {
+                            Log.d("userPage", "Error getting documents: ", task.getException());
+                        }
+                    });
+        });
 
 
 
