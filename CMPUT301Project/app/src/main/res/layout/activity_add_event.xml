@@ -59,7 +59,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.744" />
+                app:layout_constraintVertical_bias="0.744"
+                android:maxLength="20"/>
 
             <EditText
                 android:id="@+id/etAddEventComment"
