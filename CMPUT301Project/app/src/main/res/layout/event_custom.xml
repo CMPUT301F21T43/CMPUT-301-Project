@@ -13,6 +13,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:layout_weight="1"
         android:text="Habit Event"
         android:textColor="@color/black"
         android:textSize="25sp" />
