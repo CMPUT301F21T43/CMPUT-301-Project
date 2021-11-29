@@ -15,9 +15,11 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,19 +48,25 @@ import java.util.UUID;
 public class AddEventActivity extends AppCompatActivity {
 
     private static final String TAG = "AddEventActivity";
-    private static final int REQUEST_IMAGE_CAPTURE = 99;
+    public static final int REQUEST_IMAGE_CAPTURE = 99;
+    public static final int REQUEST_LOCATION_CHANGE = 100;
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
-    EditText etTitle;
-    EditText etComment;
-    ImageButton btnBack;
-    ImageButton btnConfirm;
-    Button btnSelectImage;
-    ImageView ivImage;
+    private EditText etTitle;
+    private EditText etComment;
+    private TextView tvEventLocation;
+    private ImageButton btnBack;
+    private ImageButton btnConfirm;
+    private Button btnSelectImage;
+    private Button btnChangeLocation;
+    private ImageView ivEventPhoto;
+    private CheckBox cbEventDone;
 
+    private HabitEvent changedLocationEvent;
     private boolean takenPhoto;
+    private boolean changedLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,32 +79,48 @@ public class AddEventActivity extends AppCompatActivity {
         Habit habit = (Habit) intent.getSerializableExtra("HABIT");
         etTitle = findViewById(R.id.etAddEventTitle);
         etComment = findViewById(R.id.etAddEventComment);
+        tvEventLocation = findViewById(R.id.tvAddEventLocation);
         btnBack = findViewById(R.id.btnBackAddEvent);
         btnConfirm = findViewById(R.id.btnConfirmAddEvent);
         btnSelectImage = findViewById(R.id.btnSelectImage);
-        ivImage = findViewById(R.id.ivAddEventPhoto);
+        btnChangeLocation = findViewById(R.id.btnAddEventLocation);
+        ivEventPhoto = findViewById(R.id.ivAddEventPhoto);
+        cbEventDone = findViewById(R.id.cbAddEventDone);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
+        changedLocation = false;
+        changedLocationEvent = new HabitEvent("", "", "");
+        tvEventLocation.setText(changedLocationEvent.getLocationString());
+        btnChangeLocation.setOnClickListener(view -> {
+            Intent intentEdit = new Intent(AddEventActivity.this, GetLocationActivity.class);
+            intentEdit.putExtra("EVENT", changedLocationEvent);
+            intentEdit.putExtra("HABIT", habit);
+            startActivityForResult(intentEdit, REQUEST_LOCATION_CHANGE);
+        });
+
         takenPhoto = false;
         btnConfirm.setOnClickListener(view -> {
-            String eventPhotoID = takenPhoto ? uploadPhoto(ivImage) : "default";
+            String eventPhotoID = takenPhoto ? uploadPhoto(ivEventPhoto) : "default";
 
             Map<String, Object> habitEvent = new HashMap<>();
 
             // Add all these to Firestore
             String eventTitle = etTitle.getText().toString();
             String eventComment = etComment.getText().toString();
+            boolean eventDone = cbEventDone.isChecked();
+            double eventLat = changedLocationEvent.getLatitude();
+            double eventLon = changedLocationEvent.getLongitude();
 
             habitEvent.put("title", eventTitle);
             habitEvent.put("comment", eventComment);
             habitEvent.put("photoID", eventPhotoID);
-            habitEvent.put("latitude", 1);
-            habitEvent.put("longitude", 1);
-            habitEvent.put("isDone", false);
+            habitEvent.put("latitude", eventLat);
+            habitEvent.put("longitude", eventLon);
+            habitEvent.put("isDone", eventDone);
             db.collection("Users")
                     .document(username)
                     .collection("Habits")
@@ -132,11 +156,16 @@ public class AddEventActivity extends AppCompatActivity {
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        if (requestCode == AddEventActivity.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ivImage.setImageBitmap(imageBitmap);
+            ivEventPhoto.setImageBitmap(imageBitmap);
             takenPhoto = true;
+        } else if (requestCode == AddEventActivity.REQUEST_LOCATION_CHANGE) {
+            Bundle extras = data.getExtras();
+            changedLocationEvent = (HabitEvent) extras.get("EVENT");
+            tvEventLocation.setText(changedLocationEvent.getLocationString());
+            changedLocation = true;
         }
     }
 

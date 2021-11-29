@@ -137,7 +137,15 @@ public class HabitEvent implements Serializable {
         this.longitude = longitude;
     }
 
+    /**
+     * Function to return description of the event location
+     * @return
+     *      Returns a String description of the location
+     */
     public String getLocationString() {
+        if (latitude == 1 && longitude == 1) {  // default location
+            return "Optional Location";
+        }
         return String.format("LatLon: (%.2f, %.2f)", latitude, longitude);
     }
 
