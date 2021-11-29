@@ -38,8 +38,6 @@ import java.util.Map;
 
 public class EditEventActivity extends AppCompatActivity {
 
-    public static final int REQUEST_IMAGE_CAPTURE = 99;
-    public static final int REQUEST_LOCATION_CHANGE = 100;
     private static final String TAG = "EditEventActivity";
     private EditText editTitle;
     private EditText editComment;
@@ -113,7 +111,7 @@ public class EditEventActivity extends AppCompatActivity {
             Intent intentEdit = new Intent(EditEventActivity.this, GetLocationActivity.class);
             intentEdit.putExtra("EVENT", event);
             intentEdit.putExtra("HABIT", habit);
-            startActivityForResult(intentEdit, REQUEST_LOCATION_CHANGE);
+            startActivityForResult(intentEdit, AddEventActivity.REQUEST_LOCATION_CHANGE);
         });
 
         takenPhoto = false;
@@ -151,7 +149,7 @@ public class EditEventActivity extends AppCompatActivity {
                         .collection("Habits")
                         .document(habit.getTitle())
                         .update("numEvents", FieldValue.increment(-1),
-                                "numEventsDone", FieldValue.increment(-1));
+                                "numEventsDone", FieldValue.increment(eventDone ? -1 : 0));
             }
 
             editEvent.put("title", eventTitle);
@@ -169,12 +167,12 @@ public class EditEventActivity extends AppCompatActivity {
                     .document(eventTitle)
                     .set(editEvent, SetOptions.merge());
 
-            if (eventDone) {
+            if (eventDone != event.getDone()) {
                 db.collection("Users")
                         .document(username)
                         .collection("Habits")
                         .document(habit.getTitle())
-                        .update("numEventsDone", FieldValue.increment(1));
+                        .update("numEventsDone", FieldValue.increment(eventDone ? 1 : -1));
             }
 
             Intent intentEdit = new Intent(EditEventActivity.this, HabitEventsMainActivity.class);
@@ -186,7 +184,7 @@ public class EditEventActivity extends AppCompatActivity {
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         try {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            startActivityForResult(takePictureIntent, AddEventActivity.REQUEST_IMAGE_CAPTURE);
         } catch (ActivityNotFoundException e) {
             // display error state to the user
         }
@@ -195,12 +193,12 @@ public class EditEventActivity extends AppCompatActivity {
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        if (requestCode == AddEventActivity.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ivEventPhoto.setImageBitmap(imageBitmap);
             takenPhoto = true;
-        } else if (requestCode == REQUEST_LOCATION_CHANGE) {
+        } else if (requestCode == AddEventActivity.REQUEST_LOCATION_CHANGE) {
             Bundle extras = data.getExtras();
             changedLocationEvent = (HabitEvent) extras.get("EVENT");
             tvEventLocation.setText(changedLocationEvent.getLocationString());

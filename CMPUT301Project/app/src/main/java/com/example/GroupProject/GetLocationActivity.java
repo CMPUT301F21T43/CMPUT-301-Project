@@ -48,7 +48,7 @@ public class GetLocationActivity extends AppCompatActivity implements OnMapReady
         btnBack.setOnClickListener(view -> {
             Intent intentBack = new Intent();
             intentBack.putExtra("EVENT", event);
-            setResult(EditEventActivity.REQUEST_LOCATION_CHANGE, intentBack);
+            setResult(AddEventActivity.REQUEST_LOCATION_CHANGE, intentBack);
             finish();
             return;
         });
@@ -59,7 +59,7 @@ public class GetLocationActivity extends AppCompatActivity implements OnMapReady
 
             Intent intentConfirm = new Intent();
             intentConfirm.putExtra("EVENT", event);
-            setResult(EditEventActivity.REQUEST_LOCATION_CHANGE, intentConfirm);
+            setResult(AddEventActivity.REQUEST_LOCATION_CHANGE, intentConfirm);
             finish();
             return;
         });
