@@ -31,6 +31,7 @@ public class Habit implements Serializable {
     private Long dayToStart;
     private Map<String, Boolean> activeDays;
     private Boolean isPublic;
+    private int progress;
 
     /**
      * Generic constructor for Habit.
@@ -50,6 +51,7 @@ public class Habit implements Serializable {
         this.dayToStart = dayToStart;
         this.activeDays = activeDays;
         this.isPublic = isPublic;
+        this.progress = 0;
     }
 
     /**
@@ -77,6 +79,24 @@ public class Habit implements Serializable {
      */
     public String getReason() {
         return reason;
+    }
+
+    /**
+     * Function to return habit progress
+     * @return progress
+     *      Returns progress as int
+     */
+    public int getProgress() {
+        return progress;
+    }
+
+    /**
+     * Function to set habit progress
+     * @param progress
+     *      progress for habit as int
+     */
+    public void setProgress(int progress) {
+        this.progress = progress;
     }
 
     /**
