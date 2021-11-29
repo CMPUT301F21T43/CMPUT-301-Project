@@ -15,15 +15,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroupProject">
         <activity
+            android:name=".GetLocationActivity"
+            android:exported="true" />
+        <activity
             android:name=".EmailPasswordActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".EditEventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExploreUsers"
+            android:exported="false" />
+        <activity
+            android:name=".Notifications"
             android:exported="false" />
         <activity
             android:name=".AddEventActivity"
@@ -48,8 +58,11 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBFQZRkpV552Q61bX_8vw8ehG5REZoxU8g" />
     </application>
 
 </manifest>

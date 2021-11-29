@@ -18,6 +18,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
+        android:textSize="25sp"
         android:editable="false"
         android:hint="@string/username"
         android:singleLine="true"
@@ -31,7 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="@string/username"
+        android:text="Username"
+        android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextUsername"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -40,8 +42,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
+        android:textSize="25sp"
         android:ems="10"
         android:hint="@string/first_name_space"
         android:singleLine="true"
@@ -54,7 +57,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="@string/first_name_space"
+        android:textSize="25sp"
+        android:text="First Name"
         app:layout_constraintBottom_toTopOf="@+id/editTextFirstName"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -63,8 +67,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
+        android:textSize="25sp"
         android:ems="10"
         android:hint="@string/last_name_space"
         android:singleLine="true"
@@ -77,7 +82,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="@string/last_name_space"
+        android:textSize="25sp"
+        android:text="LastName"
         app:layout_constraintBottom_toTopOf="@+id/editTextLastName"
         app:layout_constraintStart_toStartOf="parent" />
 

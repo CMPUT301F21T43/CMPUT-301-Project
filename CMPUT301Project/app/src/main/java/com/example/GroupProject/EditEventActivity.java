@@ -9,25 +9,20 @@ import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,28 +30,29 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class EditEventActivity extends AppCompatActivity {
 
-    private static final int REQUEST_IMAGE_CAPTURE = 99;
+    public static final int REQUEST_IMAGE_CAPTURE = 99;
+    public static final int REQUEST_LOCATION_CHANGE = 100;
     private static final String TAG = "EditEventActivity";
     private EditText editTitle;
     private EditText editComment;
+    private TextView tvEventLocation;
     private ImageButton btnBack;
     private ImageButton btnConfirmEdit;
     private Button btnSelectImage;
+    private Button btnChangeLocation;
     private ImageView ivEventPhoto;
+    private CheckBox cbEventDone;
 
+    private HabitEvent changedLocationEvent;
     private boolean takenPhoto;
+    private boolean changedLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +63,13 @@ public class EditEventActivity extends AppCompatActivity {
 
         editTitle = findViewById(R.id.etEditEventTitle);
         editComment = findViewById(R.id.etEditEventComment);
+        tvEventLocation = findViewById(R.id.tvEditEventLocation);
         btnBack = findViewById(R.id.btnBackEditEvent);
         btnConfirmEdit = findViewById(R.id.btnConfirmEditEvent);
         btnSelectImage = findViewById(R.id.btnSelectEditEvent);
+        btnChangeLocation = findViewById(R.id.btnChangeLocation);
         ivEventPhoto = findViewById(R.id.ivEditEventPhoto);
+        cbEventDone = findViewById(R.id.cbEditEventDone);
 
         Intent intent = getIntent();
         HabitEvent event = (HabitEvent) intent.getSerializableExtra("EVENT");
@@ -78,6 +77,8 @@ public class EditEventActivity extends AppCompatActivity {
 
         editTitle.setText(event.getTitle());
         editComment.setText(event.getComment());
+        tvEventLocation.setText(event.getLocationString());
+        cbEventDone.setChecked(event.getDone());
 
         FirebaseFirestore db = MainActivity.getFirestoreInstance();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -106,15 +107,32 @@ public class EditEventActivity extends AppCompatActivity {
             dispatchTakePictureIntent();
         });
 
+        changedLocation = false;
+        btnChangeLocation.setOnClickListener(view -> {
+            Intent intentEdit = new Intent(EditEventActivity.this, GetLocationActivity.class);
+            intentEdit.putExtra("EVENT", event);
+            intentEdit.putExtra("HABIT", habit);
+            startActivityForResult(intentEdit, REQUEST_LOCATION_CHANGE);
+        });
+
         takenPhoto = false;
         btnConfirmEdit.setOnClickListener(view -> {
             String eventPhotoID = takenPhoto ? AddEventActivity.uploadPhoto(ivEventPhoto) : event.getPhotoID();
-
             Map<String, Object> editEvent = new HashMap<>();
 
             // Add all these to Firestore
             String eventTitle = editTitle.getText().toString();
             String eventComment = editComment.getText().toString();
+            boolean eventDone = cbEventDone.isChecked();
+            double eventLat, eventLon;
+
+            if (changedLocation) {
+                eventLat = changedLocationEvent.getLatitude();
+                eventLon = changedLocationEvent.getLongitude();
+            } else {
+                eventLat = event.getLatitude();
+                eventLon = event.getLongitude();
+            }
 
             if (!eventTitle.equals(event.getTitle())) {
                 db.collection("Users")
@@ -131,7 +149,9 @@ public class EditEventActivity extends AppCompatActivity {
             editEvent.put("title", eventTitle);
             editEvent.put("comment", eventComment);
             editEvent.put("photoID", eventPhotoID);
-            HabitEvent newEvent = new HabitEvent(eventTitle, eventComment, eventPhotoID);
+            editEvent.put("latitude", eventLat);
+            editEvent.put("longitude", eventLon);
+            editEvent.put("isDone", eventDone);
 
             db.collection("Users")
                     .document(username)
@@ -142,7 +162,6 @@ public class EditEventActivity extends AppCompatActivity {
                     .set(editEvent, SetOptions.merge());
 
             Intent intentEdit = new Intent(EditEventActivity.this, HabitEventsMainActivity.class);
-            intentEdit.putExtra("EVENT", newEvent);
             intentEdit.putExtra("HABIT", habit);
             startActivity(intentEdit);
         });
@@ -165,6 +184,11 @@ public class EditEventActivity extends AppCompatActivity {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             ivEventPhoto.setImageBitmap(imageBitmap);
             takenPhoto = true;
+        } else if (requestCode == REQUEST_LOCATION_CHANGE) {
+            Bundle extras = data.getExtras();
+            changedLocationEvent = (HabitEvent) extras.get("EVENT");
+            tvEventLocation.setText(changedLocationEvent.getLocationString());
+            changedLocation = true;
         }
     }
 }

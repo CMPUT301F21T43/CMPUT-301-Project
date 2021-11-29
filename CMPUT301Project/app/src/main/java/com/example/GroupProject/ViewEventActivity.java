@@ -7,6 +7,8 @@ package com.example.GroupProject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,11 +29,13 @@ public class ViewEventActivity extends AppCompatActivity {
 
     private static final String TAG = "HabitEventDetails";
 
-    ImageButton btnBack;
-    ImageButton btnEditEvent;
-    TextView tvEventTitle;
-    TextView tvEventComment;
-    ImageView ivEventPhoto;
+    private ImageButton btnBack;
+    private ImageButton btnEditEvent;
+    private TextView tvEventTitle;
+    private TextView tvEventComment;
+    private TextView tvEventLocation;
+    private ImageView ivEventPhoto;
+    private CheckBox cbEventDone;
 
     DatabaseReference getImage;
 
@@ -45,7 +49,9 @@ public class ViewEventActivity extends AppCompatActivity {
         btnEditEvent = findViewById(R.id.btnEditEvent);
         tvEventTitle = findViewById(R.id.tvEventTitle);
         tvEventComment = findViewById(R.id.tvEventComment);
+        tvEventLocation = findViewById(R.id.tvEventLocation);
         ivEventPhoto = findViewById(R.id.ivViewEventPhoto);
+        cbEventDone = findViewById(R.id.cbEventDone);
 
         Intent intent = getIntent();
         HabitEvent event = (HabitEvent) intent.getSerializableExtra("EVENT");
@@ -58,8 +64,9 @@ public class ViewEventActivity extends AppCompatActivity {
 
         tvEventTitle.setText(event.getTitle());
         tvEventComment.setText(event.getComment());
-
+        tvEventLocation.setText(event.getLocationString());
         getImage = databaseReference.child(event.getPhotoID());
+        cbEventDone.setChecked(event.getDone());
 
         getImage.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
